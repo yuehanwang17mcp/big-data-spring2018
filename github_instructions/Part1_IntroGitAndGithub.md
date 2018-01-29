@@ -1,15 +1,15 @@
 
-# Setting up Git and Github (Command Line) 
+# Setting up Git and Github (Command Line)
 
 ***
 
-### Collaboration on Coding Projects
+### What is Git?
 
 Collaboration is key when working with a group on a coding project. Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. In other words, Git is software that keeps careful track of changes to text files (like code scripts and web pages) in order to allow users to preserve edit histories and merge multiple versions.
 
 ### What is Github?
 
-Github is a web service that hosts your code and provides easy ways to store, work with, and share your projects. It is designed for collaboration, meaning that once a file is recognized in Github, if you are working on a project with collaborators, it will identify changes between files, and let the users know when they try to upload if the same lines have been changed. If the same lines have been changed, you have to tell it one you want, this is called a **merge conflict**. If a merge conflict is not found, it will automatically update the online version of the repository with your new code.
+Github is a web service built on top of Git that hosts your code and provides easy ways to store, work with, and share your projects. It is designed for collaboration, meaning that once a file is recognized in Github, if you are working on a project with collaborators, it will identify changes between files, and let the users know when they try to upload if the same lines have been changed. If the same lines have been changed, you have to tell it one you want, this is called a **merge conflict**. If a merge conflict is not found, it will automatically update the online version of the repository with your new code.
 
 Working with Github is easy, there are two main ways you can work with Github, via command line, or with a Desktop GUI. The instructions below will show you how to get started on the command line.
 
@@ -19,7 +19,7 @@ We are using Github because it has been become a popular standard for open sourc
 
 ### What are some Git and Github specific terms to familiarize with?
 
-Github has a particular, and sometimes peculiar, set of language and terms that are used when working with it and its functionalities. The following are some common terms and what they mean when you hear them. You will grow more familiar with these over time.
+Github has a particular, and sometimes peculiar, way of speaking about itself and its functionality. The following are some terms that you should familiarize yourself with. You will grow more familiar with these over time.
 
 #### Repository
 
@@ -27,7 +27,7 @@ A repository is the most basic element of GitHub. They're easiest to imagine as 
 
 #### Clone
 
-A clone is a copy of a repository in which you are a collaborator that is on your machine, not the remote Github website. With your clone you can edit the files in your preferred editor and use Git to keep track of your changes without having to be online. It is, however, connected to the remote version so that changes can be synced between the two. You can **commit** and **push** your local changes to the remote to keep them synced.
+A clone is a local copy of a repository on your hard drive. With your clone you can edit the files in your preferred editor and use Git to keep track of your changes without having to be online. A clone does, however, maintain its association with the remote version; changes made locally can be logged (or **committed**) and synced (**pushed**) with the remote copy on Github servers.
 
 #### Fork
 
@@ -35,31 +35,31 @@ A fork is a personal copy of *another user's* repository that lives on your acco
 
 #### Fetch
 
-Fetching refers to getting the latest changes from an online repository without merging them in. Once these changes are fetched you can compare them to your local branches (the code residing on your local machine).
+Fetching refers to getting the latest changes from an online repository *without* merging them. Once these changes are fetched you can compare them to your local branches (the code residing on your local machine).
 
 #### Pull
 
-Pull refers to when you are fetching in changes in an online repository and merging them into your local version. For instance, if someone has edited the remote file you're both working on, you'll want to pull in those changes to your local copy so that it's up to date.
+Pull refers to when you are fetching in changes in an online repository *and merging them* into your local version. For instance, if someone has edited the remote file you're both working on, you'll want to pull in those changes to your local copy so that it's up to date.
 
 #### Merge
 
-Merge is the process of taking files from one version of the repository (i.e. the online version) and syncing them with another (i.e. your local version). This is the process of combining two versions and resolving conflicts. If there are conflicts, those are called **merge conflicts**, and must be resolved manually.
+Merge describes the process of taking files from one version of the repository (i.e. the online version) and syncing them with another (i.e. your local version). Combining two versions like this will often result in conflicts. Such conflicts are called **merge conflicts**, and must be resolved manually.
 
 #### Merge Conflict
 
-A merge conflict is when two collaborators change the same line of the same file in a repository. These are not a problem, when you collaborate it will happen, however it can be a bit confusing at first. To resolve a merge conflict, the user needs to pick which line is the one that should be saved. Merge conflicts must be resolved in order to successfully **pull** and **push** repositories.
+A merge conflict is when two collaborators change the same line of the same file in a repository. These tend to really scare new Git users, but *they are not a problem*! When you collaborate it will happen. However it can be a bit confusing at first. To resolve a merge conflict, the user needs to pick which line is the one that should be saved. Merge conflicts must be resolved in order to successfully **pull** and **push** repositories.
 
 #### Commit
 
-When you change a file, before you **push** to the online version, you need to **commit** the changes. A commit, or "revision", is an individual change to a file (or set of files). It's like when you save a file, except with Git, every time you save it creates a unique ID (a.k.a. the "SHA" or "hash") that allows you to keep record of what changes were made when and by who. Commits usually contain a commit message which is a brief description of what changes were made.
+When you change a file, before you **push** to the online version, you need to **commit** the changes. A commit, or "revision", is an individual change to a file (or set of files). It's like when you save a file, except with Git, every time you save it creates a unique ID (a.k.a. the "SHA" or "hash") that records what changes were made when and by who. Commits usually contain a commit message: it's worth spending some time on these and making them descriptive, as they will help you keep track of your project over its development.
 
 #### Push
 
-Pushing refers to sending your committed changes to a remote repository such as GitHub.com. For instance, if you change something locally, you'd want to then push those changes so that others may access them.
+Pushing refers to sending your committed changes to a remote repository such as GitHub. This serves a number of roles - it gives you a remote backup of your work that you can access anywhere while it also allows others to access them.
 
 #### Branch
 
-A branch is a parallel version of a repository. It is contained within the repository, but does not affect the primary or master branch allowing you to work freely without disrupting the "live" version. When you've made the changes you want to make, you can merge your branch back into the master branch to publish your changes.
+A branch is a parallel version of a repository. It is contained within the repository, but does not affect the primary (or *master*) branch. This is useful! You can work freely without fear of breaking the "live" version. It's generally good practice to keep your *master* branch clean and working, while you test changes on branches. When you've made the changes you want to make (or have decided to abandon ship), you can either merge your branch back into the master branch or revert to the clean, working master.
 
 ***
 
@@ -78,9 +78,9 @@ Once signed up, go to your profile page.
 
 ## 2. Create, join, or fork repositories in your Github account
 
-To start us off, we need a project (aka repository) to work on. This is the Github way of storing projects. So on the Github site, let’s create a repository. Repositories can be used for many projects, allowing you to collaborate, share, and modify scripts, programs, and websites. Project repositories can be named just about anything, and you should pick something relevant to your project.
+To start us off, we need a project (a.k.a., a repository) to work on. This is the Github way of storing projects. So on the Github site, let’s create a repository. Repositories can be used for many projects, allowing you to collaborate, share, and modify scripts, programs, and websites. Project repositories can be named just about anything, and you should pick something relevant to your project.
 
-For this exercise, we are going to set up a repository that will hold HTML, CSS, and JavaScript for a website. Other projects can range from Python projects, to C projects, to just about any language you can find.
+For this exercise, we are going to set up a repository that will hold HTML, CSS, and JavaScript for a website. But keep in mind that Github can be used to version control just about any textual content or language (I actually use Git to version control all of my writing).
 
 ### Create a website using Github Pages
 
@@ -146,7 +146,9 @@ Download Git for your machine. A wizard will lead you through the installation. 
 
 ***
 
-## 4. Authenticate with Github using SSH
+# Revise according to GitHub guidance (here)[https://help.github.com/articles/which-remote-url-should-i-use/]
+
+<!-- ## 4. Authenticate with Github using SSH
 
 Because our work is stored online on the Github page, our local machine needs to communicate with the Github servers in order to pull and push project documents. This requires authentication with the Github servers, and Github will ask us to enter our username and password everytime we want to pull or push files. If we are making alot of changes, entering our username and password everytime you push a file to the server can get tedious.
 
@@ -163,7 +165,7 @@ The Github site contains very nice instructions on how to do this. Before you co
 5. Testing your SSH connection
 6. Working with SSH Key passphrases
 
-https://help.github.com/articles/generating-ssh-keys/
+https://help.github.com/articles/generating-ssh-keys/ -->
 
 ***
 
@@ -177,17 +179,17 @@ First, create a **github** directory on your machine. We are going to set up a *
 
 #### i. Open Terminal, change your current location to your Documents directory.
 
-Use cd to change directories on your machine to the location you want to store documents.
+Use cd to change directories on your machine to the location you want to store documents. Note that we're using the `~/` shortcut to our home directory.
 
 ***
 
 ```sh
-cd documents
+cd ~/documents
 ```
 
 ***
 
-Note: You can use **pwd** to find out your present working directory)
+Note: You can use the `pwd` command from your command line to determine your present working directory.
 
 #### ii. Create a new directory called ‘github’
 
@@ -219,8 +221,7 @@ The ‘github’ folder is now your working directory and commands we run will b
 
 You saw this require some command line work. For documentation on additional command line commands and shortcuts, the following cheatsheet can be very helpful. Descriptions of the commands we just used, if you are curious, are included.
 
-https://github.com/0nn0/terminal-mac-cheatsheet/wiki/Terminal-Cheatsheet-for-Mac-(-basics-)
-
+https://github.com/0nn0/terminal-mac-cheatsheet
 
 ## 6. Clone a copy of the repository you want to work on
 
@@ -237,6 +238,8 @@ Replace with your username to get your github.io repository. To do this, you can
 ```sh
 git clone git@github.com:<Github username>/<Github username>.github.io.git
 ```
+
+
 
 [Read more about the git commands available in terminal](https://www.siteground.com/tutorials/git/commands.htm)
 
@@ -293,7 +296,7 @@ Let's begin our project. Working in the project directory on your machine, you c
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8"> 
+	<meta charset="utf-8">
 	<title>Hello World</title>
 </head>
 <body>
@@ -379,7 +382,7 @@ git commit –m “added index.html and updated readme”
 ***
 
 This commits our changes to the local repository.  You will see a note that files in your master branch were changed and created.
- 
+
 ## 10. Push files to our online repository
 
 The last step is push the files to the remote repository on the Github website to synchronize them for the rest of our team and any others that want to work with our files. We do this using git push. The syntax for this is **git push origin branchname**. This will push the file to the remote origin and match it to the name of the branch. If the branch doesn’t exist, it will be created. To push our files to Github, use the following:
@@ -521,9 +524,8 @@ https://github.com/0nn0/terminal-mac-cheatsheet/wiki/Terminal-Cheatsheet-for-Mac
 #### Github Glossary –
 https://help.github.com/articles/github-glossary
 
-#### Git on the Command Line - 
+#### Git on the Command Line -
 http://dont-be-afraid-to-commit.readthedocs.org/en/latest/git/commandlinegit.html
 
 #### Git Branching – Basic Branching and Merging
 https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
-
