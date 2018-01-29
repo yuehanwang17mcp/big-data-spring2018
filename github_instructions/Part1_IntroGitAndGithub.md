@@ -78,21 +78,21 @@ Once signed up, go to your profile page.
 
 ## 2. Create, join, or fork repositories in your Github account
 
-To start us off, we need a project (a.k.a., a repository) to work on. This is the Github way of storing projects. So on the Github site, let’s create a repository. Repositories can be used for many projects, allowing you to collaborate, share, and modify scripts, programs, and websites. Project repositories can be named just about anything, and you should pick something relevant to your project.
+To start us off, we need a project---recall that projects are stored as **repositories** on Github (or **repos** for short). So let’s create our first repository! Repositories allow you to collaborate, share, and modify scripts, programs, and websites. Project repositories can be named just about anything, but you should pick something relevant to your project; please, for the love of all good things, don't call your repo `new-repo1`.
 
-For this exercise, we are going to set up a repository that will hold HTML, CSS, and JavaScript for a website. But keep in mind that Github can be used to version control just about any textual content or language (I actually use Git to version control all of my writing).
+For this exercise, we are going to set up a repository that will hold HTML, CSS, and JavaScript for a website. But keep in mind that Github can be used to version control just about any textual content written in just about any scripting or markup language (I actually use Git to version control all of my writing).
 
 ### Create a website using Github Pages
 
-In our website repository, we have keep the HTML, CSS, and JS required for our webpage. A feature of Github is the ability to create a homepage using something called [Github pages](https://pages.github.com/).
+Github allows you to easily create a simple, **static website** using its [Github pages](https://pages.github.com/) platform. Note the word 'static'---Pages does not allow you to host more sophisticated **dynamic websites** that make use of database queries, content management systems, etc.
 
-To use Github pages, you have to name your repository very specifically. The following steps detail creating a repository and setting up the initial settings.
+Our website repository will include all of the HTML, CSS, and JavaScript required to make our webpage run.
 
 ***
 
 #### i. Click on the Repositories tab on your main profile page.
 
-On your Github profile page, click on the Repositories tab.
+Navigate to your Github profile page, and click on the 'Repositories' tab.
 
 #### ii. In the upper right corner, select ‘New’.
 
@@ -100,35 +100,25 @@ Create a new repository.
 
 #### iii. In the Create a new repository window, set up your repository.
 
-Name the repository **username.github.io**, and *replace username with your Github username*. Give the repository a description, make it public, and initialize it with a README. Don’t worry about the license at this point.
+To use Github pages, you have to name your repository using a very specific convention. Name the repository *username*.github.io, where username should be replaced with your Github username. **If you do not adhere to this naming convention, your site will not work.** Give the repository a description, make it public, and initialize it with a README. Don’t worry about the license or adding a .gitignore file at this point.
 
 #### iv. Click Create.
 
-You now have an empty repository set up in which you can add files and set up a project.
+Congratulations! You've created your first repository! This repository will host any included files on a page visible to the internet via the url *username*.github.io.
 
 ***
 
-Our repository is on the Github webpage in our profile. Now we can **clone** a copy to our local machines so we can edit the files and materials. To do that though, we need to set up Git on our machine. We want to set it up so we can interact with it via command line on our local machine to create, edit, and manage files, which means we need to set up a secure key that Github will recognize is only on your machine.
+Now that we have a repository, we can **clone** a copy to our local machines, add content, manage files, and make changes. To do that though, we need to set up Git on our machine. Once we've done this, we will be able to interact with our remote Github repositories using the Git command line utility.
 
 ***
 
 ## 3. Setting up Github
 
-### Check to see if Git is installed, if not, we need to install Git
+**Important Note for Windows users:** First, some bad news: coders tend to favor Unix-like operating systems (e.g., OS X or Linux). Windows is **not** a Unix-like operating system! The Windows command prompt is built on DOS. To easily use the command line to interact with Github, you will need to install Git Bash, which is a terminal that emulates essential Unix-like shell functionality and includes the Git command line utility. This can be downloaded from the [Git for Windows project](http://gitforwindows.org/). Once installed, proceed below, noting only that your command line work will be done in the Git Bash shell, not Terminal or Command Prompt.
 
-Moving back to our local machine, we need to get git and Github setup so we can work with it.
+#### i. Check That Git is Installed
 
-**If you are using Mac:** Using Terminal, we are going to check for Git, and if it is not found, we will download and install necessary files.
-
-**If you are using Windows:** Git does not work easily from the Windows command prompt. To easily use command line to interact with Github, you need to install Github for desktop where you can use Git Bash. This is a command line interface that allows you to run commands to create repositories, rectify file differences, and push commits.
-
-[Download Github for Desktop](https://desktop.github.com/)
-
-Once downloaded, proceed below, but instead of using Terminal, you use Git Bash.
-
-#### i. Open Terminal/Git Bash
-
-#### ii. Check git installation by entering the following command
+Open Terminal (OS X or Linux) or Git Bash (Windows) and enter the following command:
 
 ***
 
@@ -138,15 +128,17 @@ git –-version
 
 ***
 
-if you have Git installed, you will see the version. If you get an error, or you don’t see the version, you need to install Git. Install Git from the downloads page on the main Git project homepage.
+If Git is correctly installed on your machine, you will see the version. If you get an error, or you don’t see the version, you need to install Git. Download Git from the downloads page on the [main Git project homepage](https://git-scm.com/). A wizard will lead you through the installation. The defaults should be fine. You might need to restart your machine afterwards; at the very least, you'll have to restart Terminal.
 
-https://git-scm.com/
-
-Download Git for your machine. A wizard will lead you through the installation. You can select the defaults for installation. You might need to restart your machine after installation to get it to take effect.
+Also, pause and congratulate yourself; you've just executed a command from the command line. Command line can seem like a frightening thing reserved for hackers, but hopefully you'll find that, over time, it becomes something more like a close friend. Believe it or not, it can be much, much faster than fighting through your operating system's graphical user interface (GUI).
 
 ***
 
-# Revise according to GitHub guidance (here)[https://help.github.com/articles/which-remote-url-should-i-use/]
+##
+
+```sh
+git config credential.helper 'cache --timeout=3600'
+```
 
 <!-- ## 4. Authenticate with Github using SSH
 
@@ -169,247 +161,246 @@ https://help.github.com/articles/generating-ssh-keys/ -->
 
 ***
 
-## 5. Create a Directory for Github Projects
+Next we want to setup a local folder that contains local copies of our Github repositories. The easiest way to edit code is to work on it locally. You can then sync local clones with the Github remote repositories so that others can see and use your changes, and so that you can pull changes others have made.
 
-Next we want to setup a Github folder on your computer that can contain local copies of our Github project directories. The easiest way to edit and change code is to work on it on your own machine. You can then sync the repository folders with the Github servers so others can see and use your code modifications, and you can pull changes others have made. Please work through the following steps get your repo set up.
+## Create a Directory for Github Projects
 
-### Create a github folder in your Documents
-
-First, create a **github** directory on your machine. We are going to set up a **github** folder within the Documents folder of our local profile (**documents/github**) using Terminal and some basic command line to complete the task.
-
-#### i. Open Terminal, change your current location to your Documents directory.
-
-Use cd to change directories on your machine to the location you want to store documents. Note that we're using the `~/` shortcut to our home directory.
-
-***
+You may be tempted to create a new directory using your operating system GUI; instead, let's keep building our command line skills and create a directory from Terminal or Git Bash. This is accomplished using the `mkdir` command as follows:
 
 ```sh
-cd ~/documents
+mkdir ~/Desktop/github
 ```
 
-***
+This will create a folder called 'github' on my Desktop. Note that I use the tilde character followed by a slash (`~/`)---on Unix-like operating systems this is a shortcut that refers to your home directory. On OS X, this is equivalent to typing the longer path `/Users/<your username>/Desktop/github`. In Git Bash this is equivalent to `c/Users/<your username>`.
 
-Note: You can use the `pwd` command from your command line to determine your present working directory.
+## Change Your Working Directory
 
-#### ii. Create a new directory called ‘github’
-
-Make a new folder that will hold our github projects.
-
-***
+Now that you've created a folder to store your Github projects, you'll want to change your working directory to that new folder. You can c-hange your d-irectory with the `cd` command and tell the terminal to p-rint your w-orking d-rectory using the `pwd` command. (It all makes so much sense!)
 
 ```sh
-mkdir github
+pwd
+cd ~/Desktop/github
+pwd
 ```
 
-***
+The above commands should print your working directory before and after changing it. The ‘github’ folder is now your working directory and commands we run will be happening in this directory. We will work locally on our Github repositories in this space.
 
-This creates an empty folder called github in our Documents folder. We will use this for storing local copies of our github repositories and as working space when we edit and modify projects.
-
-#### iii. Change the working directory to your new 'github' directory
-
-Change directories to your new github directory.
-
-***
+As you get more comfortable with the command line you may want to start typing more than one command at a time. Good thinking! There are a couple of ways you can do this, with slightly different effects. Say you wanted to make a directory and change your working directory to this new folder.
 
 ```sh
-cd github
+# The second command will not execute if the first throws an error.
+mkdir ~/Desktop/github && cd ~/Desktop/github
+# The second command will execute regardless of the success of the first command.
+mkdir ~/Desktop/github; cd ~/Desktop/github
 ```
 
-***
-
-The ‘github’ folder is now your working directory and commands we run will be happening in this directory. We will work locally on our Github repositories in this space.
-
-You saw this require some command line work. For documentation on additional command line commands and shortcuts, the following cheatsheet can be very helpful. Descriptions of the commands we just used, if you are curious, are included.
+For documentation on additional command line commands and shortcuts, the following cheatsheet can be very helpful. Descriptions of the commands we just used, if you are curious, are included.
 
 https://github.com/0nn0/terminal-mac-cheatsheet
 
-## 6. Clone a copy of the repository you want to work on
+## Clone a copy of the repository you want to work on
 
 Create a clone of the website repository on your machine so you can edit code and files. This will allow for pulling, merging, and pushing changes you make to your files.
 
 To access Github commands in the terminal, use the term **git** to begin your statement.
 
-#### i. With your SSH authentication setup, clone your first repo to your local drive using the following.
+#### i. Clone your Github Pages repo to your local drive.
 
-Replace with your username to get your github.io repository. To do this, you can use **git clone**.
-
-***
+We're now going to download the repository we've created using the **clone** command from the Git command line utility.
 
 ```sh
-git clone git@github.com:<Github username>/<Github username>.github.io.git
+git clone https://<Github username>/<Github username>.github.io.git
 ```
 
+This method of connecting to Github, called HTTPS, is only one option for accessing your remote repositories. You can also use the slightly more secure SSH protocol. However, Github recommends using HTTPS; SSH takes a bit more setup and is, unfortunately, often blocked by institutional firewalls (MIT not included). [Feel free to experiment, though!](https://help.github.com/articles/connecting-to-github-with-ssh/)
 
+#### List directory contents
 
-[Read more about the git commands available in terminal](https://www.siteground.com/tutorials/git/commands.htm)
+Take a look in your Finder window (or Files on Windows); you will that see a ‘<Github username>.github.io’ folder is has been created. But wait! Let's say you wanted to take a look at this directory without ever leaving the comfort of the command line. Easy! It would look something like this:
 
-***
+```sh
+ls -lfh
+```
+
+The `ls` command lists directory contents. You should see your <Github username>.github.io folder listed. The characters following the hyphen are options that do the following:
+
++ `-l` Presents the directory contents in a list.
++ `-f` Includes hidden files in the list.
++ `-h` Requests human-readable file sizes.
+
+Note that `ls -lfh` is syntactically equivalent to `ls -l -f -h`.
 
 #### ii. Change your working directory to your cloned repo.
 
-***
+We know how to do this! The `cd` command!
 
 ```sh
 cd <Github username>.github.io
 ```
+<!--
+### Sidebar: Create a Repository Remotely using Command Line using Git Init
 
-***
+Above, we created a repository on the Github webpage and then cloned it to our local machine. What if we want to create a repository from the command line in an existing directory and then push that to a Github respoitory so others can collaborate with us?
 
-Take a look in your finder window, you will see a ‘github-username.github.io’ folder is now in your github folder.
-
-***
-
-### 6b. Create a Repository Remotely using Command Line using Git Init
-
-Above, we created a repository on the Github webpage. What if we want to create one from the command line (remotely) in an existing directory and then push that to Github so others can collaborate with us?
-
-The steps to remotely create a repository are detailed by the [Github docs](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/).
+Check out the [Github documentation](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/) for more information on setting remote resitory URLs. -->
 
 
 ## 7. Make edits locally in your repository
 
-Going back to your ‘username.github.io’ folder that you have created, you can add, edit, modify, and delete files from this directory. This directory is local, but we will use the command line to sync it with the repo on the Github site. This is where Github shines, you can fully edit documents and files on your machine, then synchronize them with your repositories on the Github site. This is excellent for group work and versioning.
+This directory is local, but we will use the command line to sync it with the repo on the Github site. This is where Github shines, you can fully edit documents and files on your machine, then synchronize them with your repositories on the Github site. This is excellent for collaborating with large teams and keeping track of your versions.
 
-#### i. Install a Text Editor (Sublime Text)
+#### i. Install a Text Editor (Atom)
 
-*If you have Sublime Text installed, you can move on to the next step*
+*If you have Atom installed, you can move on to the next step*
 
-When editing code, it is important to use a Text Editor and not a Word Processor. A text editor is a simple program that edits text files. This is distictly different than a Word Processor, such as Microsoft Word. In order to properly format, show colors, and display different fonts, programs such as Microsoft Word add alot of extra code to the source files. We don't want this! Text Editors work purely with the text they are provided, and are used for writing code, scripting, and programming.
+When editing code, you'll use a text editor and NOT a word processor. A text editor is a simple program that edits plaintext files. This is very different from a word processor (e.g., Microsoft Word, Apple Pages, LibreOffice Writer). Word processors include formatting and layout information in their file formats, which allows them to display documents as they will appear when they are printed or exported for the web. This is often called "What You See Is What You Get", or WYSIWYG (pronounced 'wizzy-wig').
 
-The text editor we recommend is called **Sublime Text**. Before moving on, please install it and use it for writing your code.
+We don't want this! Text editors work with text and text only; what you see in a text editor window is the entirety of the file. For this reason, some say that in a text editor's display, 'What You See is What You Mean'. Text editors are used to write code, scripts, and programs. But you can also use them to typeset documents using markup languages like Markdown and LaTeX, often in conjunction with command line utilities like Pandoc. Ask me about my writing workflow sometime: it's pretty arcane, but 100% plaintext!
 
-[Sublime Text 3](https://www.sublimetext.com/3)
+The text editor we recommend is called **Atom**. Before moving on, please install it and use it for writing your code. [Download it here](https://atom.io/).
 
 #### ii. Edit the Github README
 
-Edit the README to contain your name and some information on your project. This README contains the text that is visible to visitors to the Github repo. Here you can descriptions on what your project is, what it does, and how people that fork a copy can use it.
+Assuming that your working directory is still your Github pages repo, you can open it as a project directory in Atom from the command line as follows:
 
-For example, you could write the date and that this is your Github homepage.
+```sh
+atom ./
+```
+
+`./` is how you explicitly say 'the current folder.'
+
+You should see your Github pages repository open in the file tree on the left side of the screen. Open and edit the README to contain your name and some information on your project.
+
+Text contained in this README file is displayed by default when visitors view your Github repo. You'll want to describe your project: what it is, what it does, how do do it, and how people that fork a copy are permitted to use it. For example, you could write the date, that this is your Github homepage, and that it was created on the first day of class for Big Data, Visualization, and Society at MIT.
+
 
 #### iii. Create our website... write some code!
 
-Let's begin our project. Working in the project directory on your machine, you can work with or create almost anything. For example, let’s create a basic HTML document. Open a text document, copy and paste the following code snip. We are going to call this **index.html**.
+Let’s create a very basic webpage using HTML (Hypertext Markup Language). Open a text document, copy and paste the following code snip. We are going to call this **index.html**. I've added comments above each line below so that those of you unfamiliar with HTML can begin to grasp its structure.
 
 ***
 
 ```html
+<!-- tells the browser that it should expect html -->
 <!DOCTYPE html>
+<!-- opening html tag identifies the contained text as html and tells the browser and search engines that the page is in English -->
 <html lang="en">
+<!-- head section contains metadata and links to external files -->
 <head>
+	<!-- metadata identifying how characters are encoded. There are many ways to encode text, but UTF-8 is the most standard in web development. -->
 	<meta charset="utf-8">
+	<!-- Creates a title that is displayed in the browser's title bar, but not in the page body -->
 	<title>Hello World</title>
+<!-- announces the end of the head section -->
 </head>
+<!-- document body contains content that is displayed in the browser window -->
 <body>
+	<!-- create a header -->
 	<h1>Hello World</h1>
+	<!-- create a paragraph -->
 	<p>I wuz here.</p>
+<!-- end the document body -->
 </body>
+<!-- end the html file  -->
 </html>
 ```
 
-***
-
-Save the document in the **username.github.io** directory as **index.html**. Now we can start the process of creating a **commit**, and once we have a commit, **push** our code to the Github website.
-
+Save the document in the **username.github.io** root directory as **index.html**. Now that we have some (admittedly simple) content, we'll want to **commit** our changes and then **push** our local code to the remote repository hosted on Github.
 
 ## 7. Use git status to check the working status and synchronization of documents.
 
-When working on the command line, Git and Github have many commands you can run that you will need to familiarize yourself with.
+We're about to perform a very, very common series of tasks when working with Github repos: we'll 1) check the status of our repo, 2) stage our changes, 3) commit our changes, and 4) push our changes to Github. Over time, this workflow will become fully absorbed into your muscle memory.
 
-Having made the changes above and saved them, go back to terminal. Enter:
-
-***
+We'll start by checking the status of our local repo as follows:
 
 ```sh
 git status
 ```
 
-***
-
-This checks the current status of changes. You should see that our **README.md** was modified, and that **index.html** is not yet tracked. However, these files are not yet staged to be committed to the online repository. In order to commit this files to our online repository, we need to stage them first.
+This will output a list of changes made since the last commit. You should see that we've modified our **README.md** file, and that **index.html** is not yet tracked. In order to commit this files to our remote repository, we need to stage them first.
 
 ## Commiting and Pushing Changes
 
 ## 8. Stage your changes, modifications, and additions
 
-When you are done working, stage your changes by using:
+You can stage your changes by using:
 ***
 ```sh
 git add <filename>
 ```
 
-***
-This puts the files into the Git staging area. You can add multiple files to your staging area at once. If you edit many files on your machine, when you are done, put them each into the staging area and you can sync them with the online repository all at once.
-
-Stage our files using the following syntax:
-
-***
+This puts the files into the Git 'staging area.' You can add multiple files to your staging area at once. You can stage individual files using the following syntax:
 
 ```sh
 git add README.md
 git add index.html
 ```
 
-If you want to stage all files, use:
+In many cases, you'll find that you want to stage all modified, added, or deleted files. This could be a daunting task if you were required to stage files one-by-one. Good thing this is not the case! You can simply use:
 
 ```sh
 git add .
 ```
 
-***
+Check the result by typing in `git status `again to see that the changes are ready to be committed. If you ever need to unstage anything, use the following:
 
-Check the result by typing in git status again to see that the changes are ready to be committed. If you ever need to unstage anything, use the following:
-
-***
 ```sh
 git reset HEAD <filename>
 ```
-***
 
 **Important to note:** files are not staged in their entirety, rather, changes to the files are staged.
 
 ## 9. Commit files to our repository
 
-Once you are happy with your edits and you have made all your modifications, we are ready to commit the files and update the repository. We start locally - that is, with the repository stored in our local instance of Git. Remember, Git acts as an intermediary between us and our edits. When we change files on our local machines, Git keeps track of changes, but we need to commit those changes to the local repository so that Git knows we'd like to consider this a checkpoint.
+Once we've staged our files, we're ready to commit our changes and update the repository. We start locally - that is, with the repository stored on our local disk. Remember, Git acts as an intermediary between us and our edits. When we change files on our local machines, Git keeps track of changes, but we need to commit those changes to the local repository so that Git knows we'd like to consider this a checkpoint.
 
-It is best practice to add a comment to your commit that describes the changes you made to the files. For example, for this exercise, we can say we ‘added the index.html document and updated the readme’. This helps others working with your code stay organized and informed on what you did that made this commit worthy.
+It is considered good practice to add a comment to your commit that describes the changes you made to the files. This helps others working with your code stay organized and informed on what you did that made this commit worthy. For example, for this exercise, our comment might be: 'added the index.html document and updated the readme.'
 
-To commit our files, we use git commit. We add a –m flag for the message we want to include with our commit. In terminal, still in your working directory and with our files staged, use the following.
+**Style Note:** Technically, the Git style gods have decided that all comments should be written in the present tense. I disagree. Rather strenuously. This is the turbonerd equivalent of the 'should you use the first-person in academic writing' debate---basically the argument goes that the past tense implicates the developer, whereas the present tense refers to the commit. But I have no problem with implicating the developer for all the same reasons that I have no problem with academic writing in the first-person, so rock on with your bad past-tense self.
 
-***
+To commit our files, we use `git commit`. We add a `–m` flag to indicate that we'll be including a message with our commit. In terminal, still in your working directory and with our files staged, type the following command:
+
 ```sh
-git commit –m “added index.html and updated readme”
+git commit –m "added index.html and updated readme"
 ```
-***
 
 This commits our changes to the local repository.  You will see a note that files in your master branch were changed and created.
 
-## 10. Push files to our online repository
-
-The last step is push the files to the remote repository on the Github website to synchronize them for the rest of our team and any others that want to work with our files. We do this using git push. The syntax for this is **git push origin branchname**. This will push the file to the remote origin and match it to the name of the branch. If the branch doesn’t exist, it will be created. To push our files to Github, use the following:
-
-***
+In the future, if you want to stage all previously staged files and commit them in one fell swoop, you can use the `-a` option of the `git commit` command like so:
 
 ```sh
-git push origin master
+git commit -a -m "commit message"
 ```
 
-***
+## 10. Push files to our online repository
 
-You might have to enter your password to authenticate once more upon hitting enter. This will push our master branch to Github and sync our files.
+The last step is **push** our committed changes to the remote repository. We do this using `git push`. The syntax for this is `git push origin <branchname>`. This will push the file to the remote origin and match it to the name of the branch. We'll talk more about branches below; for now we can just type `git push` which defaults to the `master` branch on the remote origin. To push our files to Github, use the following:
 
-Go online to your Github profile page and check the ‘username.github.io’ repository. You should see your files and modifications! Wash, rinse, and repeat.
+```sh
+git push
+```
+
+You will then have to authenticate by typing your Github username and password. This will push our master branch to Github and sync our files.
+
+Navigate to your Github page and check out your ‘username.github.io’ repository. You should see your files and modifications! Wash, rinse, and repeat (and repeat, and repeat, and repeat).
+
+## Speaking of Repeating... Credential Management
+
+While it's great that Github wants to keep you secure, it can also be kind of a pain to enter your credentials every time you push changes to your remote repository. Lucky for us, Git provides a number of built-in ways to store your credentials for later use. You can do some reading on these [here](https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage) if you'd like, but I recommend the 'cache' method. This method stores credentials in memory, not on your hard disk, and they are purged after a given period of time. Other methods require that you store your credentials in plain-text files on your hard drive---not exactly secure.
+
+To prevent Github from asking for your credentials for 30 minutes, enter the following command from either Terminal or Git Bash:
+
+```sh
+git config --global credential.helper 'cache --timout=1800'
+```
+
+You can modify your timeout value, measured in seconds, to your liking.
 
 ## 11. View your Website
 
-Visit your Github site to see your page!
-
-Open a browser and navigate to:
-
-http://yourusername.github.io
+But that's not all! Because we've named this repo according to the very special .github.io syntax, we've simultaneously created a live website. Open a browser and navigate to http://<yourusername>.github.io
 
 Congrats, you have created your first github repo, and a new website in the process!
-
-===
 
 
 ## 12. Working with Branches
