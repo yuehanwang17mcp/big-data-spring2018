@@ -96,6 +96,17 @@ First we create a new folder to hold our virtual environments. Next, we create a
 
 Cool! You're now running Python in a virtual environment!
 
+## Additional Reading and Resources
+
+### Conda Command Line Cheatsheet -
+http://conda.pydata.org/docs/_downloads/conda-cheatsheet.pdf
+
+### Mac Command Line Cheatsheet –
+https://github.com/0nn0/terminal-mac-cheatsheet/wiki/Terminal-Cheatsheet-for-Mac-(-basics-)
+
+### Python Documentation -
+https://docs.python.org/3/library/index.html
+
 <!--
 
 ### Install Anaconda (aka Conda)
@@ -161,14 +172,3 @@ Follow the Test Drive at the following link:
 Working with Anaconda can make working with Python a much more pleasant experience. For additional resources, including cheatsheets and useful links, see the following materials.
 
 *** -->
-
-## Additional Reading and Resources
-
-#### Conda Command Line Cheatsheet -
-http://conda.pydata.org/docs/_downloads/conda-cheatsheet.pdf
-
-#### Mac Command Line Cheatsheet –
-https://github.com/0nn0/terminal-mac-cheatsheet/wiki/Terminal-Cheatsheet-for-Mac-(-basics-)
-
-#### Python Documentation -
-https://docs.python.org/3/library/index.html

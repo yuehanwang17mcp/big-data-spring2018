@@ -1,53 +1,43 @@
+# Crash Course in Git and Github
 
-# Setting up Git and Github (Command Line)
-
-***
-
-### What is Git?
+## What is Git?
 
 Collaboration is key when working with a group on a coding project. Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. In other words, Git is software that keeps careful track of changes to text files (like code scripts and web pages) in order to allow users to preserve edit histories and merge multiple versions.
 
-### What is Github?
+## What is Github?
 
 Github is a web service built on top of Git that hosts your code and provides easy ways to store, work with, and share your projects. It is designed for collaboration, meaning that once a file is recognized in Github, if you are working on a project with collaborators, it will identify changes between files, and let the users know when they try to upload if the same lines have been changed. If the same lines have been changed, you have to tell it one you want, this is called a **merge conflict**. If a merge conflict is not found, it will automatically update the online version of the repository with your new code.
 
 Working with Github is easy, there are two main ways you can work with Github, via command line, or with a Desktop GUI. The instructions below will show you how to get started on the command line.
 
-### Why do we use Github?
+## Why do we use Github?
 
 We are using Github because it has been become a popular standard for open source and collaborative coding projects.
 
-### What are some Git and Github specific terms to familiarize with?
+## Speaking Git
 
 Github has a particular, and sometimes peculiar, way of speaking about itself and its functionality. The following are some terms that you should familiarize yourself with. You will grow more familiar with these over time.
 
-#### Repository
+Repository
+	~ A repository is the most basic element of GitHub. They're easiest to imagine as a project's folder. A repository contains all of the project files (including scripts, code, data, and documentation), and stores each file's revision history so you can track changes. Repositories can have multiple contributors (known as collaborators) and can be either public or private.
 
-A repository is the most basic element of GitHub. They're easiest to imagine as a project's folder. A repository contains all of the project files (including scripts, code, data, and documentation), and stores each file's revision history so you can track changes. Repositories can have multiple contributors (known as collaborators) and can be either public or private.
+Clone
+	~ A clone is a local copy of a repository on your hard drive. With your clone you can edit the files in your preferred editor and use Git to keep track of your changes without having to be online. A clone does, however, maintain its association with the remote version; changes made locally can be logged (or **committed**) and synced (**pushed**) with the remote copy on Github servers.
 
-#### Clone
+Fork
+	~ A fork is a personal copy of *another user's* repository that lives on your account. Forks allow you to freely make changes to a project without affecting the original. Forks remain attached to the original, allowing you to submit a pull request to the original's author to update with your changes. You can also keep your fork up to date by pulling in updates from the original. To edit files, you must **clone** your forked repository to your machine, and you can work with it as if it is your own.
 
-A clone is a local copy of a repository on your hard drive. With your clone you can edit the files in your preferred editor and use Git to keep track of your changes without having to be online. A clone does, however, maintain its association with the remote version; changes made locally can be logged (or **committed**) and synced (**pushed**) with the remote copy on Github servers.
+Fetch
+	~ Fetching refers to getting the latest changes from an online repository *without* merging them. Once these changes are fetched you can compare them to your local branches (the code residing on your local machine).
 
-#### Fork
+Pull
+	~ Pull refers to when you are fetching in changes in an online repository *and merging them* into your local version. For instance, if someone has edited the remote file you're both working on, you'll want to pull in those changes to your local copy so that it's up to date.
 
-A fork is a personal copy of *another user's* repository that lives on your account. Forks allow you to freely make changes to a project without affecting the original. Forks remain attached to the original, allowing you to submit a pull request to the original's author to update with your changes. You can also keep your fork up to date by pulling in updates from the original. To edit files, you must **clone** your forked repository to your machine, and you can work with it as if it is your own.
+Merge
+	~ Merge describes the process of taking files from one version of the repository (i.e. the online version) and syncing them with another (i.e. your local version). Combining two versions like this will often result in conflicts. Such conflicts are called **merge conflicts**, and must be resolved manually.
 
-#### Fetch
-
-Fetching refers to getting the latest changes from an online repository *without* merging them. Once these changes are fetched you can compare them to your local branches (the code residing on your local machine).
-
-#### Pull
-
-Pull refers to when you are fetching in changes in an online repository *and merging them* into your local version. For instance, if someone has edited the remote file you're both working on, you'll want to pull in those changes to your local copy so that it's up to date.
-
-#### Merge
-
-Merge describes the process of taking files from one version of the repository (i.e. the online version) and syncing them with another (i.e. your local version). Combining two versions like this will often result in conflicts. Such conflicts are called **merge conflicts**, and must be resolved manually.
-
-#### Merge Conflict
-
-A merge conflict is when two collaborators change the same line of the same file in a repository. These tend to really scare new Git users, but *they are not a problem*! When you collaborate it will happen. However it can be a bit confusing at first. To resolve a merge conflict, the user needs to pick which line is the one that should be saved. Merge conflicts must be resolved in order to successfully **pull** and **push** repositories.
+Merge Conflict
+	~ A merge conflict is when two collaborators change the same line of the same file in a repository. These tend to really scare new Git users, but *they are not a problem*! When you collaborate it will happen. However it can be a bit confusing at first. To resolve a merge conflict, the user needs to pick which line is the one that should be saved. Merge conflicts must be resolved in order to successfully **pull** and **push** repositories.
 
 #### Commit
 

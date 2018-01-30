@@ -1,6 +1,6 @@
 # Problem Set 0: "Hello World" - Setup a Github Homepage
 
-This problem set is straightforward and designed to get you started, and has a goal of helping you set up a website and becoming more familiar with Github. For your deliverable, you are going to create a simple static website that says "Hello World." You can customize it and add your bio, a couple of links... whatever you want!
+This problem set is designed to get you started with Git and Github pages. You will set up a website and become a bit more familiar with Github. For your deliverable, you are going to create a simple static website that says "Hello World." If you feel so inclined, go ham - you want!
 
 `On the assignment tab of the course Stellar website, submit the link to your Github page.`
 
@@ -8,7 +8,7 @@ This problem set is straightforward and designed to get you started, and has a g
 
 Following the instructions found in Part 1 of the in-class tutorial, create your Github homepage. On this page, include at least the following:
 
-1. Heading with your name
+1. A heading with your name
 2. Paragraph containing a short text bio or introduction
 3. An image and link to a visualization project you find inspiring
 

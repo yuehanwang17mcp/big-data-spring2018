@@ -1,7 +1,5 @@
 # Forking the Class Repository
 
-Key concepts: fork, fetch
-
 Most of our work this semester will be channeled through a class Github repository in which all of the course files and materials are uploaded, maintained, and stored. Each week, course materials will be pushed by the teaching staff into the class repository; student submissions will also be pushed to forks of the class repository.
 
 Find the class repository here:
