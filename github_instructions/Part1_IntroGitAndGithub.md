@@ -18,8 +18,10 @@ We are using Github because it has been become a popular standard for open sourc
 
 Github has a particular, and sometimes peculiar, way of speaking about itself and its functionality. The following are some terms that you should familiarize yourself with. You will grow more familiar with these over time.
 
-Repository
-	~ A repository is the most basic element of GitHub. They're easiest to imagine as a project's folder. A repository contains all of the project files (including scripts, code, data, and documentation), and stores each file's revision history so you can track changes. Repositories can have multiple contributors (known as collaborators) and can be either public or private.
+<dl>
+	<dt>Repository</dt>
+	<dd>A repository is the most basic element of GitHub. They're easiest to imagine as a project's folder. A repository contains all of the project files (including scripts, code, data, and documentation), and stores each file's revision history so you can track changes. Repositories can have multiple contributors (known as collaborators) and can be either public or private.</dd>
+</dl>
 
 Clone
 	~ A clone is a local copy of a repository on your hard drive. With your clone you can edit the files in your preferred editor and use Git to keep track of your changes without having to be online. A clone does, however, maintain its association with the remote version; changes made locally can be logged (or **committed**) and synced (**pushed**) with the remote copy on Github servers.
