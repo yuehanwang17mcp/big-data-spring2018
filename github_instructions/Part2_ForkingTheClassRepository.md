@@ -1,10 +1,8 @@
-
-# Getting your Own Copy of the Class Repository
-### Fork a Copy of the Class Repository (Command Line)
+# Forking the Class Repository
 
 Key concepts: fork, fetch
 
-Most of our work this semester will be channeled through a repository in which all of the course files and materials are uploaded, maintained, and stored. Each week, course materials will be pushed by the teaching staff into the class repository; student submissions will also be pushed to forks of the class repository.
+Most of our work this semester will be channeled through a class Github repository in which all of the course files and materials are uploaded, maintained, and stored. Each week, course materials will be pushed by the teaching staff into the class repository; student submissions will also be pushed to forks of the class repository.
 
 Find the class repository here:
 
@@ -81,15 +79,15 @@ Notice the first line, it is the main class repo! It starts with ‘civic-data-d
 git fetch ericmhuntley master
 ```
 
-3. We then need to grab our specific folder. We do that using `git checkout`. This will let us grab the specific file we are looking for by adding an argument to the end of the command. This argument is the relative path to the file you want to get from the location of the repo. This should be your file name and path. In this example, the week-04 folder is in the main class repo at the base level, so we can just put week-04.
+3. We then need to grab our specific folder. We do that using `git checkout`. This will let us grab the specific file we are looking for by adding an argument to the end of the command. This argument is the relative path to the file you want to get from the location of the repo. This should be your file name and path. In this example, the week-04 folder is in the main class repo at the base level, so we can just put week-01.
 
 ```sh
-git checkout ericmhuntley/master -- week-04
+git checkout ericmhuntley/master -- week-01
 ```
 
-This will bring you only the folder called ‘week-04’. Obviously, this can be changed to retrieve the folder according the proper week (or name of the folder!)
+This will bring you only the folder called ‘week-01’. Obviously, this can be changed to retrieve the folder according the proper week (or name of the folder!)
 
-4. You will now have the new folder called ‘week-04’ in your personal fork, and they’ll be ready to edit, save, and do what you want with. To view the folder, open up the folder on your machine that contains your personal forked repository.
+4. You will now have the new folder called ‘week-01’ in your personal fork, and they’ll be ready to edit, save, and do what you want with. To view the folder, open up the folder on your machine that contains your personal forked repository.
 
 <!--
 ### Troubleshooting Pull Problems

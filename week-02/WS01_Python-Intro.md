@@ -1,4 +1,3 @@
-
 # Introduction to Python 
 
 #### Starting Steps
@@ -27,7 +26,7 @@ Todays lecture:
 * introduction to Python / IPython
     - Syntax
     - Libraries
-    - Datatypes 
+    - Datatypes
     - Data Structures
     - Collections
     - Loops
@@ -36,7 +35,7 @@ Todays lecture:
 ## 1. Python:
 
 
-<a href="https://www.python.org/">Python</a> is an increasingly popular high-level programming language. It emphasizes legibility over highly complex structure. Python innately provides simple data structures allowing for easy data manipulation. Python provides a simple approach to object-oriented programming, which in turn allows for intuitive programming, and has resulted in a large user community that has created numerous libraries that extend the basic capacities of the language. 
+<a href="https://www.python.org/">Python</a> is an increasingly popular high-level programming language. It emphasizes legibility over highly complex structure. Python innately provides simple data structures allowing for easy data manipulation. Python provides a simple approach to object-oriented programming, which in turn allows for intuitive programming, and has resulted in a large user community that has created numerous libraries that extend the basic capacities of the language.
 
 Python is an "interpretted" language. This means that every Python command that is executed is actually translated to lower-level programming languages. Lower-level programming languages are very fast and powerful, but writing programs in these languages can be difficult.
 
@@ -84,9 +83,9 @@ $$e^x = \int e^x dx$$
 
 ## 3. Python Libraries
 
-Python is a dynamically typed language. A language has dynamic typing when variable types are not predefined like in a compiled language; the type of a value is evaluated when the code is run, based on how you are attempting to use it. 
+Python is a dynamically typed language. A language has dynamic typing when variable types are not predefined like in a compiled language; the type of a value is evaluated when the code is run, based on how you are attempting to use it.
 
-Dynamic typing and a number of other language specific characteristics, like readability and reusability, make it a very popular programming language with a large user community. However, Python on itself only provides a basic number of modules and functionality. In order to extend Python’s functionality, the active community has created a very large number of libraries. A library is a built-in or external module that can be imported into our current code to add functionality. Libraries usually take advantage of Object-Oriented-Programming, defining Python objects in additional scripts that can then be instantiated in our current code. 
+Dynamic typing and a number of other language specific characteristics, like readability and reusability, make it a very popular programming language with a large user community. However, Python on itself only provides a basic number of modules and functionality. In order to extend Python’s functionality, the active community has created a very large number of libraries. A library is a built-in or external module that can be imported into our current code to add functionality. Libraries usually take advantage of Object-Oriented-Programming, defining Python objects in additional scripts that can then be instantiated in our current code.
 
 Loading libraries into our current context can be expensive; for that reason, Python requires us to explicitly load the libraries that we want to use:
 
@@ -125,7 +124,7 @@ Comments let you document your code and are not executed. They are very useful w
 
 Single-line comments start with the hash character, # , and extend to the end of the physical line. A comment may appear at the start of a line or following whitespace or code.
 
-Multiline comments are known as docstrings. They start with “”” and end with “””. 
+Multiline comments are known as docstrings. They start with “”” and end with “””.
 
 
 
@@ -133,7 +132,7 @@ Multiline comments are known as docstrings. They start with “”” and end wi
 # Firstly, this is a single-line comment.
 
 """
-This is a 
+This is a
 multiline
 comment
 """
@@ -163,7 +162,7 @@ x = 3
 print(x)
 x = x+2
 print(x)
-# the following retrieves the value stored in x, adds 2 to it, 
+# the following retrieves the value stored in x, adds 2 to it,
 # and stores the result in x.
 x+=2
 print(x)
@@ -197,7 +196,7 @@ Variables can be defined based on constructing a numeric data type. Every time w
 
 
 ```python
-# Integers (int) are a numerical data-type. 
+# Integers (int) are a numerical data-type.
 print(1+2)
 print(type(1+2))
 ```
@@ -240,12 +239,12 @@ Notice integer division and floating-point error below!
 #### 3. Strings:
 Strings are sets of characters. We can create them by enclosing characters in quotes. Python treats single quotes the same as double quotes.
 
-Strings could be thought of as a list of characters. Therefore, we can access substrings, by using a similar syntax to the one of lists. They also have a number of methods or operations that we can perform with them. 
+Strings could be thought of as a list of characters. Therefore, we can access substrings, by using a similar syntax to the one of lists. They also have a number of methods or operations that we can perform with them.
 
 
 
 ```python
-# A string is sequence of characters. 
+# A string is sequence of characters.
 print("Hello World.")
 
 # Let's store a string in a variable called "s".
@@ -271,11 +270,11 @@ print(string)
 
 
 #### 4. Booleans
-Booleans are binary datatypes. They have 2 values: **True** and **False** (or 1 and 0). Booleans are useful when testing for truth value; we can test them in an **if** or **while** condition or as operand of Boolean operations. 
+Booleans are binary datatypes. They have 2 values: **True** and **False** (or 1 and 0). Booleans are useful when testing for truth value; we can test them in an **if** or **while** condition or as operand of Boolean operations.
 
 
 ```python
-# booleans, or bools, are another data type. They can hold only two 
+# booleans, or bools, are another data type. They can hold only two
 # possible values: True or False.
 is_true = True
 print(is_true)
@@ -311,7 +310,7 @@ print(not x or y)
 
 
 ```python
-# There are functions to make comparisons between valuables and produce bools. 
+# There are functions to make comparisons between valuables and produce bools.
 # '==' tests for equality
 print(1 == 2)
 print(1 == 1)
@@ -324,7 +323,7 @@ x = 1
 y = 2
 # compare values of pointers
 print(x == y)
-# set x and y to be the same pointer 
+# set x and y to be the same pointer
 x = y
 print(x)
 print(y)
@@ -349,7 +348,7 @@ Python is an imperative programming language. In computer science, imperative pr
 * branches
 * function calls
 
-Booleans can be used to control the flow of execution of the code. If-statements execute a section of code if a given bool evaluates to True. There is a specific syntax for booleans, including indentations. 
+Booleans can be used to control the flow of execution of the code. If-statements execute a section of code if a given bool evaluates to True. There is a specific syntax for booleans, including indentations.
 
 
 ```python
@@ -377,7 +376,7 @@ else:
     B
 
 
-#### 6. Lists 
+#### 6. Lists
 Lists are a data structure designed for easy storage and access to data. They are initialized using by using "**[ ]**" to enclose a comma separated sequence of values. These values can be anything. Lists can contain the same type of values, or a heterogeneous mix of values.  We can access individual elements of a list, a subset of elements, or the whole list. Lists are mutable: we can modify their elements.
 
 Python deals with multiple data structures in a similar manner. For example lists, dictionaries, files, and and iterators work similarly.
@@ -388,7 +387,7 @@ Python deals with multiple data structures in a similar manner. For example list
 L1 = [] # an empty list
 x = 5
 L2 = [1,2.0,'a',"abcd",True,x] # a list containing different values
-# lists can be built dynamically (aka on the fly) using "append" and 
+# lists can be built dynamically (aka on the fly) using "append" and
 # "extend".
 L1.append(1)
 L1.append(2)
@@ -397,7 +396,7 @@ L3 = ['a','b','c']
 L1.extend(L3)
 L1.append(L3)
 print(L1)
-# Values stored in lists are accessible by their index in the list. 
+# Values stored in lists are accessible by their index in the list.
 # Lists maintain the ordering in which values were stored in them.
 # We use "[i]" to retrieve the i-th element in a list.
 # Note that the first element in a list in Python has index 0.
@@ -450,9 +449,9 @@ asquaredlist
 
 
 #### 7. Dictionaries
-Dictionaries, called "dicts" for short, allow you to store values by providing identifying keys and values. They always have key/value pairs. Dicts are initialized using "{}". Placing a comma-separated list of **key:value** pairs within the braces adds initial **key:value** pairs to the dictionary. Dictionaries are indexed by keys instead of numeric indices. 
+Dictionaries, called "dicts" for short, allow you to store values by providing identifying keys and values. They always have key/value pairs. Dicts are initialized using "{}". Placing a comma-separated list of **key:value** pairs within the braces adds initial **key:value** pairs to the dictionary. Dictionaries are indexed by keys instead of numeric indices.
 
-It is best to think of a dictionary as an unordered set of key: value pairs, with the requirement that the keys are unique (within one dictionary). 
+It is best to think of a dictionary as an unordered set of key: value pairs, with the requirement that the keys are unique (within one dictionary).
 
 The **keys()** method of a dictionary object returns a list of all the keys used in the dictionary, in arbitrary order. To check whether a single key is in the dictionary, use the **in** keyword.
 
@@ -474,7 +473,7 @@ if not D2[6]: # evaluates to false
     print("Dicts are fun.")
 else:
     print("Dicts are not that fun.")
-    
+
 # The keys and values of dicts can be accessed as lists.
 print("keys: "+str(list(D2.keys())))
 print("values: "+str(list(D2.values())))
@@ -569,7 +568,7 @@ print(a2)
 
 
 #### 8. Iteration
-Loops allow us to automate repetitive tasks. The repeated execution of a set of statements is called iteration. There are a number of way to iterate in Python. We can use **for** loops or **while** loops too. The syntax is like the syntax of if-statements. The **for** loop loops over each of the elements of a list or iterator, assigning the current element to the variable name given. A **while** loop repeats a sequence of statements until some condition becomes false. 
+Loops allow us to automate repetitive tasks. The repeated execution of a set of statements is called iteration. There are a number of way to iterate in Python. We can use **for** loops or **while** loops too. The syntax is like the syntax of if-statements. The **for** loop loops over each of the elements of a list or iterator, assigning the current element to the variable name given. A **while** loop repeats a sequence of statements until some condition becomes false.
 
 
 
@@ -703,9 +702,9 @@ for i in range(100):
     x+=i
 print(x)
 
-# What if we do this for a new initial value for x? 
+# What if we do this for a new initial value for x?
 # What if we use a different number instead of 100?
-# We don't want to rewrite this for loop every time. 
+# We don't want to rewrite this for loop every time.
 # Let's define a function.
 def ForSum(x,y):
     for i in range(y):
@@ -747,7 +746,7 @@ def print_words(x="THIS",y="Not Mike"):
 
 x = "Mike"
 y = "Something else"
-    
+
 print_words(x)
 ```
 
@@ -768,7 +767,7 @@ Series and numpy lists behave similarly as well.
 
 #### Vectorization
 
-Numpy arrays are a bit different from regular python lists, and are the bread and butter of data science. Pandas Series are built atop them. 
+Numpy arrays are a bit different from regular python lists, and are the bread and butter of data science. Pandas Series are built atop them.
 
 In other words, operations on numpy arrays, and by extension, Pandas Series, are **vectorized**. You can add two numpy lists by just using `+` whereas the result isnt what you might expect for regular python lists. To add regular python lists elementwise, you will need to use a loop:
 
@@ -787,7 +786,7 @@ newlist
 
 
 
-**Vectorization** is a powerful idiom, and we will use it a lot in this class. And, for almost all data intensive computing, we will use numpy arrays rather than python lists, as the python numerical stack is based on it. 
+**Vectorization** is a powerful idiom, and we will use it a lot in this class. And, for almost all data intensive computing, we will use numpy arrays rather than python lists, as the python numerical stack is based on it.
 
 You have seen this in idea in spreadsheets where you add an entire column to another one.
 
@@ -804,4 +803,3 @@ print(a*b)
 
     <class 'numpy.ndarray'>
     [ 1  4  9 16 25]
-

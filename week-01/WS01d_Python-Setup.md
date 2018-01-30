@@ -1,9 +1,12 @@
+# Python Setup
 
-# Anaconda Crash Course: Using Anaconda (“Conda”) to Supplement Python
+1. Install Python
+2. Install Hydrogen for Atom
+3. Virtual environments for Python? Prahbs.
 
 ***
 
-Python is a valuable scripting language for data analysis and management; however managing a Python project environment can be nuanced and tricky. Anaconda is a platform built to complement Python by creating customizable and easily accessible environments in which you can run Python scripts. 
+Python is a valuable scripting language for data analysis and management; however managing a Python project environment can be nuanced and tricky. Anaconda is a platform built to complement Python by creating customizable and easily accessible environments in which you can run Python scripts.
 
 For reference, the Anaconda homepage is found at the following address.
 
@@ -15,7 +18,7 @@ The following tutorial runs through the installation of Anaconda, and then intro
 
 ### Install Anaconda (aka Conda)
 
-The Anaconda homepage contains the materials that you need to install Anaconda on your machine. You will primarily be using Anaconda through the command line, so you will have to get comfortable working on the command line. 
+The Anaconda homepage contains the materials that you need to install Anaconda on your machine. You will primarily be using Anaconda through the command line, so you will have to get comfortable working on the command line.
 
 ## 1. Check Anaconda Version and Install
 
@@ -63,7 +66,7 @@ If you see a 4.X.X version number popup, and with platform and environment infor
 
 ## 3. The Anaconda 30-minute Test Drive
 
-Now let’s familiarize with what exactly Anaconda allows us to do. On a basic level, Anaconda is a Python distribution that adds many features and streamlines work with the language. It does this by creating specific environments on your machine in which you can specify the packages that are installed and used, and easily lets you toggle between environments. With in the individual environments, you can perform analysis, run scripts, and develop code.
+Now let’s familiarize with what exactly Anaconda allows us to do. On a basic level, Anaconda is a Python distribution that adds many features and streamlines work with the language. It does this by creating specific environments on your machine in which you can specify the packages that are installed and used, and easily lets you toggle between environments. Within the individual environments, you can perform analysis, run scripts, and develop code.
 
 Environments are the bread and butter of Anaconda, because not all Python scripts you run will use the same packages, so you can customize exactly what you need, and create a sandbox that lets you try new things. Your environments will save the packages you have installed, allowing you to easily load an environment and run your scripts.
 

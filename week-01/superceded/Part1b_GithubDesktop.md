@@ -1,11 +1,9 @@
 
-# Git Crash Course: Setting up Git and Github (Desktop) 
+# Git Crash Course: Setting up Git and Github (Desktop)
 
 ***
 
 While using the command is the standard method for interacting with Git and Github, Github Desktop makes tracking changes and updating your files even easier by providing a desktop application and graphic user interface (no command line coding necessary!).
-
-***
 
 ## 1. Download and Install Github Desktop
 
@@ -14,8 +12,6 @@ If you've already gone through the steps from [Part 1](https://github.com/lukemi
 Navigate to the [Github Desktop homepage](https://desktop.github.com/) and download the client.
 
 ![Github Desktop Homepage](images/homepage.png "Github Desktop Homepage")
-
-***
 
 ## 2. Using the Application
 
@@ -96,7 +92,3 @@ To sync our changes, simply click the Sync button in the top right corner. This 
 ## 3. Additional Resources
 
 Feel free to read more about [Getting Started](https://help.github.com/desktop/guides/getting-started/) and [Contributing to Projects](https://help.github.com/desktop/guides/contributing/) with Github Desktop.
-
-
-
-
