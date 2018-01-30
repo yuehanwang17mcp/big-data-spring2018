@@ -120,13 +120,9 @@ Now that we have a repository, we can **clone** a copy to our local machines, ad
 
 Open Terminal (OS X or Linux) or Git Bash (Windows) and enter the following command:
 
-***
-
 ```sh
 git –-version
 ```
-
-***
 
 If Git is correctly installed on your machine, you will see the version. If you get an error, or you don’t see the version, you need to install Git. Download Git from the downloads page on the [main Git project homepage](https://git-scm.com/). A wizard will lead you through the installation. The defaults should be fine. You might need to restart your machine afterwards; at the very least, you'll have to restart Terminal.
 
@@ -259,7 +255,7 @@ We don't want this! Text editors work with text and text only; what you see in a
 
 The text editor we recommend is called **Atom**. Before moving on, please install it and use it for writing your code. [Download it here](https://atom.io/).
 
-#### ii. Edit the Github README
+#### ii. Edit the Github README.md
 
 Assuming that your working directory is still your Github pages repo, you can open it as a project directory in Atom from the command line as follows:
 
@@ -269,10 +265,11 @@ atom ./
 
 `./` is how you explicitly say 'the current folder.'
 
-You should see your Github pages repository open in the file tree on the left side of the screen. Open and edit the README to contain your name and some information on your project.
+You should see your Github pages repository open in the file tree on the left side of the screen. Open the `README.md` file. The extensions tells you that this is a Markdown file; Markdown is an exceedingly popular markup (get it?) language that features a very simple syntax for structuring documents.
 
-Text contained in this README file is displayed by default when visitors view your Github repo. You'll want to describe your project: what it is, what it does, how do do it, and how people that fork a copy are permitted to use it. For example, you could write the date, that this is your Github homepage, and that it was created on the first day of class for Big Data, Visualization, and Society at MIT.
+For example, where HTML requires both opening and closing tags to create a heading (`<h1>Heading Text</h1>`), Markdown only requires a single octothorpe character (`# Heading Text`). Documentation of Github's variant on Markdown (called 'Github-flavored Markdown') is [here](https://help.github.com/articles/basic-writing-and-formatting-syntax/) and it's worth looking into. It's very easy to learn and will allow you to cruise through creating documentation for your Github repos.
 
+Text contained in a README.md file in your repo's root folder is displayed by default when visitors view your Github repo. You'll want to describe your project: what it is, what it does, how do do it, and how people that fork a copy are permitted to use it. For example, you could write the date, that this is your Github homepage, and that it was created on the first day of class for Big Data, Visualization, and Society at MIT.
 
 #### iii. Create our website... write some code!
 
@@ -285,15 +282,15 @@ Let’s create a very basic webpage using HTML (Hypertext Markup Language). Open
 <!DOCTYPE html>
 <!-- opening html tag identifies the contained text as html and tells the browser and search engines that the page is in English -->
 <html lang="en">
-<!-- head section contains metadata and links to external files -->
+<!-- head element, bounded by <head> tags, contains metadata and links to external files -->
 <head>
-	<!-- metadata identifying how characters are encoded. There are many ways to encode text, but UTF-8 is the most standard in web development. -->
+	<!-- metadata identifying how characters are encoded. There are many ways to encode text, but UTF-8 standard in web development. -->
 	<meta charset="utf-8">
-	<!-- Creates a title that is displayed in the browser's title bar, but not in the page body -->
+	<!-- Creates a title that is displayed in the browser's title bar, search engine results, etc. but not in the page body -->
 	<title>Hello World</title>
-<!-- announces the end of the head section -->
+<!-- closes the head element-->
 </head>
-<!-- document body contains content that is displayed in the browser window -->
+<!-- the body element contains content that is displayed in the browser window -->
 <body>
 	<!-- create a header -->
 	<h1>Hello World</h1>
@@ -305,11 +302,17 @@ Let’s create a very basic webpage using HTML (Hypertext Markup Language). Open
 </html>
 ```
 
-Save the document in the **username.github.io** root directory as **index.html**. Now that we have some (admittedly simple) content, we'll want to **commit** our changes and then **push** our local code to the remote repository hosted on Github.
+Save the document in the `<Github username>.github.io` root directory as `index.html`. Now that we have some (admittedly simple) content, we'll want to **commit** our changes and then **push** our local code to the remote repository on Github.
 
 ## 7. Use git status to check the working status and synchronization of documents.
 
-We're about to perform a very, very common series of tasks when working with Github repos: we'll 1) check the status of our repo, 2) stage our changes, 3) commit our changes, and 4) push our changes to Github. Over time, this workflow will become fully absorbed into your muscle memory.
+We're about to perform a series of tasks that are very, very common series when working with Github repos. We'll
+1. Check the **status** of our repo,
+2. Stage (or **add**) our changed files,
+3. **Commit** our changes, and
+4. **Push** our changes to Github.
+
+Over time, this workflow will become fully absorbed into your muscle memory.
 
 We'll start by checking the status of our local repo as follows:
 
@@ -317,7 +320,7 @@ We'll start by checking the status of our local repo as follows:
 git status
 ```
 
-This will output a list of changes made since the last commit. You should see that we've modified our **README.md** file, and that **index.html** is not yet tracked. In order to commit this files to our remote repository, we need to stage them first.
+This will output a list of changes made since the last commit or, in this case, since the repository was initialized. You should see that we've modified our **README.md** file, and that **index.html** is not yet tracked. In order to commit this files to our remote repository, we need to stage them first.
 
 ## Commiting and Pushing Changes
 
@@ -336,25 +339,25 @@ git add README.md
 git add index.html
 ```
 
-In many cases, you'll find that you want to stage all modified, added, or deleted files. This could be a daunting task if you were required to stage files one-by-one. Good thing this is not the case! You can simply use:
+In many cases, you'll find that you want to stage all modified, added, or deleted files. This could quickly become very tedious if you were required to stage files one-by-one. Luckily, this is not the case! You can simply use:
 
 ```sh
 git add .
 ```
 
-Check the result by typing in `git status `again to see that the changes are ready to be committed. If you ever need to unstage anything, use the following:
+Check the result by typing in `git status` again to see that the changes are ready to be committed. If you ever need to unstage anything, use the following:
 
 ```sh
 git reset HEAD <filename>
 ```
 
-**Important to note:** files are not staged in their entirety, rather, changes to the files are staged.
+**Note:** Files are not staged in their entirety. Rather, changes to the files are staged.
 
 ## 9. Commit files to our repository
 
-Once we've staged our files, we're ready to commit our changes and update the repository. We start locally - that is, with the repository stored on our local disk. Remember, Git acts as an intermediary between us and our edits. When we change files on our local machines, Git keeps track of changes, but we need to commit those changes to the local repository so that Git knows we'd like to consider this a checkpoint.
+Once we've staged our files, we're ready to commit our changes and update the remote repository. We start locally - that is, with the repository stored on our local disk. Remember that Git acts as an intermediary between us and our edits. When we change files on our local machines, Git keeps track of changes, but we need to commit those changes to the local repository so that Git knows we'd like to consider this a checkpoint.
 
-It is considered good practice to add a comment to your commit that describes the changes you made to the files. This helps others working with your code stay organized and informed on what you did that made this commit worthy. For example, for this exercise, our comment might be: 'added the index.html document and updated the readme.'
+It is considered good practice to add a comment to your commit that describes the changes you made to the files. This helps others working with your code---and you, two months from now--know what you did that was worthy of a commit. For example, for this exercise, our comment might be: 'added the index.html document and updated README.'
 
 **Style Note:** Technically, the Git style gods have decided that all comments should be written in the present tense. I disagree. Rather strenuously. This is the turbonerd equivalent of the 'should you use the first-person in academic writing' debate---basically the argument goes that the past tense implicates the developer, whereas the present tense refers to the commit. But I have no problem with implicating the developer for all the same reasons that I have no problem with academic writing in the first-person, so rock on with your bad past-tense self.
 
@@ -374,7 +377,7 @@ git commit -a -m "commit message"
 
 ## 10. Push files to our online repository
 
-The last step is **push** our committed changes to the remote repository. We do this using `git push`. The syntax for this is `git push origin <branchname>`. This will push the file to the remote origin and match it to the name of the branch. We'll talk more about branches below; for now we can just type `git push` which defaults to the `master` branch on the remote origin. To push our files to Github, use the following:
+The last step is to **push** our committed changes to the remote repository. We do this using `git push`. The syntax for this is `git push origin <branchname>`. This will push the file to the remote origin and match it to the name of the branch. We'll talk more about branches below; for now we can just type `git push` which defaults to the `master` branch on the remote origin. To push our files to Github, use the following:
 
 ```sh
 git push
@@ -382,13 +385,15 @@ git push
 
 You will then have to authenticate by typing your Github username and password. This will push our master branch to Github and sync our files.
 
-Navigate to your Github page and check out your ‘username.github.io’ repository. You should see your files and modifications! Wash, rinse, and repeat (and repeat, and repeat, and repeat).
+Navigate to your Github page and check out your ‘username.github.io’ repository. You should see your files and modifications! But that's not all! Because we've named this repo according to the very special .github.io syntax, we've simultaneously created a live website. Open a browser and navigate to http://<yourusername>.github.io
+
+Congrats! You created your first Github repo, created a new website in the process, and learned the basic Github workflow! Wash, rinse, and repeat (and repeat, and repeat, and repeat).
 
 ## Speaking of Repeating... Credential Management
 
-While it's great that Github wants to keep you secure, it can also be kind of a pain to enter your credentials every time you push changes to your remote repository. Lucky for us, Git provides a number of built-in ways to store your credentials for later use. You can do some reading on these [here](https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage) if you'd like, but I recommend the 'cache' method. This method stores credentials in memory, not on your hard disk, and they are purged after a given period of time. Other methods require that you store your credentials in plain-text files on your hard drive---not exactly secure.
+While it's great that Github wants to keep you secure, it can also be kind of a pain to enter your credentials every time you push changes to your remote repository. Luckily, Git provides a number of built-in ways to store your credentials for later use. You can do some reading on these [here](https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage) if you'd like, but I recommend the 'cache' method. This method stores credentials in memory, not on your hard disk, and they are purged after a given period of time. Other methods require that you store your credentials in plain-text files on your hard drive---not exactly secure.
 
-To prevent Github from asking for your credentials for 30 minutes, enter the following command from either Terminal or Git Bash:
+To prevent Github from asking for your credentials for 30 minutes after they are entered, type the following command from either Terminal or Git Bash:
 
 ```sh
 git config --global credential.helper 'cache --timout=1800'
@@ -396,120 +401,91 @@ git config --global credential.helper 'cache --timout=1800'
 
 You can modify your timeout value, measured in seconds, to your liking.
 
-## 11. View your Website
-
-But that's not all! Because we've named this repo according to the very special .github.io syntax, we've simultaneously created a live website. Open a browser and navigate to http://<yourusername>.github.io
-
-Congrats, you have created your first github repo, and a new website in the process!
-
-
 ## 12. Working with Branches
 
-Up to this point, we have been working with our ‘master’ branch. The ‘master’ branch is the main branch of our repository, and should always be kept working and clean. If we want to work on a copy that is different than the live ‘master’ branch, we can create a working branch that has a copy of all of the files in the master branch, then try out changes on the working branch so you don’t break code that is in the master branch.
+Up to this point, we have been working with what's called the `master` branch. The `master` branch is the main branch of our repository, and should always be kept working and clean. Branches allow you to create separate lines of development, including commits, that do not affect the `master`. These can then be merged into the `master` when they're complete, or abandoned if something doesn't work out. Long story short: if you're doing something that could conceivably break your code, you should make a new branch.
 
-Keep in mind that creating new branches will not create new local file directories. That is, if you make changes to a local file while a non-master branch is checked out, the changes are stored in the local Git repository, but the original local file is unchanged (as it is represented by the master branch in Git).
-
-In Terminal, to create a branch, follow the following steps.
+Keep in mind that creating new branches will not create new local file directories. That is, if you make changes to a local file while a non-master branch is checked out, the changes are stored in the local Git repository while the original local file remains unchanged (as it is represented by the `master` branch in Git).
 
 #### i. Create a branch based on the master branch
 
-To create a branch based on the master branch, use the following syntax:
+To create a branch based on the `master` branch, use the following syntax:
 
-***
 ```sh
 git checkout –b <new branch name> <existing branch name>
 ```
-***
 
 For example, we can use:
 
-***
 ```sh
 git checkout –b test-changes master
 ```
-***
 
-to create a new branch called test-changes of the master branch. (Technically the master part at the end is unnecessary, but always better to be verbose).
+This will create a new branch called `test-changes` based on the `master` branch. Technically the `master` part at the end is unnecessary, but it is almost always better to be verbose.
 
 #### ii. Show all local branches by using the branch command
 
 Show all branches of the repository using the following command:
-***
+
 ```sh
 git branch
 ```
-***
-**Note:**An asterisk will appear next to the current working branch.
 
-#### iii. Switching between branches
+**Note:** An asterisk will appear next to the current working branch.
 
-Use **git checkout** to switch between branches. Switching back to the master branch would look like:
+#### Make changes to your HTML.
 
-***
-```sh
-git checkout master
+Add a second paragraph to the body of your webpage and modify the first paragraph. Maybe something like...
+
+```html
+<!-- create a header -->
+<h1>Hello World</h1>
+<!-- create a paragraph -->
+<p>I wuz here. Were you?</p>
+<!-- who wouldn't? -->
+<p>I'd rather be branching.</p>
 ```
-***
+
+Now stage the changes, commit them to your `test-changes` branch, and push them to your remote repo. Branches can be committed to the local repository and synced to the remote repository (on the Github site) using the very same **push** process described above.
 
 #### iv. Merge branches
 
-Merging branches is easy. To merge **test-changes** back into master, change to your master branch using checkout, and then use the merge command.
+Let's say that we're done implementing changes that we've been building on the `test-changes` branch and that you'd now like to fold them into the `master` branch. Git calls this a **merge**. To merge `test-changes` back into master, change to your master branch using checkout, and then use the merge command.
 
-***
 ```sh
 git checkout master
 git merge test-changes
 ```
-***
 
-#### v. Commit and Push a Branch
+If you're working on a project alone, that's likely to be all she wrote and the merge should present no problems. In collaborative settings with multiple people working on the same lines of code, you may experience what are called **merge conflicts**. In short, conflicts will be flagged in your file when you open it in a text editor. You will have to go through your file and find conflicts, decide which change to accept, and then delete the surrounding conflict markers. Though we won't be dealing with this today in our simple example, it's worth reading up on resolving merge conflicts [here](https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line/).
 
-Branches can be commited to the local repository and synced to the remote repository (on the Github site) using the same **push** process described in the steps used for the master branch above.
 
 #### vi. Delete a Branch
 
-If you ever need to delete a branch if you are done working in a branch and have merged changes, use the –d key of the branch command. For example, to delete test-changes, use:
+If you ever need to delete a branch---maybe you're done working in a branch and have merged changes---use the –d key of the branch command. For example, to delete test-changes, use:
 
-***
 ```sh
 git branch –d test-changes
 ```
-***
-
-**Branches are a powerful component of working with Github!**
-
-## 14. Resolving Merge Conflicts
-
-Users working in large groups are bound to run into some conflicts when two or more people are working on the same files and changing the same lines of code. There are methods for resolving this, but unfortunately will require some manual checking. In short, conflicts will be flagged in your file when you open it in a text editor. You will have to go through your file and find conflicts, decide which one to accept, and then delete the surrounding conflict markers. This is described in nice detail on the Github help pages at the following address.
-
-https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line/
-
-Congrats, this crash course has introduced you to git and Github! Clearly there is much more to learn, including handling issues, which are like tickets individuals can open on your code, then interact with the authors to resolve, and pull requests, where authors can take modified code and merge it into their original projects. See below for additional reading, cheatsheets, and resources.
-
-Github has a DESKTOP APP! This makes things quite a bit easier. If you are comfortable working on the command line, you can stop here, but to learn the Desktop app, check out Part 1B.
-
 
 ## 12. Pulling changes from Github
 
-Often you will need to incorporate changes made by others on the remote repository on your local drive.  In this case, you can log into terminal and use git pull. Git pull will retrieve new work done by other people and merge the local changes with changes made by others. Syntax appears like the following. (syntax looks like the following - **git pull remote branch **)
+Often you will need to incorporate changes made by others on the remote repository on your local drive. In this case, you can use the `git pull` command. Git pull will retrieve new work done by other people and merge the local changes with changes made by others (this may cause merge conflicts). The syntax for a `pull` looks like this:
 
-***
 ```sh
 git pull origin master
 ```
-***
 
-For more on this, read the following at the Github help pages.
+For more on this, read the [Github help pages](https://help.github.com/articles/fetching-a-remote/).
 
-https://help.github.com/articles/fetching-a-remote/
-***
+## Fin.
 
-***
+Congratulations! This crash course has introduced you to Git and Github! Clearly there is much more to learn, including handling issues, which are like tickets individuals can open on your code, then interact with the authors to resolve, and pull requests, where authors can take modified code and merge it into their original projects. See below for additional reading, cheatsheets, and resources.
 
 
 ## Additional Reading and Resources
 
-#### Mac Command Line Cheatsheet –
+#### Command Line Cheatsheet –
 https://github.com/0nn0/terminal-mac-cheatsheet/wiki/Terminal-Cheatsheet-for-Mac-(-basics-)
 
 #### Github Glossary –
