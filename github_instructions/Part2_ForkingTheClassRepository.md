@@ -57,9 +57,9 @@ git push origin master
 
 It's a **push**! **Origin** is the remote repository, and **master** is the branch we are pushing.
 
-#### C. Pulling the Folders for the New Week
+#### C. Fetching the Folders for the New Week
 
-There are a couple of methods to get new materials from Github and incorporate them into your forked repo. We are going to show you here how to get just the new folders you specify. For example, each week we are uploading a new folder with the materials for that week, this is how you can get just the new week's folder from the main class repository.
+There are a couple of methods to get new materials from Github and incorporate them into your forked repo: the primary commands are `pull` and `fetch`. We are going to show you here how to `fetch` only the new folders you specify. Each week we will be uploading a new folder with the materials for that week; use the method below to retrieve only the new week's folder from the remote class repository.
 
 1. First, view and setup your remote versions. These are the remote Github repositories that are associated with your forked repo, meaning this is your personal fork, and actually the main original fork as well (full class repo). To view the remote versions, type the following:
 

@@ -4,17 +4,55 @@
 2. Install Hydrogen for Atom
 3. Virtual environments for Python? Prahbs.
 
-***
+Python is a valuable scripting language for data analysis and management; however, managing a Python project environment can be nuanced and tricky. Anaconda is a platform built to complement Python by creating customizable and easily accessible environments in which you can run Python scripts.
 
-Python is a valuable scripting language for data analysis and management; however managing a Python project environment can be nuanced and tricky. Anaconda is a platform built to complement Python by creating customizable and easily accessible environments in which you can run Python scripts.
+The following tutorial runs through installing Python and the Hydrogen plug-in for Atom, then introduces you to the concepts behind virtual environments, which we will be using to manage our projects.
 
-For reference, the Anaconda homepage is found at the following address.
+## Python Setup
 
-https://www.continuum.io/why-anaconda
+### Checking for Installed Versions
 
-The following tutorial runs through the installation of Anaconda, and then introduces you to the concepts behind Anaconda that make it a nice and useful Python development environment.
+First, check whether you have Python installed. Open the Terminal or Windows Command Prompt and type the following command:
 
-***
+```sh
+python -V
+```
+You should see something like `Python 3.6.3`. If a Python 2.x.x version shows up, type `python3 -V`. If the console prints a Python `3.6.x` version, you're set. Otherwise, you'll need to install Python 3.
+
+### Installing Python 3.6.x
+
+Navigate to the [3.6.3 release page](https://www.python.org/downloads/release/python-363/) and select the appropriate installer for your operating system. Install Python using the default settings. Close any open Terminal or Command Prompt windows and reopen the application. Now type `python -V`. This may still cause a Python 2.x.x version to appear; if this is the case, type `python3 -V`. If you ran Python 3 using the `python3` command, you'll use this in every instance below where you're instructed to type `python`. We now have Python 3 and can execute it from the command line!
+
+### Run a Script
+
+In this week's repo folder, you should see a file called `first-script.py`. This is a Python script! `.py` is the standard file extension. Now that we've installed Python, we can run this script easily from the command line.
+
+```sh
+$ cd /path/to/repo/big-data-spring2018/week-01/
+$ python first-script.py
+Python is printing me!
+```
+
+Open the script - we'll get into Python next week, but this script is very simple. What do you suspect is happening here? For now, let's move on.
+
+### A Note on Python Versions
+
+You may (reasonably) ask: why would I ever want to maintain two versions of the same language on my operating system? Good question! Ordinarily, this would be only a source of confusion. But something strange happened between Python 2.7 and Python 3.x---the development team made unusually significant changes to the way the language thinks and operates. These were so significant, in fact, that Python 3 sacrificed **backwards-compatibility**. In other words, scripts written in Python 2.x will often not run correctly in Python 3.x.
+
+So: imagine you've been coding in Python for years and you've built up a substantial collection of scripts you'd still like to be able to execute. You'll need to have Python 2.7.x on hand if you want to run older scripts! This also means that scripts you find on Github and elsewhere will often not be updated for Python 3 compatibility.
+
+## Install Hydrogen for Atom
+
+As Elliot Alderson as it may make us feel to run all of our scripts from the command line, it will sometimes frankly be much easier to run chunks of our Python scripts rather than the scripts in their entirety. To do this, we will be using an Atom package called Hydrogen that will let us execute and display the output of our Python and JavaScript code from within Atom.
+
+To install Hydrogen, open Atom, and open your preferences. Select 'Install' search for Hydrogen. Click the 'Install' button. After a brief interlude, Hydrogen should be installed! Check that 'Hydrogen' appears under the Packages drop-down menu.
+
+Open the `first-script.py` script. Select the first line and type shift-enter. You'll see a checkmark appear next to the line and your cursor will have progressed to the next line. The checkmark tells you that the line executed successfully. In this case, that means a variable called `msg` is now stored in memory. Type shift-enter again.  You should see "Python is printing me!" appear next to the print function. This is how Hydrogen displays console output. Cool, eh? We can now run not only full scripts, but 'chunks' of code. This will allow us significantly more flexibility as we're developing our own scripts.
+
+## Virtual Environments for Python
+
+All right... one last task! Albeit one that's a bit confusing.
+<!--
 
 ### Install Anaconda (aka Conda)
 
@@ -57,7 +95,7 @@ We used Python 3, not Python 2. The guidelines on the site describe that we shou
 Once we are finished with the installation, check to make sure it installed correctly by performing a version check.
 
 ```sh
-	conda info
+conda info
 ```
 
 If you see a 4.X.X version number popup, and with platform and environment information, the installation worked. Now we can begin working with Conda.
@@ -78,7 +116,7 @@ Follow the Test Drive at the following link:
 
 Working with Anaconda can make working with Python a much more pleasant experience. For additional resources, including cheatsheets and useful links, see the following materials.
 
-***
+*** -->
 
 ## Additional Reading and Resources
 
