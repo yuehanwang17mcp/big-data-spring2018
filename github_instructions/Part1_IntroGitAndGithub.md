@@ -21,25 +21,17 @@ Github has a particular, and sometimes peculiar, way of speaking about itself an
 <dl>
 	<dt>Repository</dt>
 	<dd>A repository is the most basic element of GitHub. They're easiest to imagine as a project's folder. A repository contains all of the project files (including scripts, code, data, and documentation), and stores each file's revision history so you can track changes. Repositories can have multiple contributors (known as collaborators) and can be either public or private.</dd>
+	<dt>Clone</dt>
+	<dd>A clone is a local copy of a repository on your hard drive. With your clone you can edit the files in your preferred editor and use Git to keep track of your changes without having to be online. A clone does, however, maintain its association with the remote version; changes made locally can be logged (or **committed**) and synced (**pushed**) with the remote copy on Github servers.</dd>
+	<dt>Fetch</dt>
+	<dd>Fetching refers to getting the latest changes from an online repository *without* merging them. Once these changes are fetched you can compare them to your local branches (the code residing on your local machine).</dd>
+	<dt>Pull</dt>
+	<dd>Pull refers to when you are fetching in changes in an online repository *and merging them* into your local version. For instance, if someone has edited the remote file you're both working on, you'll want to pull in those changes to your local copy so that it's up to date.</dd>
+	<dt>Merge</dt>
+	<dd>Merge describes the process of taking files from one version of the repository (i.e. the online version) and syncing them with another (i.e. your local version). Combining two versions like this will often result in conflicts. Such conflicts are called **merge conflicts**, and must be resolved manually.</dd>
+	<dt>Merge Conflict</dt>
+	<dd>A merge conflict is when two collaborators change the same line of the same file in a repository. These tend to really scare new Git users, but *they are not a problem*! When you collaborate it will happen. However it can be a bit confusing at first. To resolve a merge conflict, the user needs to pick which line is the one that should be saved. Merge conflicts must be resolved in order to successfully **pull** and **push** repositories.</dd>
 </dl>
-
-Clone
-	~ A clone is a local copy of a repository on your hard drive. With your clone you can edit the files in your preferred editor and use Git to keep track of your changes without having to be online. A clone does, however, maintain its association with the remote version; changes made locally can be logged (or **committed**) and synced (**pushed**) with the remote copy on Github servers.
-
-Fork
-	~ A fork is a personal copy of *another user's* repository that lives on your account. Forks allow you to freely make changes to a project without affecting the original. Forks remain attached to the original, allowing you to submit a pull request to the original's author to update with your changes. You can also keep your fork up to date by pulling in updates from the original. To edit files, you must **clone** your forked repository to your machine, and you can work with it as if it is your own.
-
-Fetch
-	~ Fetching refers to getting the latest changes from an online repository *without* merging them. Once these changes are fetched you can compare them to your local branches (the code residing on your local machine).
-
-Pull
-	~ Pull refers to when you are fetching in changes in an online repository *and merging them* into your local version. For instance, if someone has edited the remote file you're both working on, you'll want to pull in those changes to your local copy so that it's up to date.
-
-Merge
-	~ Merge describes the process of taking files from one version of the repository (i.e. the online version) and syncing them with another (i.e. your local version). Combining two versions like this will often result in conflicts. Such conflicts are called **merge conflicts**, and must be resolved manually.
-
-Merge Conflict
-	~ A merge conflict is when two collaborators change the same line of the same file in a repository. These tend to really scare new Git users, but *they are not a problem*! When you collaborate it will happen. However it can be a bit confusing at first. To resolve a merge conflict, the user needs to pick which line is the one that should be saved. Merge conflicts must be resolved in order to successfully **pull** and **push** repositories.
 
 #### Commit
 
