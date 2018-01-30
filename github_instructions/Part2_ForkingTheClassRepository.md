@@ -1,30 +1,24 @@
 # Forking the Class Repository
 
-Most of our work this semester will be channeled through a class Github repository in which all of the course files and materials are uploaded, maintained, and stored. Each week, course materials will be pushed by the teaching staff into the class repository; student submissions will also be pushed to forks of the class repository.
+Most of our work this semester will be channeled through a [class Github repository](https://github.com/ericmhuntley/big-data-spring2018). This repo is where you will find all of the course materials; these will be pushed up by the teaching staff each week. student submissions will also be pushed to forks of the class repository.
 
-Find the class repository here:
+To download a local copy of the course files, fork a copy of the class repository into your own Github profile. **You only need to do this once.** This will give you your very own copy of the class repository that you can edit at will. However, it will also still be linked to the original repository, which makes magic possible: you can **fetch** and **pull** materials from the original repository as it the teaching staff update it.
 
-[https://github.com/ericmhuntley/big-data-spring2018](https://github.com/ericmhuntley/big-data-spring2018)
+## Fork the Class Repository
 
-To download a local copy of the course files, **fork** a copy of the class repository into your own Github profile. **You only need to do this once.** This will give you your own copy of the class repository that you can edit it at will. However, it will also still be linked to the original repository, meaning you can **fetch** and **pull** materials from it as needed. Let's start be making our **fork**.
+Create your own personal copy, or ‘fork’, of the class repository!
 
-#### A. Fork the Class Repository
+1. Click 'fork' on the Github page of the [main class repository](https://github.com/ericmhuntley/big-data-spring2018). If you navigate to your profile page after doing so, you'll see a copy of the class repo. This is your fork!
+2. Open Terminal (for Mac and Linux users) or Git Bash (for Windows users). Change to your github directory (remember `cd`?).
+3. Type `git clone https://github.com/<Github username>/big-data-spring2018.git`.
 
-Create your own personal copy, or ‘fork’, of the class repository.
+You have now **forked** the repository and **cloned** it onto your machine. This means that you can now work with and edit your own version of the class repository. Changes made here will not affect the main class repository.
 
-1. First click fork on the Github page of the main class repository.
-[https://github.com/ericmhuntley/big-data-spring2018](https://github.com/ericmhuntley/big-data-spring2018)
-2. In Github, navigate to your profile and locate your personal fork of repository.
-3. Open Terminal (for Mac and Linux users) or Git Bash (for Windows users). Change to your github directory.
-5. Type `git clone https://github.com/<Github username>/big-data-spring2018.git`.
+## Fetch changes from the main class repository
 
-After completing this step, you will be able to work with and edit your own version of the class repository; you have now **forked** the repository and **cloned** it onto your machine. Changes here will not affect the main class repository. You can **pull**, **merge**, **commit**, and **push** to your **fork** as much as you want.
+### Commit changes to your fork
 
-## Get New Files from the Main Class Repository
-
-#### B. Before getting files from the main repo, commit changes to your own repo.
-
-You will need to commit any changes you've made to the forked repository before you can **pull** new files from the class repository. This will let Github know what has changed and what hasn’t. When you pull the main class repository, Github will provide the main class files, give you files you don’t have, and flag any items that were changed in both your personal fork and main class repo. To do this, run through the following steps.
+You will need to commit any changes you've made to the forked repository before you can fetch new files from the class repository. This way, Git will know what has changed and what hasn’t. When you fetch the main class repository, Github will provide the main class files, give you files you don’t have, and flag any items that were changed in both your personal fork and main class repo. As a reminder, you stage, commit, and push changes using the following series of steps.
 
 1. Using Terminal or Git Bash, change into the directory that contains the local copy of your forked repository.
 
@@ -55,7 +49,7 @@ git push origin master
 
 It's a **push**! **Origin** is the remote repository, and **master** is the branch we are pushing.
 
-#### C. Fetching the Folders for the New Week
+### Fetch new folders for the week
 
 There are a couple of methods to get new materials from Github and incorporate them into your forked repo: the primary commands are `pull` and `fetch`. We are going to show you here how to `fetch` only the new folders you specify. Each week we will be uploading a new folder with the materials for that week; use the method below to retrieve only the new week's folder from the remote class repository.
 

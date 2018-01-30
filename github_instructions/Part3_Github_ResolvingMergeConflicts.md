@@ -1,7 +1,5 @@
 # Resolving Merge Conflicts
 
-***
-
 Sometimes, when working on a project, you and your colleagues will change the same line of code. This often happens unintentionally, and you end up with a conflict between two files. No need to panic, simply read the message, and locate what the error might be. If two people change the same line of code, Github will not know which one it should keep, so you have to tell which one, and remove the other.
 
 When this happens, you will see an error similar to the following:

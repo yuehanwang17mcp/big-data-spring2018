@@ -41,8 +41,6 @@ Github has a particular, and sometimes peculiar, way of speaking about itself an
 
 Okay, let's get started with Github, set up our computers to talk to the Github website so we can push and pull files, and let's give this a try!
 
-***
-
 ## Getting Started on Github
 
 Sign up for a Github account on the (Github site)[http://www.github.com] in which you can host projects and maintain repositories. Once signed up, go to your profile page.
@@ -64,8 +62,6 @@ You'll now see the new repository prompt. To use a repo as a Github pages site, 
 Congratulations! You've created your first repository! This repository will host any included files on a page visible to the internet via the url *username*.github.io.
 
 Now that we have a repository, we can **clone** a copies to local drives, add content, manage files, and make changes. First, though, we need to set up Git on our machine. Once we've done this, we will be able to interact with our remote Github repositories using the Git command line utility.
-
-***
 
 ## Getting Started with Git
 
@@ -197,8 +193,6 @@ Text contained in a README.md file in your repo's root folder is displayed by de
 
 Let’s create a very basic webpage using HTML (Hypertext Markup Language). Open a text document, copy and paste the following code snip. We are going to call this **index.html**. I've added comments above each line below so that those of you unfamiliar with HTML can begin to grasp its structure.
 
-***
-
 ```html
 <!-- tells the browser that it should expect html -->
 <!DOCTYPE html>
@@ -250,7 +244,7 @@ This will output a list of changes made since the last commit or, in this case, 
 ### Stage your Changes
 
 You can stage your changes by using:
-***
+
 ```sh
 git add <filename>
 ```
