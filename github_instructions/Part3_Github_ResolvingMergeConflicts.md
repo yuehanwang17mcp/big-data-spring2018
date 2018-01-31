@@ -13,13 +13,9 @@ Automatic merge failed; fix conflicts and then commit the result.
 
 What this is saying is that there is a conflict in the file **test.txt**. When we try to pull and there are conflicts, Github will add the conflicts to our file. To fix this conflict, we need to open the file and choose which of the competing lines we want to use.
 
-### 1. Navigate to and Open the File
+## Identifying Merge Conflicts
 
-Navigate to the file with conflicts on your computer and open it up using Atom (or your favorite text editor). We'll manually resolve the conflicts in the text editor.
-
-### 2. Identify the Merge Conflicts
-
-With the file open, locate the merge conflicts. These are identified by **conflict markers**, which look like **<<<<<<<**, **=======**, and **>>>>>>>**. The **<<<<<<<** delineates the start of the conflict. Immediately following are the changes you've made to your local copy of the repository. Following the comparison marker (**=======**), you'll find changes made to the remote repository. The **>>>>>>>** marker signals the end of the conflict.
+Navigate to the file with conflicts on your computer and open it up using Atom (or your favorite text editor). We'll manually resolve the conflicts in the text editor. With the file open, locate the merge conflicts. These are identified by **conflict markers**, which look like **<<<<<<<**, **=======**, and **>>>>>>>**. The **<<<<<<<** delineates the start of the conflict. Immediately following are the changes you've made to your local copy of the repository. Following the comparison marker (**=======**), you'll find changes made to the remote repository. The **>>>>>>>** marker signals the end of the conflict.
 
 To demonstrate, merge conflicts might look something like the following:
 
@@ -33,7 +29,7 @@ Good bye. # Other changes and edits
 >>>>>>> ANOTHER BRANCH # End of changes made on the remote repository
 ```
 
-### 3. Edit the File to Resolve Conflicts
+## Edit the File to Resolve Conflicts
 
 To resolve these conflicts, determine which lines you want to keep, and remove the conflict markers and lines of code you don't want. Clean the file so that only the lines of code you want to keep are in it.
 
@@ -45,13 +41,11 @@ Hello. # Your changes and edits
 
 Save your file once you've made the edit and resolved the conflict.
 
-### 4. Fix all of the Merge Conflicts
+In order to complete the merge and get the commit to properly perform, you need to fix all of the merge conflicts. Unfortunately, you do usually have to do this manually, as Github will not know which of the conflicts it should keep. There is a way to force Github to take changes using `git pull --force`... but you almost never want to do this! It will overwrite all of your changes!
 
-In order to complete the merge and get the commit to properly perform, you need to fix **all** of the merge conflicts. Unfortunately, you do usually have to do this manually, as Github will not know which of the conflicts it should keep. There is a way to force Github to take changes using **git pull --force**... but you almost never want to do this! It will overwrite all of your changes!
+## Commit and Push your Changes
 
-### 5. Commit and Push your Change
-
-Once you have finished resolving conflicts, you can push to your remote repo just as you would any other commit. First **commit** your changes, include a message that you are resolving conflicts in addition to your changes, then **push** them to the remote.
+Once you have finished resolving conflicts, you can push to your remote repo just as you would any other commit. First `commit` your changes, include a message that you are resolving conflicts in addition to your changes, then `push` them to the remote.
 
 ### Read the Docs
 
