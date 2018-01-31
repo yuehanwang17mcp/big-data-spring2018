@@ -289,6 +289,8 @@ This commits our changes to the local repository.  You will see a note that file
 In the future, if you want to stage all previously staged files and commit them in one fell swoop, you can use the `-a` option of the `git commit` command like so:
 
 ```sh
+git commit -am "commit message"
+# OR its syntactical equivalent:
 git commit -a -m "commit message"
 ```
 
