@@ -337,10 +337,10 @@ git checkout –b <new branch name> <existing branch name>
 For example, we can use:
 
 ```sh
-git checkout –b test-changes master
+git checkout –b testchanges master
 ```
 
-This will create a new branch called `test-changes` based on the `master` branch. Technically the `master` part at the end is unnecessary, but it is almost always better to be verbose.
+This will create a new branch called `testchanges` based on the `master` branch. Technically the `master` part at the end is unnecessary, but it is almost always better to be verbose.
 
 ### Show all local branches
 
