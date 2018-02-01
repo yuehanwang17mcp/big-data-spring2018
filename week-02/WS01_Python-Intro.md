@@ -98,26 +98,25 @@ $$e^x = \int e^x dx$$
 
 ## Python Libraries
 
-Python is a dynamically typed language. A language has dynamic typing when variable types are not predefined like in a compiled language; the type of a value is evaluated when the code is run, based on how you are attempting to use it.
+Python on its own only provides fairly basic functionality. In order to extend Python, its very large, active, and dedicated user community has contributed an ever-growing list of libraries to make your life easier. A library is a bundle of code that can be easily imported into our current code to add functionality. Libraries define Python objects, functions, and methods that can we can use seamlessly in our own code.
 
-Dynamic typing and a number of other language specific characteristics, like readability and reusability, make it a very popular programming language with a large user community. However, Python on itself only provides a basic number of modules and functionality. In order to extend Python’s functionality, the active community has created a very large number of libraries. A library is a built-in or external module that can be imported into our current code to add functionality. Libraries usually take advantage of Object-Oriented-Programming, defining Python objects in additional scripts that can then be instantiated in our current code.
-
-Loading libraries into our current context can be expensive; for that reason, Python requires us to explicitly load the libraries that we want to use:
+Loading libraries can be computationally expensive (i.e., it consumes resources and slows the execution of any given script); for that reason, Python requires us to explicitly load the libraries that we want to use. For example, say we wanted to load the `math` library:
 
 ```python
 import math
 ```
 
-We can be more specific and import only specific classes or functions of the library:
+Easy peasy! We can also be more specific and import only specific classes or functions of the library:
 
 ```python
 from math import pi
 ```
 
-We can also change the name of the library when it gets imported. This allows you to invoke libraries using shorter names. Libraries often have conventional abbreviations; for example, you'll often see the `pandas` library (which we'll be using a lot in the class!) imported as `import pandas as pd`.
+It is generally considered good practice to keep your imports minimal. In other words, don't load in an entire library if you're only going to use a single class or function.
+
+We can also change the name of the library when it gets imported. This allows you to invoke libraries using shorter names. Libraries often have conventional abbreviations; for example, you'll often see the `pandas` library (which we'll be using a lot in the class!) imported as `pd`
 
 ```python
-import matplotlib as plt
 import pandas as pd
 ```
 
@@ -186,15 +185,21 @@ print(type(division))
 
 ### Numeric Types and Their Methods
 
-Python implements four distinct numeric types: plain integers, long integers, floating point numbers, and complex numbers. In addition, Booleans are a subtype of plain integers.
+Python implements four distinct numeric data types: plain integers, long integers, floating point numbers, and complex numbers. In addition, Booleans are a subtype of plain integers.
 
-Variables can be defined based on constructing a numeric data type. Every time we define a variable with a number, we are constructing an instance of the datatype. Different datatypes have different constructors; to construct a numeric data type, you only need to type it! In general, numeric types (and data types) have methods and properties. Properties allow you to access specific data of a given object, and methods allow you to do operations with them.
-
+Variables can be defined based on constructing a numeric data type. Every time we define a variable with a number, we are constructing an instance of the datatype. Different datatypes have different constructors; to construct a numeric data type, you only need to type it! In general, numeric types (and other data types) have associated **methods** and can be manipulated using **operators**.
 
 ```python
 # Integers (int) are a numerical data-type.
 print(1+2)
 print(type(1+2))
+
+# Example of an integer method: .bit_length(), which returns the number of bytes needed to represent the integer in binary
+one = 1
+one.bit_length()
+big = 15000
+big.bit_length()
+
 ```
 
 ```python
@@ -204,11 +209,20 @@ print(3.0-2.0)
 print(6*5.0)
 print(7.0/2)
 print(type(1.0+5))
+
+# Example of a float method: .is_integer(), which returns True or False depending on whether the value can be represented as an integer.
+
+flt = 2.5
+flt.is_integer()
+flt += 0.5
+flt.is_integer()
 ```
+
+Common python operators include: `+`, `-`, `*`, `/`, `//`, `%`, `abs()`, and `int()`. Take a look at the [Python documentation](https://docs.python.org/2/library/stdtypes.html) to see what these do!
 
 ### Strings
 
-Strings are sets of characters. We can create them by enclosing characters in quotes. Python treats single quotes the same as double quotes.
+Strings are sets of characters. We create them by enclosing characters in quotes. Python treats single quotes the same as double quotes.
 
 Strings can be thought of as lists of characters - we'll get into lists a bit more later. For now, know that we can access substrings by specifying ranges in the list or characters. They also have a number of methods or operations that we can perform with them.
 
@@ -225,14 +239,19 @@ print(s)
 print(s[2])
 print(s[2:6])
 
-# You can add strings together
+# You can add strings together (i.e., concatenate them)
 string = s + " Another string."
 print(string)
 string+=" A third string."
 print(string)
+
+# Examples of string methods: .find(), which returns the index of the first instance of a substring and .count(), which returns the number of occurances of a particular substring.
+string.find("Another")
+string.count("i")
+
 ```
 
-### Formatting strings: `f` strings and `str.format()`
+#### Formatting strings: `f` strings and `str.format()`
 
 Imagine though, that you're interested in including a value stored in a variable in your string. For example, you'd like to print a message to console that includes both the result of an operation and a description of that result. Python now has an simple syntax that accomplishes exactly this, known as the f string. It looks something like this:
 
@@ -314,8 +333,7 @@ Python deals with multiple data structures in a similar manner. For example list
 L1 = [] # an empty list
 x = 5
 L2 = [1,2.0,'a',"abcd",True,x] # a list containing different values
-# lists can be built dynamically (aka on the fly) using "append" and
-# "extend".
+# lists can be built dynamically (aka on the fly) using the .append() and .extend() methods
 L1.append(1)
 L1.append(2)
 print(L1)
@@ -343,18 +361,27 @@ print(L[2:4])
 print(range(10))
 print(range(2,10))
 print(range(4,10,2))
-# The length of a list can be calculated using "len()"
+# The length of a list can be calculated using len()
 print(len(range(10)))
 ```
 
-Lists can also be constructed through a functional programming idiom called list comprehension.
+#### List comprehension
 
+Lists can also be constructed differently using an approach called 'list comprehension'. Basically, what happens here is that a provided operation is applied to each element in a list. This is very, *very* useful in cases where you want to generate a new list that is the result of applying a function or functions to elements of a list - without list comprehension, the syntax would be far more verbose. For example, let's say we want to create a list that is the result of squaring each integer from 0 to 4.
 
 ```python
-alist=[1,2,3,4,5]
-asquaredlist=[i*i for i in alist]
-asquaredlist
+# Verbose syntax without list comprehension
+squares = [ ]
+for i in range(5):
+  squares.append(i*i)
+print(squares)
+
+# WITH list comprehension... ahhhhh... it's like taking a warm bath.
+squares = [i*i for i in range(5)]
+print(squares)
 ```
+
+If you're familiar with `R`, this is similar to `lapply`.
 
 ### Dictionaries
 
