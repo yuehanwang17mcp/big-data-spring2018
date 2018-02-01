@@ -61,11 +61,11 @@ You'll now see the new repository prompt. To use a repo as a Github pages site, 
 
 Congratulations! You've created your first repository! This repository will host any included files on a page visible to the internet via the url *username*.github.io.
 
-Now that we have a repository, we can **clone** a copies to local drives, add content, manage files, and make changes. First, though, we need to set up Git on our machine. Once we've done this, we will be able to interact with our remote Github repositories using the Git command line utility.
+Now that we have a repository, we can **clone** copies to local drives, add content, manage files, and make changes. First, though, we need to set up Git on our machine. Once we've done this, we will be able to interact with our remote Github repositories using the Git command line utility.
 
 ## Getting Started with Git
 
-Git is the version management system that sits beneath Github. Git was designed by Linus Torvalds to improve collaboration between the many programmers contributing to the open source GNU/Linux operating system, but is now holds a comfortable plurality among the source code management tools adopted by software developers. It's a bit quirky, but once you learn how to use it you may be surprised---it can be deployed as a functional version management system for essentially any text-based project.
+Git is the version management system that sits beneath Github. Git was designed by Linus Torvalds to improve collaboration between the many programmers contributing to the open source GNU/Linux operating system, but now holds a comfortable plurality among the source code management tools adopted by software developers. It's a bit quirky, but once you learn how to use it you may be surprised---it can be deployed as a functional version management system for essentially any text-based project.
 
 **Important Note for Windows users:** First, some bad news: coders tend to favor Unix-like operating systems (e.g., OS X or Linux). Windows is **not** a Unix-like operating system! The Windows command prompt is built on DOS. To easily use the command line to interact with Github, you will need to install Git Bash, which is a terminal that emulates essential Unix-like shell functionality and includes the Git command line utility. This can be downloaded from the [Git for Windows project](http://gitforwindows.org/). Once installed, proceed below, noting only that your command line work will be done in the Git Bash shell, not Terminal or Command Prompt.
 
@@ -183,7 +183,7 @@ atom ./
 
 `./` is how you explicitly say 'the current folder.'
 
-You should see your Github pages repository open in the file tree on the left side of the screen. Open the `README.md` file. The extensions tells you that this is a Markdown file; Markdown is an exceedingly popular markup (get it?) language that features a very simple syntax for structuring documents.
+You should see your Github pages repository open in the file tree on the left side of the Atom window. Open the `README.md` file. The extensions tells you that this is a Markdown file; Markdown is an exceedingly popular markup (get it?) language that features a very simple syntax for structuring documents.
 
 For example, where HTML requires both opening and closing tags to create a heading (`<h1>Heading Text</h1>`), Markdown only requires a single octothorpe character (`# Heading Text`). Documentation of Github's variant on Markdown (called 'Github-flavored Markdown') is [here](https://help.github.com/articles/basic-writing-and-formatting-syntax/) and it's worth looking into. It's very easy to learn and will allow you to cruise through creating documentation for your Github repos.
 
