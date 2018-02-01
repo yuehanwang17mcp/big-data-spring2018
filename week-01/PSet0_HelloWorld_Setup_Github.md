@@ -6,7 +6,7 @@ On the assignment tab of the course Stellar website, submit the link to your Git
 
 ## Create your github.io page (10 points)
 
-Following the instructions found in Part 1 of the in-class tutorial, create your Github pages site. We will revisit this page later in the course as we build on our knowledge of HTML, CSS, and JavaScript. You can then customize it further then. For now, though, include at least the following:
+Following the instructions found in Part 1 of the in-class tutorial, create your Github pages site. We will revisit this page later in the course as we build on our knowledge of HTML, CSS, and JavaScript. You can customize it further then. For now, though, include at least the following:
 
 1. Your name, styled as a main heading (`<h1></h1>`)
 2. A one paragraph bio, styled as a paragraph (`<p></p>`)
