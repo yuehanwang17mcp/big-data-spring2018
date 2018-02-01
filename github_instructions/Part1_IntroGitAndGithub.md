@@ -365,7 +365,7 @@ Add a second paragraph to the body of your webpage and modify the first paragrap
 <p>I'd rather be branching.</p>
 ```
 
-Now stage the changes, commit them to your `test-changes` branch, and push them to your remote repo. Branches can be committed to the local repository and synced to the remote repository (on the Github site) using the very same **push** process described above.
+Now stage the changes, commit them to your `testchanges` branch, and push them to your remote repo. Branches can be committed to the local repository and synced to the remote repository (on the Github site) using the very same **push** process described above.
 
 ### Merge branches
 
@@ -373,7 +373,7 @@ Let's say that we're done implementing changes that we've been building on the `
 
 ```sh
 git checkout master
-git merge test-changes
+git merge testchanges
 ```
 
 If you're working on a project alone, that's likely to be all she wrote and the merge should present no problems. In collaborative settings with multiple people working on the same lines of code, you may experience what are called **merge conflicts**. In short, conflicts will be flagged in your file when you open it in a text editor. You will have to go through your file and find conflicts, decide which change to accept, and then delete the surrounding conflict markers. Though we won't be dealing with this today in our simple example, it's worth reading up on resolving merge conflicts [here](https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line/).
@@ -384,7 +384,7 @@ If you're working on a project alone, that's likely to be all she wrote and the 
 If you ever need to delete a branch---maybe you're done working in a branch and have merged changes---use the –d key of the branch command. For example, to delete test-changes, use:
 
 ```sh
-git branch –d test-changes
+git branch –d testchanges
 ```
 
 ## Fetching changes from Github
