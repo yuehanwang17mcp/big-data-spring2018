@@ -622,5 +622,4 @@ b = np.array([6, 7, 8, 9, 10])
 c = a + b
 print(c)
 ```
-
 **Vectorization** is a powerful idiom, and we will use it a lot in this class. For almost all data intensive computing, we will use `numpy` arrays rather than Python lists.
