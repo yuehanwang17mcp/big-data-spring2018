@@ -44,7 +44,7 @@ Then launch a Jupyter notebook.
 	jupyter notebook
 ``` -->
 
-Todays agenda:
+## Todays agenda:
 
 + What is Python?
 + Libraries
