@@ -25,7 +25,7 @@ You may (reasonably) ask: why would I ever want to maintain two versions of the 
 
 So: imagine you've been coding in Python for years and you've built up a substantial collection of scripts you'd still like to be able to execute. You'll need to have Python 2.7.x on hand if you want to run older scripts! This also means that scripts you find on Github and elsewhere will often not be updated for Python 3 compatibility.
 
-### Run a Script
+### Run a Script from the command line
 
 In this week's repo folder (in the subfolder, scripts), you should see a file called `first-script.py`. This is a Python script! `.py` is the standard file extension. Now that we've installed Python, we can run this script easily from the command line.
 
@@ -42,8 +42,6 @@ Open the script - we'll get into Python next week, but this script is very simpl
 As Elliot Alderson as it may make us feel to run all of our scripts from the command line, it will sometimes frankly be much easier to run chunks of our Python scripts rather than the scripts in their entirety. To do this, we will be using an Atom package called Hydrogen that will let us execute and display the output of our Python and JavaScript code from within Atom.
 
 To install Hydrogen, open Atom, and open your preferences. Select 'Install' search for Hydrogen. Click the 'Install' button. After a brief interlude, Hydrogen should be installed! Check that 'Hydrogen' appears under the Packages drop-down menu.
-
-Open the `first-script.py` script. Select the first line and type shift-enter. You'll see a checkmark appear next to the line and your cursor will have progressed to the next line. The checkmark tells you that the line executed successfully. In this case, that means a variable called `msg` is now stored in memory. Type shift-enter again.  You should see "Python is printing me!" appear next to the print function. This is how Hydrogen displays console output. Cool, eh? We can now run not only full scripts, but 'chunks' of code. This will allow us significantly more flexibility as we develop our own scripts.
 
 ## Virtual Environments for Python
 
@@ -94,7 +92,28 @@ virtualenv --system-site-packages ~/.venvs/bdvs
 
 First we create a new folder to hold our virtual environments. Next, we create a new virtual environment in the `bdvs` subfolder of our new `.venvs` subdirectory. We're also telling `virtualenv` that we want this environment to inherit its packages from the Python system installation (this is the role of the `--system-site packages` option). Finally, we activate the virtual environment using the `.` operator, which tells the shell to source from a provided path.
 
-Cool! You're now running Python in a virtual environment!
+Cool! You're now running Python in a virtual environment! You should see (bdvs) before the prompt in Terminal or Git Bash.
+
+## Install the `ipython` kernel
+
+We installed Hydrogen above, which will allow you to run Python scripts from within Atom. However, if you try to do this now, you're likely to be in trouble; we have yet to install a **kernel**. Basically, a kernel is a program that runs your code. One very common kernel is `ipython`, which we can install using `pip` in the same way that we installed `virtualenv` above. The only difference is that we're now working within a virtual environment, meaning that any packages you install will be installed in the virtual environment, rather than in your global Python packages.
+
+```sh
+# Remember that you may need to use pip3
+pip install ipython
+```
+
+### Running Atom from within a virtual environment
+
+Once you've activated your virtual environment (again, make sure you see (bdvs) before the prompt in Terminal or Git Bash), you can run Atom, and therefore Hydrogen, from within this environment. To do so, you must start Atom from the command line using the following command:
+
+```sh
+atom ./
+```
+
+## Run a script from within Atom
+
+Open your clone of the class repo in Atom and edit the `first-script.py` script. Select the first line and type shift-enter. You'll see a checkmark appear next to the line and your cursor will have progressed to the next line. The checkmark tells you that the line executed successfully. In this case, that means a variable called `msg` is now stored in memory. Type shift-enter again.  You should see "Python is printing me!" appear next to the print function. This is how Hydrogen displays console output. Cool, eh? We can now run not only full scripts, but 'chunks' of code. This will allow us significantly more flexibility as we develop our own scripts.
 
 ## Additional Reading and Resources
 
