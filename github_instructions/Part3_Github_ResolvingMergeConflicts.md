@@ -31,7 +31,7 @@ Good bye. # Other changes and edits
 
 ## Edit the File to Resolve Conflicts
 
-To resolve these conflicts, determine which lines you want to keep, and remove the conflict markers and lines of code you don't want. Clean the file so that only the lines of code you want to keep are in it.
+To resolve these conflicts, determine which lines you want to keep, and remove the conflict markers and lines of code you don't want. Clean the file so that only the lines of code you (or your colleagues) want to keep are in it.
 
 For example, to keep the local changes in the above example, remove the conflict markers and delete the lines of code that came from the remote repository.
 

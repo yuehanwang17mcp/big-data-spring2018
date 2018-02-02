@@ -1,6 +1,6 @@
 # Python Setup
 
-Python is a valuable scripting language for data analysis and... well, just about anything really. We won't be getting into the weeds with Python this week. However, we're going to try to get ahead of the fact that managing a Python project environment can be nuanced and tricky. This workshop will get you set up to manage Python projects; we'll be installing Python and the Hydrogen plug-in for Atom, which will allow you to execute scripts and display output from the comfort of the Atom text editor. It then introduces virtual environments using the `virtualenv` package for Python (which we'll install using the `pip` package manager); we'll be using these virtual environments to manage our projects this semester.
+Python is a valuable scripting language for data analysis and... well, just about anything really. We won't be getting into the weeds with Python this week. However, we're going to try to get ahead of the fact that managing a Python project environment can be nuanced and tricky. This workshop will prepare you and your workspace to manage Python projects; we'll be installing Python and the Hydrogen plug-in for Atom, which will allow you to execute scripts and display output from the comfort of the Atom text editor. It then introduces virtual environments using the `virtualenv` package for Python (which we'll install using the `pip` package manager); we'll be using these virtual environments to manage our projects this semester.
 
 ## Python Setup
 
@@ -27,10 +27,10 @@ So: imagine you've been coding in Python for years and you've built up a substan
 
 ### Run a Script
 
-In this week's repo folder, you should see a file called `first-script.py`. This is a Python script! `.py` is the standard file extension. Now that we've installed Python, we can run this script easily from the command line.
+In this week's repo folder (in the subfolder, scripts), you should see a file called `first-script.py`. This is a Python script! `.py` is the standard file extension. Now that we've installed Python, we can run this script easily from the command line.
 
 ```sh
-$ cd /path/to/repo/big-data-spring2018/week-01/
+$ cd /path/to/repo/big-data-spring2018/week-01/scripts/
 $ python first-script.py
 Python is printing me!
 ```
@@ -43,7 +43,7 @@ As Elliot Alderson as it may make us feel to run all of our scripts from the com
 
 To install Hydrogen, open Atom, and open your preferences. Select 'Install' search for Hydrogen. Click the 'Install' button. After a brief interlude, Hydrogen should be installed! Check that 'Hydrogen' appears under the Packages drop-down menu.
 
-Open the `first-script.py` script. Select the first line and type shift-enter. You'll see a checkmark appear next to the line and your cursor will have progressed to the next line. The checkmark tells you that the line executed successfully. In this case, that means a variable called `msg` is now stored in memory. Type shift-enter again.  You should see "Python is printing me!" appear next to the print function. This is how Hydrogen displays console output. Cool, eh? We can now run not only full scripts, but 'chunks' of code. This will allow us significantly more flexibility as we're developing our own scripts.
+Open the `first-script.py` script. Select the first line and type shift-enter. You'll see a checkmark appear next to the line and your cursor will have progressed to the next line. The checkmark tells you that the line executed successfully. In this case, that means a variable called `msg` is now stored in memory. Type shift-enter again.  You should see "Python is printing me!" appear next to the print function. This is how Hydrogen displays console output. Cool, eh? We can now run not only full scripts, but 'chunks' of code. This will allow us significantly more flexibility as we develop our own scripts.
 
 ## Virtual Environments for Python
 
