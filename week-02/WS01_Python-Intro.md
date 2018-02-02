@@ -524,17 +524,16 @@ for i in range(10):
     print(i) # How would the output of this code change if this statement was before the if-statement?
 ```
 
-You can iterate through lists using a uniquely simple syntax.
+You can iterate through lists using a uniquely simple syntax. This, incidentally, is one of the strengths of Python---it can loop through lists very, very intuitively.
 
 ```python
 myList = ["This", "is", "Python"]
 for i in myList:
     print(i) # print the value
     print(myList.index(i)) # print the position of the value (index)
-
 ```
 
-Build a list that contains all the courses that you are taking this semester, and print them. Every time you print a course number add the phrase `In Spring 2018, I am taking:`
+Build a list that contains all the courses that you are taking this semester. Then, construct a for loop that prints them. Every time you print a course number add the phrase `In Spring 2018, I am taking:`. Remember that you can use the `f` string syntax we discussed above!
 
 ```python
 # Your code here
@@ -542,57 +541,54 @@ Build a list that contains all the courses that you are taking this semester, an
 ```
 
 ### Functions
-Functions allow a programmer to write reusable code to perform a single action. Functions provide better modularity for your application and a high degree of code reusing. Once a function is defined, it can be called by typing the name of the function and passing the arguments. For example, Python gives you many built-in functions like **print()**.  Functions can just perform an operation, or they can return values.
+Functions allow a programmer to write reusable code that performs an action predictably wherever it is invoked. Functions make your code modular, and permit you to efficiently reuse chunks of code. Once a function is defined, it can be called by typing the name of the function and passing the arguments you've defined. For example, Python gives you many built-in functions like `print()`. Functions can just perform an operation, or they can return values.
 
-Functions are defined using the key work **def**.
-
-
+Functions are defined using the key word `def`. As with the other flow control types we've seen, we use indentation to indicate the portion of our code that's part of the function definition.
 
 ```python
-#consider this example:
+# Consider this example!
 # First choose an initial value for x.
 x = 0
 for i in range(100):
     x+=i
 print(x)
 
-# What if we do this for a new initial value for x?
-# What if we use a different number instead of 100?
-# We don't want to rewrite this for loop every time.
-# Let's define a function.
-def ForSum(x,y):
+# What if we want to do this for a new initial value for x? What if we use a different number instead of 100? We don't want to rewrite this for loop every time, so let's define a function!
+def for_sum(x,y):
     for i in range(y):
         x+=i
     # "return" indicates what values to output
     return x
 
 # Same calculation from above
-print(ForSum(0,100))
-print(ForSum(10,50)) # Now with new numbers
+print(for_sum(0,100))
+print(for_sum(10,50)) # Now with new numbers
 
-# Interestingly, pointers can store functions. This means that functions
+# Interestingly, variables can store functions. This means that functions
 # can be inputs to other functions.
-F = ForSum
-print(F(0,100))
+f = for_sum
+print(f(0,100))
 
 def execute(funct,x):
     return funct(x,100)
 
-print(execute(F,10))
+print(execute(f,10))
 
 # Now, just for fun:
-print(F(F(F(10,100),50),1000))
+print(f(f(f(10,100),50),1000))
 ```
 
 ```python
-def print_words(x="THIS",y="Not Mike"):
+def print_words(x="This",y="Not Eric"):
     print(x)
     print(y)
 
-x = "Mike"
+print_words()
+
+x = "Eric"
 y = "Something else"
 
-print_words(x)
+print_words(x, y)
 ```
 
 Now, wrap the code you created for the previous section in a function called `course_printer`.
@@ -602,31 +598,29 @@ Now, wrap the code you created for the previous section in a function called `co
 
 ```
 
-#### Vectorization
+### `numpy` Arrays and Vectorization
 
-Numpy arrays are a bit different from regular python lists, and are the bread and butter of data science. Pandas Series are built atop them.
+`numpy` arrays are a bit different from regular Python lists. It's important to note this up front because these are the bread and butter of data science in Python. `pandas` series are built atop them.
 
-In other words, operations on numpy arrays, and by extension, Pandas Series, are **vectorized**. You can add two numpy lists by just using `+` whereas the result isnt what you might expect for regular python lists. To add regular python lists elementwise, you will need to use a loop:
-
-
-```python
-newlist=[]
-for item in alist:
-    newlist.append(item+item)
-newlist
-```
-
-**Vectorization** is a powerful idiom, and we will use it a lot in this class. And, for almost all data intensive computing, we will use numpy arrays rather than python lists, as the python numerical stack is based on it.
-
-You have seen this in idea in spreadsheets where you add an entire column to another one.
-
-Two final examples
-
+To speak technically, operations on `numpy` arrays, and by extension, `pandas` series, are **vectorized**. You can add two numpy lists by just using `+`. You have seen this in idea in spreadsheets, at least if you've ever added an entire column to another one. This would not work with a standard Python list! To add regular Python lists elementwise (i.e., element by element), you would need to use a rather cumbersome loop:
 
 ```python
-a=np.array([1,2,3,4,5])
-print(type(a))
-b=np.array([1,2,3,4,5])
+# import the numpy package
+import numpy as np
 
-print(a*b)
+# without vectorized numpy arrays
+a = [1, 2, 3, 4, 5]
+b = [6, 7, 8, 9, 10]
+c = []
+for i, j in zip(a, b):
+  c.append(i + j)
+print(c)
+
+# with vectorized numpy arrays
+a = np.array([1, 2, 3, 4, 5])
+b = np.array([6, 7, 8, 9, 10])
+c = a + b
+print(c)
 ```
+
+**Vectorization** is a powerful idiom, and we will use it a lot in this class. For almost all data intensive computing, we will use `numpy` arrays rather than Python lists.
