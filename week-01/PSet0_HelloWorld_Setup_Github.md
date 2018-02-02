@@ -16,4 +16,4 @@ Remember to stage, commit, and push your changes to your Github pages repository
 
 ## Modify the Python Script (5 points)
 
-Fork a copy of the class repository. Then clone your fork of the repo. Finally, duplicate the `first-script.py` into the provided 'submission' folder. Change the message that the script prints to the console. Stage, commit, push!
+Fork a copy of the class repository. Then clone your fork of the repo. Finally, duplicate the `first-script.py` into the provided 'submission' folder. Change the message that the script prints to the console. Stage, commit, push! As a reminder, this push will store your changes in the FORK of the class repo, not the original class repo. So don't worry about breaking it!
