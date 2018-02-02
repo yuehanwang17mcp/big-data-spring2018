@@ -649,3 +649,7 @@ c = a + b
 print(c)
 ```
 **Vectorization** is a powerful idiom, and we will use it a lot in this class. For almost all data intensive computing, we will use `numpy` arrays rather than Python lists.
+
+## Fin.
+
+Okay, so that was a lot. Obviously, you should not expect all of this to stick immediately. Hopefully, though, the waters will begin to clear as you tackle the problem set for this week.
