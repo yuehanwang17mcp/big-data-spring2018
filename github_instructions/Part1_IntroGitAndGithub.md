@@ -23,6 +23,8 @@ Github has a particular, and sometimes peculiar, way of speaking about itself an
 	<dd>A repository is the most basic element of GitHub. They're easiest to imagine as a project's folder. A repository contains all of the project files (including scripts, code, data, and documentation), and stores each file's revision history so you can track changes. Repositories can have multiple contributors (known as collaborators) and can be either public or private.</dd>
 	<dt>Clone</dt>
 	<dd>A clone is a local copy of a repository on your hard drive. With your clone you can edit the files in your preferred editor and use Git to keep track of your changes without having to be online. A clone does, however, maintain its association with the remote version; changes made locally can be logged (committed) and synced (pushed) with the remote copy on Github servers.</dd>
+	<dt>Fork</dt>
+	<dd>This is not, strictly speaking, a Git function but rather a Github function. Forking a repo creates a copy that is both separately editable and tied to your Github profile and still tied to the repo from which you're forking. This means that you can make your own edits while also still updating the repository with changes made to the original repo.</dd>
 	<dt>Fetch</dt>
 	<dd>Fetching refers to getting the latest changes from an online repository *without* merging them. Once these changes are fetched you can compare them to your local branches (the code residing on your local machine).</dd>
 	<dt>Pull</dt>
