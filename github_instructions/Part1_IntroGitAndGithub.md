@@ -173,7 +173,7 @@ We don't want this! Text editors work with text and text only; what you see in a
 
 The text editor we recommend is called **Atom**. Before moving on, please install it and use it for writing your code. [Download it here](https://atom.io/).
 
-### Edit the Github README.md
+### Opening Atom from the Command Line
 
 Assuming that your working directory is still your Github pages repo, you can open it as a project directory in Atom from the command line as follows:
 
@@ -181,7 +181,17 @@ Assuming that your working directory is still your Github pages repo, you can op
 atom ./
 ```
 
-`./` is how you explicitly say 'the current folder.'
+`./` is how you explicitly say 'the current folder.' If you receive a 'command not found' error, you'll have to open Atom from your applications folder or Start menu, then...
+
+#### On Mac OS X
+
+From the `Atom` dropdown menu, select "Install Shell Commands."
+
+#### On Windows
+
+You'll have to add a directory to your PATH variable---basically, this is how Windows knows what commands to include in its command line. Search for "Edit the System Environment Variables" from the start menu and open it. Click "Environment Variables..." at the bottom. Edit "Path", add a new path using the "New" button, and use the path `%LOCALAPPDATA%\Atom\bin`. Click OK, restart Git Bash, and you should be able to run Atom from the command line as described above.
+
+### Edit the Github README.md
 
 You should see your Github pages repository open in the file tree on the left side of the Atom window. Open the `README.md` file. The extensions tells you that this is a Markdown file; Markdown is an exceedingly popular markup (get it?) language that features a very simple syntax for structuring documents.
 
