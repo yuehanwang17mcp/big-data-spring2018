@@ -302,7 +302,7 @@ print(not x or y)
 ```
 
 ```python
-# There are functions to make comparisons between valuables and produce bools.
+# There are functions to make comparisons between values and produce bools.
 # '==' tests for equality
 print(1 == 2)
 print(1 == 1)
@@ -310,22 +310,27 @@ print(1 == 1)
 print(1 != 2)
 # comparison functions also apply to strings
 print("abcd" == "abcd")
-# Pointers and their values can be compared.
+# Variables and their values can be compared.
 x = 1
 y = 2
-# compare values of pointers
+# compare values of variables
 print(x == y)
-# set x and y to be the same pointer
+# set x and y to be the same value
 x = y
 print(x)
 print(y)
 # check if x and y are THE SAME using the 'is' function.
 print(x is y)
+
+x = 1.0
+y = 1
+print(x == y)
+print(x is y)
 ```
 
 ### Lists
 
-Lists are a data structure designed for easy storage and access to data. They are initialized using by using `[ ]` to enclose a comma separated sequence of values. These values can be anything. Lists can either contain a series of the same type of values, or a heterogeneous mix of types.  We can access individual elements of a list, a subset of elements, or the whole list. Lists are mutable: we can modify their elements.
+Lists are a data structure designed for easy storage and access to data. They are initialized using by using `[ ]` to enclose a comma separated sequence of values. While lists *can* contain a series of values of the same type (integers, floats, etc.), this not required. Lists can comprise a heterogeneous mix of types (e.g., `["whoa, this is", 1, "crazy list", 0.0]`). We can access individual elements of a list, a subset of elements, or the whole list. Lists are mutable: we can modify their elements.
 
 Python deals with multiple data structures in a similar manner. For example lists, dictionaries, files, and and iterators work similarly. It's important to note that Python is 0-indexed. This means that the first element in a list is not accessed with `list[1]`. Rather, it is accessed with `list[0]`. This is the case with most programming languages, with some notable exceptions. `R` for example, is 1-indexed.
 
@@ -341,10 +346,10 @@ L3 = ['a','b','c']
 L1.extend(L3)
 L1.append(L3)
 print(L1)
-# Whoa! What's the difference between extend and append?
+# Whoa, wait! What's the difference between extend and append?
 
 # Values stored in lists are accessible by their index in the list.
-# Lists maintain the ordering in which values were stored in them.
+# Lists maintain the order
 # We use "[i]" to retrieve the i-th element in a list.
 # Note that the first element in a list in Python has index 0.
 L = ['a','b','c','d','e']
@@ -392,56 +397,58 @@ It is best to think of a dictionary as an unordered set of `key:value` pairs, wi
 The `keys()` method of a dictionary object returns a list of all the keys used in the dictionary, in an arbitrary order. To check whether a single key is in the dictionary, use the `in` keyword.
 
 ```python
-D = {} # an empty dict
-D2 = {'key1':1,'key2':"moose",4:5}
-print(D2)
-# Key-value pairs can also be defined like this
-D2[6] = False
-print(D2)
+d1 = {} # an empty dict
+d2 = {'key1':1,'key2':"moose",4:5}
+print(d2)
+# Key-value pairs can also be defined like this - note that '6' does NOT refer to an index position like it would with a list. Here, it creates a key that is given the value false.
+d2[6] = False
+print(d2)
 # values can be retrieved using their keys.
-print(D2['key2'])
-print(D2[6])
+print(d2['key2'])
+# Once again: 6 refers to a KEY, NOT an index position.
+print(d2[6])
 
 # can be used in conditionals
-if not D2[6]: # evaluates to false
+if not d2[6]: # evaluates to false
     print("Dicts are fun.")
 else:
     print("Dicts are not that fun.")
 
-# The keys and values of dicts can be accessed as lists.
-print("keys: "+str(list(D2.keys())))
-print("values: "+str(list(D2.values())))
-```
+# The keys and values of dicts can be accessed as lists. Note that, here, they're being converted to strings so that they can be concatenated with the descriptive text.
+print("keys: "+str(list(d2.keys())))
+print("values: "+str(list(d2.values())))
 
-```python
-adict={'one':1, 'two': 2, 'three': 3}
-print(adict)
-print(adict['one'])
-print([i for i in adict])
+numbers = {'one':1, 'two': 2, 'three': 3}
+print(numbers)
+print(numbers['one'])
+# Hey! This looks familiar... remember list comprehension above?
+print([i for i in numbers])
 
-print([(k,v) for k,v in adict.items()])
+# We can also use list comprehension to print key:value pairs in a list.
+print([(k,v) for k,v in numbers.items()])
 
-playlist = (list(adict.values()))
+list(numbers.values())
+
+# Here, we use the 'values' method to extract dictionary values, which we then convert to a list, which allows us to reference its elements by their index.
+playlist = list(numbers.values())
 print(playlist[1])
-print(list(adict.keys()))
+print(list(numbers.keys()))
 ```
 
-The keys do not have to be strings. You can use dictionary comprehensions as well:
-
+Much like we can create lists using a 'list comprehension' syntax, we can also construction dictionaries using 'dictionary comprehension' as well:
 
 ```python
-mydict={k:v for (k,v) in zip(range(5), range(5))}
+mydict = {k:v for (k,v) in zip(range(5), range(5))}
 mydict
 ```
 
-You can construct them nicely using the function `dict`.
+Finally, Python includes a function called `dict` that allows you to use a very intuitive syntax to construct dictionaries.
 
 ```python
 dict(a=1, b=2)
 ```
 
-
-#### Dictionaries and JSON
+<!-- #### Dictionaries and JSON
 
 A **JSON** (JavaScript Object Notation) is a lightweight data-interchange format that is quite standard across the web. It is highly readable and easy for machines to parse and generate. It is very similar to a Python dictionary. However, a dictionary is a python object, while a JSON is a set of characters. We can convert a dictionary into a JSON (or vice versa) very easily with a built-in Python module.
 
@@ -458,24 +465,22 @@ print(a)
 print(s)
 ## reading back the keys are now in unicode
 print(a2)
-```
+``` -->
 
 ## Flow Control
 
-Python is an imperative programming language. In computer science, imperative programming is a programming paradigm that uses statements that change a program's state. The different states are executed based on a number of rules. We can control the flow of the program through a number of structures. In python there are three main categories of program control flow:
+Okay, we've started getting the hang of Python data structures and how they can be manipulated. But a program that flows linearly through a long list of variable definitions and commands is pretty limited; say we want our program to make decisions based on values of a variable! Say we want our program to perform a task over and over again until it reaches a given state! Say we find ourselves writing the same basic commands over and over again and want a more efficient way of invoking those commands! We can do all of this and more with what we call 'control flow'. In Python there are three main categories of program control flow:
 
 + Branches
 + Loops
-+ List comprehension
 + Function calls
-
-Booleans can be used to control the flow of execution of the code. If-statements execute a section of code if a given bool evaluates to True. There is a specific syntax for booleans, including indentations.
 
 ### Branches
 
+You can think of branches as decisions based on criteria you provide. If-elif-else statements execute a block of code if a given condition is true, and a different block of code if a given condition is false. Take note of the syntax in the below example: `if [statement]:` is followed by a line break, then a tab. If you do not follow this syntax, your code will not work correctly! Python is somewhat distinctive in that it reads meaning into levels of indentation; it *interprets* some types of *whitespace*. The code that is indented one level (one tab) below an if-elif-else statement will be executed when that statement's condition is true. The same holds true for loops and function calls, as we'll see below.
+
 ```python
 flag = True
-x = 0
 if flag:
     x = 1
     print("Flag is True.")
@@ -483,8 +488,7 @@ else:
     x = 2
     print("Flag is False.")
 print(x)
-# We can check for other cases as well. Controlling the execution of code
-# like this is referred to as "flow of control".
+# We can check for other cases as well. The == operator checks for equivalence, so it will be true when x is equal to a given value
 if x == 0:
     print("A")
 elif x == 1:
@@ -493,121 +497,34 @@ else:
     print("C")
 ```
 
-    Flag is True.
-    1
-    B
+### Iterating with Loops
 
-### Loops
-
-### List comprehension
-
-### Function calls
-
-## Syntactical Quirks
-
-### No character after functions!
-
-If you've worked in, for example, JavaScript, you may have noticed that the above lines look a little naked. In some languages, you use, for example, `;` after a function call. This is not the case in Python. A line break is sufficient to indicate the end of a line.
-
-### Interpreted indentation
-
-One of the things that makes Python so readable is that it enforces a common
-
-#### Iteration
-Loops allow us to automate repetitive tasks. The repeated execution of a set of statements is called iteration. There are a number of way to iterate in Python. We can use **for** loops or **while** loops too. The syntax is like the syntax of if-statements. The **for** loop loops over each of the elements of a list or iterator, assigning the current element to the variable name given. A **while** loop repeats a sequence of statements until some condition becomes false.
-
+Loops allow us to automate repetitive tasks (hooray!). Repeatedly executing a set of statements is called *iteration*. There are a number of way to iterate in Python. We can use `for` loops or `while` loops. The syntax is like the syntax of if-statements---notice the indentations! The `for` loop loops over each of the elements of a list or iterator, assigning the current element to the variable name given. A `while` loop repeats a sequence of statements until some condition becomes false.
 
 
 ```python
-X = range(10)
-print(X)
-```
+x = range(10)
+print(x)
 
-    range(0, 10)
+for i in x:
+    print(i)
 
-
-
-```python
-for x in X:
-    print(x)
-```
-
-    0
-    1
-    2
-    3
-    4
-    5
-    6
-    7
-    8
-    9
-
-
-
-```python
-for i in X:
+for i in x:
     # doubles the list element
-    print(X[i]*2)
-
-print(X)
+    print(i*2)
 ```
 
-    0
-    2
-    4
-    6
-    8
-    10
-    12
-    14
-    16
-    18
-    range(0, 10)
-
-
-We can control the execution of a loop through different statements. Python includes statements to exit a loop prematurely. To exit a loop, use the **break** statement. The loop below is a for loop.
+We can control the execution of a loop through branches. Python includes statements to exit a loop prematurely. To exit a loop, use the `break` statement.
 
 
 ```python
 for i in range(10):
-    print(i)
     if (i > 5):
         break # breaks out of the loop when it gets a number higher than five
+    print(i) # How would the output of this code change if this statement was before the if-statement?
 ```
 
-    0
-    1
-    2
-    3
-    4
-    5
-    6
-
-
-While loops are also supported. **continue** continues to the next iteration of the loop skipping all the code below, while **break** breaks out of it.
-
-
-```python
-i=0
-while i < 10:
-    print(i)
-    i=i+1
-    if i < 5:
-        continue
-    else:
-        break
-```
-
-    0
-    1
-    2
-    3
-    4
-
-
-You can iterate through lists.
-
+You can iterate through lists using a uniquely simple syntax.
 
 ```python
 myList = ["This", "is", "Python"]
@@ -617,23 +534,14 @@ for i in myList:
 
 ```
 
-    This
-    0
-    is
-    1
-    Python
-    2
-
-
-Build a list that contains all the courses that you are taking this semester, and print them. Every time you print a course number add the phrase `In Spring 2017, I am taking:`
-
+Build a list that contains all the courses that you are taking this semester, and print them. Every time you print a course number add the phrase `In Spring 2018, I am taking:`
 
 ```python
 # Your code here
 
 ```
 
-#### 9. Functions
+### Functions
 Functions allow a programmer to write reusable code to perform a single action. Functions provide better modularity for your application and a high degree of code reusing. Once a function is defined, it can be called by typing the name of the function and passing the arguments. For example, Python gives you many built-in functions like **print()**.  Functions can just perform an operation, or they can return values.
 
 Functions are defined using the key work **def**.
@@ -676,15 +584,6 @@ print(execute(F,10))
 print(F(F(F(10,100),50),1000))
 ```
 
-    4950
-    4950
-    1235
-    4950
-    4960
-    505685
-
-
-
 ```python
 def print_words(x="THIS",y="Not Mike"):
     print(x)
@@ -696,20 +595,12 @@ y = "Something else"
 print_words(x)
 ```
 
-    Mike
-    Not Mike
-
-
 Now, wrap the code you created for the previous section in a function called `course_printer`.
-
 
 ```python
 # Your code here:
 
 ```
-
-Series and numpy lists behave similarly as well.
-
 
 #### Vectorization
 
@@ -725,13 +616,6 @@ for item in alist:
 newlist
 ```
 
-
-
-
-    [2, 4, 6, 8, 10]
-
-
-
 **Vectorization** is a powerful idiom, and we will use it a lot in this class. And, for almost all data intensive computing, we will use numpy arrays rather than python lists, as the python numerical stack is based on it.
 
 You have seen this in idea in spreadsheets where you add an entire column to another one.
@@ -746,6 +630,3 @@ b=np.array([1,2,3,4,5])
 
 print(a*b)
 ```
-
-    <class 'numpy.ndarray'>
-    [ 1  4  9 16 25]
