@@ -151,10 +151,6 @@ comment
 print("Comments worked!")
 ```
 
-## Python Data Structures
-
-A data structure is a way of organizing data in the computer memory. Data structures can implement one or more particular data types (ADT).  Some data structures can be built based on a basic type or basic building block. Most languages allow more complicated composite types to be recursively constructed starting from basic types.
-
 ### Variables
 
 Variables allow us to store results, text, functions or data that we can retrieve later by invoking their name. They give our code persistence. Unlike many other programming languages, you don’t have to explicitly define a variable name or its datatype beforehand; you can create variables on the fly! Variables can also be continuously redefined. Python emphasizes legibility. You should as well! Good naming practices clearly refer to the data you are storing.
@@ -182,6 +178,10 @@ division=5/6
 print(division)
 print(type(division))
 ```
+
+## Python Data Structures
+
+A data structure is a way of organizing data in the computer memory. Data structures can implement one or more particular data types. Some data structures can be built based on a basic type or basic building block. Most languages allow more complicated composite types to be recursively constructed starting from basic types.
 
 ### Numeric Types and Their Methods
 
@@ -466,6 +466,32 @@ print(s)
 ## reading back the keys are now in unicode
 print(a2)
 ``` -->
+
+## How Python thinks: With objects!
+
+Before we get too much further, it's worth elaborating how Python *thinks*. While this is not a computer science class, I think you'll find that a basic understanding of the stuff under the hood will be helpful. Like most other modern programming languages, Python is *object-oriented*. This means that every variable definition creates an object, or an *instantiation* of an object, to be more precise. These objects can have *methods*, which you'll recognize by their syntax: they look like `.method()`. These will perform some operation on the object on which they're invoked.
+
+### Methods vs. Functions
+
+One common point of confusion for new programmers is the difference between a *method* and a *function*. Both are invoked in code to perform operations. However, they differ in a couple of ways: first of all, a method is bound to a specific type of object. String objects have methods that the programmer can bind to any given instance of the string object. Second of all, a method is automatically passed the object on which it is called. If I have a string variable called `text`, when I use the `.count()` method, `count` is passed the contents of `text`.
+
+A *function*, on the other hand, requires that data be *explicitly passed*. And they are not bound to any particular object, though they may be written to expect certain data types.
+
+Let's consider an example: the difference between the `.sort()` method and the `sorted()` function. Both can be used to sort lists. However, they behave a little bit differently. Consider the following code block:
+
+```python
+fun_list = ['are', 'we', 'having', 'fun', 'yet', '?']
+fun_list.sort()
+print(fun_list)
+
+more_fun = ['i', 'know', 'that', 'i', 'am', '!']
+more_fun_sort = sorted(more_fun)
+print(more_fun_sort)
+```
+
+Both the list object's `.sort()` method and the `sorted()` function sort the elements of a list. One modifies the list in place and the other returns a new sorted list. This isn't really what we're interested in here, though. Take a look at the invocation of `fun_list.sort()`: `fun_list` is automatically implicitly passed to the `.sort()` method. `sorted()` on the other hand requires that we be explicit and pass the `more_fun` variable.
+
+This will make more sense as you work with functions and methods; keep it in mind, though, as we begin to explore Python's capabilities in earnest.
 
 ## Flow Control
 
