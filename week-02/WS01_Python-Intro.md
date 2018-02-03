@@ -25,25 +25,6 @@ atom ./
 
 When Atom launches, you should see the repo's directory tree on the left side of the screen.
 
-<!--
-First, create an environment that is running Python 3. We can name this anything, but name it **python3** so we can remember easily what it is.
-
-```sh
-	conda create --name python3 python=3.6
-```
-
-Now we want to work in this environment. Activate **python3** using the following.
-
-```sh
-	source activate python3
-```
-
-Then launch a Jupyter notebook.
-
-```sh
-	jupyter notebook
-``` -->
-
 ## Todays agenda:
 
 + What is Python?
@@ -58,7 +39,7 @@ Then launch a Jupyter notebook.
 
 Python is an "interpreted" language. This means that every Python command that is executed is actually translated to lower-level programming languages. Lower-level, compiled programming languages (for example, C++) are very fast and powerful, but writing programs in these languages can be difficult.
 
-There are two main versions of Python, these are Python 2 and Python 3. Python 3 is newer, and removed bugs and idiosyncrasies of Python 2; however Python 2 is still heavily used. While the fundamentals of the two versions are the same, there are some differences (mostly syntactical) between the two. These differences are substantial enough that, unfortunately, Python 3 is NOT backwards compatible, so always double check which version of Python a given script is written in. In this class, we are using Python 3.
+There are two main versions of Python, these are Python 2 and Python 3. Python 3 is newer, and removed bugs and idiosyncrasies of Python 2; however Python 2 is still heavily used. While the fundamentals of the two versions are the same, there are some differences (mostly syntactical) between the two. These differences are substantial enough that, unfortunately, Python 3 is NOT backwards compatible, so always double check which version of Python a given script is written in. It should be documented, but if it isn't, you can consult a [Python 2 vs. Python 3 cheatsheet](http://python-future.org/compatible_idioms.html) to scan the script for the tell-tale signs of either (print commands tend to be an easy way of doing this). In this class, we are using Python 3.
 
 There are a number of great Python tutorials available on the web, some can be found here:
 
@@ -71,28 +52,6 @@ There are also some excellent Python textbooks and cookbooks. Yes, dear reader, 
 
 + Guttag, John. *Introduction to Computation and Programming Using Python*. Cambridge: MIT Press, 2017.
 + McKinney, Wes. 2017. *Python for Data Analysis*. 2nd ed. Boston: O’Reilly Media.
-
-
-<!-- ## 2. Jupyter Notebooks:
-
-![IPython](images/ipython.png "IPython")
-
-<p>
-A Jupyter Notebook (formerly called iPython) is a tool for interactively writing and executing Python code. It allows the programmer to easily write and test code by allowing snippets of code and their results to be displayed side-by-side. Each snippet of code is called a "cell". It promotes the ease of documentation by allowing some cells to contain text, html code, images, or even Latex. Jupyter is particularly useful for Big Data computation, as it allows for parallel processing.
-</p>
-<p>Here is some Latex:</p>
-$$e^x = \int e^x dx$$
-<p>Here is some HTML:</p>
-<table>
-    <tr>
-        <td>1</td>
-        <td>2</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>4</td>
-    </tr>
-</table> -->
 
 ## Python Libraries
 
@@ -357,7 +316,6 @@ print(L[-2])
 # We can access chunks of a list to produce sub-lists.
 print(L[:2])
 print(L[2:4])
-#print [1,2]+['a','b']
 # There is a useful function for producing sequences of numbers.
 print(range(10))
 print(range(2,10))
@@ -447,25 +405,6 @@ Finally, Python includes a function called `dict` that allows you to use a very 
 ```python
 dict(a=1, b=2)
 ```
-
-<!-- #### Dictionaries and JSON
-
-A **JSON** (JavaScript Object Notation) is a lightweight data-interchange format that is quite standard across the web. It is highly readable and easy for machines to parse and generate. It is very similar to a Python dictionary. However, a dictionary is a python object, while a JSON is a set of characters. We can convert a dictionary into a JSON (or vice versa) very easily with a built-in Python module.
-
-```python
-import json
-
-a = {'a': 1, 'b':2}
-s = json.dumps(a)
-a2 = json.loads(s)
-
-## a is a dictionary
-print(a)
-## s is a string containing a in JSON encoding
-print(s)
-## reading back the keys are now in unicode
-print(a2)
-``` -->
 
 ## How Python thinks: With objects!
 
