@@ -1,4 +1,4 @@
-# Introduction to Python
+7# Introduction to Python
 
 ## Starting out
 
@@ -47,11 +47,9 @@ Then launch a Jupyter notebook.
 ## Todays agenda:
 
 + What is Python?
-+ Libraries
-+ Datatypes
-+ Data Structures
-+ Collections
-+ Loops
++ Python Libraries
++ Python Datatypes and Structures
++ How Python thinks: With objects!
 + Flow Control
 
 ## What is Python?
@@ -60,7 +58,7 @@ Then launch a Jupyter notebook.
 
 Python is an "interpreted" language. This means that every Python command that is executed is actually translated to lower-level programming languages. Lower-level, compiled programming languages (for example, C++) are very fast and powerful, but writing programs in these languages can be difficult.
 
-There are two main versions of Python, these are Python 2 and Python 3. Python 3 is newer, and remove bugs and idiosyncrasies of Python 2; however Python 2 is still heavily used. While the fundamentals of the two versions are the same, there are some differences (mostly syntactical) between the two. These differences are substantial enough that, unfortunately, Python 3 is NOT backwards compatible, so always double check which version of Python a given script is written in. In this class, we are using Python 3.
+There are two main versions of Python, these are Python 2 and Python 3. Python 3 is newer, and removed bugs and idiosyncrasies of Python 2; however Python 2 is still heavily used. While the fundamentals of the two versions are the same, there are some differences (mostly syntactical) between the two. These differences are substantial enough that, unfortunately, Python 3 is NOT backwards compatible, so always double check which version of Python a given script is written in. In this class, we are using Python 3.
 
 There are a number of great Python tutorials available on the web, some can be found here:
 
@@ -125,13 +123,12 @@ import pandas as pd
 import math
 import matplotlib
 import numpy as np
-
-# If you get an error message stating that "No module named ... ", quit Python using quit()
-# After quiting, install the missing library using pip. For example, in the terminal, to
-# get matplotlib, type 'conda install matplotlib'
 ```
 
-## Comments
+If you get an error message stating that "No module named ... ", quit atom. After quitting, install the missing library using pip. For example, in the terminal, to get matplotlib, type 'pip install matplotlib'
+
+
+### Comments
 
 Comments allow you to include text in you code that is not executed. This makes them exceptionally useful for documenting your code. Documenting your code becomes imperative when you share it. Other coders won't know what was going on in your brain! You probably will have a hard time remembering after a while, too so... do yourself and others a favor. It is always good practice to comment your code with future users (again, including you in two months) in mind. We can have single- or multi-line comments.
 
@@ -179,7 +176,7 @@ print(division)
 print(type(division))
 ```
 
-## Python Data Structures
+## Python Datatypes and Structures
 
 A data structure is a way of organizing data in the computer memory. Data structures can implement one or more particular data types. Some data structures can be built based on a basic type or basic building block. Most languages allow more complicated composite types to be recursively constructed starting from basic types.
 
@@ -222,7 +219,7 @@ Common python operators include: `+`, `-`, `*`, `/`, `//`, `%`, `abs()`, and `in
 
 ### Strings
 
-Strings are sets of characters. We create them by enclosing characters in quotes. Python treats single quotes the same as double quotes.
+Strings are sets of characters. We create them by enclosing characters in quotes. Python treats single quotes the same as double quotes, but it's good practice to be consistent with what you use.
 
 Strings can be thought of as lists of characters - we'll get into lists a bit more later. For now, know that we can access substrings by specifying ranges in the list or characters. They also have a number of methods or operations that we can perform with them.
 
@@ -245,7 +242,7 @@ print(string)
 string+=" A third string."
 print(string)
 
-# Examples of string methods: .find(), which returns the index of the first instance of a substring and .count(), which returns the number of occurances of a particular substring.
+# Examples of string methods: .find(), which returns the index of the first instance of a substring and .count(), which returns the number of occurrences of a particular substring.
 string.find("Another")
 string.count("i")
 
@@ -266,7 +263,7 @@ This simple syntax is a new addition to Python - it only became available in Pyt
 
 ```python
 finding1 = 17
-print("We find that the value is {}!".format(finding))
+print("We find that the value is {}!".format(finding1))
 finding2 = 13
 print("We find that the first value is {} and the second value is {}!".format(finding1, finding2))
 ```
@@ -278,8 +275,7 @@ The `str.format()` method places the variables in curly brackets in the order in
 Booleans are binary datatypes that are used to indicate the truth or falsehood of a statement. Epistemologically, computers are incredibly simplistic. They understand two values: `True` and `False` (or 1 and 0). Despite the highly reductive computational treatment of truth they imply, Booleans are exceedingly useful.
 
 ```python
-# booleans, can hold only two
-# possible values: True or False.
+# booleans, can hold only two possible values: True or False.
 is_true = True
 print(is_true)
 ```
@@ -400,7 +396,9 @@ The `keys()` method of a dictionary object returns a list of all the keys used i
 d1 = {} # an empty dict
 d2 = {'key1':1,'key2':"moose",4:5}
 print(d2)
-# Key-value pairs can also be defined like this - note that '6' does NOT refer to an index position like it would with a list. Here, it creates a key that is given the value false.
+
+# Key-value pairs can also be defined like this - note that '6' does NOT refer to
+# an index position like it would with a list. Here, it creates a key that is given the value false.
 d2[6] = False
 print(d2)
 # values can be retrieved using their keys.
@@ -408,13 +406,14 @@ print(d2['key2'])
 # Once again: 6 refers to a KEY, NOT an index position.
 print(d2[6])
 
-# can be used in conditionals
+# Key-value pairs can be used in conditionals
 if not d2[6]: # evaluates to false
     print("Dicts are fun.")
 else:
     print("Dicts are not that fun.")
 
-# The keys and values of dicts can be accessed as lists. Note that, here, they're being converted to strings so that they can be concatenated with the descriptive text.
+# The keys and values of dicts can be accessed as lists. Note that, here,
+# they're being converted to strings so that they can be concatenated with the descriptive text.
 print("keys: "+str(list(d2.keys())))
 print("values: "+str(list(d2.values())))
 
@@ -429,7 +428,8 @@ print([(k,v) for k,v in numbers.items()])
 
 list(numbers.values())
 
-# Here, we use the 'values' method to extract dictionary values, which we then convert to a list, which allows us to reference its elements by their index.
+# Here, we use the 'values' method to extract dictionary values, which we
+# then convert to a list, which allows us to reference its elements by their index.
 playlist = list(numbers.values())
 print(playlist[1])
 print(list(numbers.keys()))
@@ -514,7 +514,8 @@ else:
     x = 2
     print("Flag is False.")
 print(x)
-# We can check for other cases as well. The == operator checks for equivalence, so it will be true when x is equal to a given value
+# We can check for other cases as well. The == operator checks for equivalence,
+# so it will be true when x is equal to a given value
 if x == 0:
     print("A")
 elif x == 1:
