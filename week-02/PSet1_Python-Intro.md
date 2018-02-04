@@ -3,7 +3,7 @@
 
 ## Expectations
 
-We recognize that this may be your first experience with programming. As such, we'll be grading primarily on whether your code works as expected. We'll generally emphasize code functionality and readability over performance. However, we expect your code to be non-repetitive, relatively clean, and efficient enough to deal with medium-to-large datasets. As we move forward with the course, you will be introduced to programming techniques, iterators, and objects that will allow to work with data in relatively efficient ways.
+We recognize that this may be your first experience with programming. As such, we'll be grading primarily on whether your code works as expected. We'll generally emphasize code functionality and readability over performance. However, we expect your code to be non-repetitive, relatively clean, and efficient enough to deal with medium-to-large datasets. As we move forward with the course, you will be introduced to programming techniques, iterators, and objects that will allow you to work with data in relatively efficient ways.
 
 ## Give credit where credit is due
 
@@ -20,7 +20,7 @@ def function_i_didn't_write(arg1, arg2):
   return result
 ```
 
-## Lists
+## A. Lists
 
 1. Create a list containing any 4 strings.
 2. Print the 3rd item in the list - remember how Python indexes lists!
@@ -29,7 +29,7 @@ def function_i_didn't_write(arg1, arg2):
 5. Get the list length and print it.
 6. Replace the last item in the list with the string “new” and print
 
-## Strings
+## B. Strings
 
 Given the following list of words stored as strings, complete the following tasks:
 
@@ -42,7 +42,7 @@ sentence_words = ['I', 'am', 'learning', 'Python', 'to', 'munge', 'large', 'data
 4. Perform the same operation using the [`sorted()` function](https://docs.python.org/3.3/howto/sorting.html). Provide a brief description of how the `sorted()` function differs from the `.sort()` method.
 5. Extra Credit: Modify the sort to do a case [case-insensitive alphabetical sort](http://matthiaseisen.com/pp/patterns/p0005/).
 
-## Random Function
+## C. Random Function
 
 Here is a Python snippet that generates a random integer:
 
@@ -64,10 +64,10 @@ assert(50 <= my_random(100, low = 50) <= 100)
 + Inputs
   1. Two `integers` that will be used as lower and upper bounds of the function. If the user does not pass a lower bound, the default value should be zero.
 + Outputs
-  1. A random number within the established bounds
+  1. Print a random number within the established bounds
 
 
-## String Formatting Function
+## D. String Formatting Function
 
 Write a function that expects two inputs. The first is a title that may be multiple words, the second is a number. Given these inputs, print the following string (replacing `n` and `title` with dynamic values passed to the script).
 
@@ -79,7 +79,7 @@ Write a function that expects two inputs. The first is a title that may be multi
   1. Print a string of the format: `The number n bestseller today is: title`. You should use an `f` string or the `.format()` method to format the printed string.
 
 
-## Password Validation Function
+## E. Password Validation Function
 
 Write a function that evaluates the strength of a password. Ask the user to input a password that meets the criteria listed below. You can either use the Python [`input`](https://docs.python.org/3/library/functions.html#input) built-in function, or just pass the password as a function argument. Validate that the user’s password matches this criteria. If password is valid, print a helpful success message.
 
@@ -95,7 +95,7 @@ Test that the user's password...
 + Outputs
   1. A success message if the password works, an error message if it fails.
 
-## Exponentiation Function
+## F. Exponentiation Function
 
 Create a function called `exp` that accepts two integers and then `return`s an exponentiation, **without using the exponentiation operator** (`**`). You may assume these are positive integers. Use at least one custom-defined function.
 
@@ -114,7 +114,7 @@ exp(5, 4) # output: 625
 
 Hint: You can recursively multiply a number. The second function parameter defines the number of times the recursive loop happens. Every time the loop happens, you can redefine the variable that gets multiplied.
 
-## Extra Credit: Min and Max Functions
+## G. Extra Credit: Min and Max Functions
 
 Write your own versions of the Python built-in functions `min()` and `max()`. They should take a list as an argument and return the minimum or maximum element. Assume lists contain numeric items only.
 
