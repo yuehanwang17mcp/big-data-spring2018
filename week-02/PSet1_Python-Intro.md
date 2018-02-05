@@ -5,6 +5,12 @@
 
 We recognize that this may be your first experience with programming. As such, we'll be grading primarily on whether your code works as expected. We'll generally emphasize code functionality and readability over performance. However, we expect your code to be non-repetitive, relatively clean, and efficient enough to deal with medium-to-large datasets. As we move forward with the course, you will be introduced to programming techniques, iterators, and objects that will allow you to work with data in relatively efficient ways.
 
+## Submission Guidelines
+
++ Your problem set response should be submitted as a single script called `pset1.py` that is stored the submissions folder of your forked Github repo.
++ Using comments, label each code block with the problem to which it responds (e.g., `#A.1 Create a list containing any 4 strings`, `#A.2 Print the 3rd item in the list`).
++ Finally, you should include a print function (e.g., `print(string_list)`or a function call (e.g., `pass_valid()`) as the last line in each code block; as a general rule, we shouldn't have to modify your code to see its output!
+
 ## Give credit where credit is due
 
 Throughout the course you will often find yourself taking to the Internet for help. There's no shame in Googling! In fact, any honest programmer will tell you that, no matter your skill level, you'll still find yourself consulting [Stack Overflow]( http://stackoverflow.com/) on a regular basis.
