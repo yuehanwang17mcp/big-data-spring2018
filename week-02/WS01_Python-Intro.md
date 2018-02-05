@@ -57,31 +57,26 @@ There are also some excellent Python textbooks and cookbooks. Yes, dear reader, 
 
 Python on its own only provides fairly basic functionality. In order to extend Python, its very large, active, and dedicated user community has contributed an ever-growing list of libraries to make your life easier. A library is a bundle of code that can be easily imported into our current code to add functionality. Libraries define Python objects, functions, and methods that can we can use seamlessly in our own code.
 
-Loading libraries can be computationally expensive (i.e., it consumes resources and slows the execution of any given script); for that reason, Python requires us to explicitly load the libraries that we want to use. For example, say we wanted to load the `math` library:
+Loading libraries can be computationally expensive (i.e., it consumes resources and slows the execution of any given script); for that reason, Python requires us to explicitly load the libraries that we want to use. For example, say we wanted to load the `math` library and access its `pi` constant:
 
 ```python
 import math
+print(math.pi)
 ```
 
-Easy peasy! We can also be more specific and import only specific classes or functions of the library:
+Easy peasy! We can also be more specific and import only specific classes, functions, or constants from the library; this will allow you to use simpler syntax. Here, we import only the `math` library's `pi` constant, and print it without having to invoke the library.
 
 ```python
 from math import pi
+print(pi)
 ```
 
 It is generally considered good practice to keep your imports minimal. In other words, don't load in an entire library if you're only going to use a single class or function.
 
-We can also change the name of the library when it gets imported. This allows you to invoke libraries using shorter names. Libraries often have conventional abbreviations; for example, you'll often see the `pandas` library (which we'll be using a lot in the class!) imported as `pd`
+We can also change the name of the library when it gets imported. This allows you to invoke libraries using shorter names. Libraries often have conventional abbreviations; for example, you'll often see the `pandas` library (which we'll be using a lot in the class!) imported as `pd`.
 
 ```python
 import pandas as pd
-```
-
-```python
-# Import Libraries for use later in script
-import math
-import matplotlib
-import numpy as np
 ```
 
 If you get an error message stating that "No module named ... ", quit atom. After quitting, install the missing library using pip. For example, in the terminal, to get matplotlib, type 'pip install matplotlib'
@@ -453,6 +448,7 @@ else:
     x = 2
     print("Flag is False.")
 print(x)
+
 # We can check for other cases as well. The == operator checks for equivalence,
 # so it will be true when x is equal to a given value
 if x == 0:
@@ -463,7 +459,7 @@ else:
     print("C")
 ```
 
-### Iterating with Loops
+### Loops
 
 Loops allow us to automate repetitive tasks (hooray!). Repeatedly executing a set of statements is called *iteration*. There are a number of way to iterate in Python. We can use `for` loops or `while` loops. The syntax is like the syntax of if-statements---notice the indentations! The `for` loop loops over each of the elements of a list or iterator, assigning the current element to the variable name given. A `while` loop repeats a sequence of statements until some condition becomes false.
 
