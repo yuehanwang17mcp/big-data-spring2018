@@ -110,22 +110,27 @@ Variables allow us to store results, text, functions or data that we can retriev
 # We can define variables without having to declare their type. We can name it whatever we want.
 x = 4.0
 print(x)
-print(x*2)
+print(x * 2)
+
 # A text (or string) variable
 text = "This is the text we're storing!"
 print(text)
+
 # you can change the value of x as often as you want.
 x = 3
 print(x)
 x = x+2
 print(x)
+
 # the following retrieves the value stored in x, adds 2 to it,
 # and stores the result in x.
-x+=2
+x += 2
 print(x)
-x-=10
+x -= 10
 print(x)
-division=5/6
+
+# dividing two integers produces a float
+division = 12 / 6
 print(division)
 print(type(division))
 ```
@@ -142,8 +147,8 @@ Variables can be defined based on constructing a numeric data type. Every time w
 
 ```python
 # Integers (int) are a numerical data-type.
-print(1+2)
-print(type(1+2))
+print(1 + 2)
+print(type(1 + 2))
 
 # Example of an integer method: .bit_length(), which returns the number of bytes needed to represent the integer in binary
 one = 1
@@ -151,15 +156,12 @@ one.bit_length()
 big = 15000
 big.bit_length()
 
-```
-
-```python
 # Floats are another numeric type that allows for fractions.
-print(1.0+.5)
-print(3.0-2.0)
-print(6*5.0)
-print(7.0/2)
-print(type(1.0+5))
+print(1.0 + .5)
+print(3.0 - 2.0)
+print(6 * 5.0)
+print(7.0 / 2)
+print(type(1.0 + 5))
 
 # Example of a float method: .is_integer(), which returns True or False depending on whether the value can be represented as an integer.
 
@@ -193,7 +195,7 @@ print(s[2:6])
 # You can add strings together (i.e., concatenate them)
 string = s + " Another string."
 print(string)
-string+=" A third string."
+string += " A third string."
 print(string)
 
 # Examples of string methods: .find(), which returns the index of the first instance of a substring and .count(), which returns the number of occurrences of a particular substring.
@@ -256,19 +258,25 @@ print(not x or y)
 # '==' tests for equality
 print(1 == 2)
 print(1 == 1)
+
 # '!=' tests for inequality
 print(1 != 2)
+
 # comparison functions also apply to strings
 print("abcd" == "abcd")
+
 # Variables and their values can be compared.
 x = 1
 y = 2
+
 # compare values of variables
 print(x == y)
+
 # set x and y to be the same value
 x = y
 print(x)
 print(y)
+
 # check if x and y are THE SAME using the 'is' function.
 print(x is y)
 
@@ -285,36 +293,36 @@ Lists are a data structure designed for easy storage and access to data. They ar
 Python deals with multiple data structures in a similar manner. For example lists, dictionaries, files, and and iterators work similarly. It's important to note that Python is 0-indexed. This means that the first element in a list is not accessed with `list[1]`. Rather, it is accessed with `list[0]`. This is the case with most programming languages, with some notable exceptions. `R` for example, is 1-indexed.
 
 ```python
-L1 = [] # an empty list
+l_one = [] # an empty list
 x = 5
-L2 = [1,2.0,'a',"abcd",True,x] # a list containing different values
+l_two = [1, 2.0, 'a', "abcd", True, x] # a list containing different values
 # lists can be built dynamically (aka on the fly) using the .append() and .extend() methods
-L1.append(1)
-L1.append(2)
-print(L1)
-L3 = ['a','b','c']
-L1.extend(L3)
-L1.append(L3)
-print(L1)
-# Whoa, wait! What's the difference between extend and append?
+l_one.append(1)
+l_one.append(2)
+print(l_one)
+l_three = ['a', 'b', 'c']
+l_one.extend(l_three)
+l_one.append(l_three)
+print(l_one) # Whoa, wait! What's the difference between extend and append?
 
-# Values stored in lists are accessible by their index in the list.
-# Lists maintain the order
-# We use "[i]" to retrieve the i-th element in a list.
-# Note that the first element in a list in Python has index 0.
-L = ['a','b','c','d','e']
-print(L[0])
-print(L[1])
+# Values stored in lists are accessible by their index in the list. Lists maintain their order! We use "[i]" to retrieve the i-th element in a list. Note that the first element in a list in Python has index 0.
+alph = ['a', 'b', 'c', 'd', 'e']
+print(alph[0])
+print(alph[1])
+
 # We can access from the ends of lists as well.
-print(L[-1])
-print(L[-2])
+print(alph[-1])
+print(alph[-2])
+
 # We can access chunks of a list to produce sub-lists.
-print(L[:2])
-print(L[2:4])
+print(alph[:2])
+print(alph[2:4])
+
 # There is a useful function for producing sequences of numbers.
 print(range(10))
-print(range(2,10))
-print(range(4,10,2))
+print(range(2, 10))
+print(range(4, 10, 2))
+
 # The length of a list can be calculated using len()
 print(len(range(10)))
 ```
@@ -327,11 +335,11 @@ Lists can also be constructed differently using an approach called 'list compreh
 # Verbose syntax without list comprehension
 squares = [ ]
 for i in range(5):
-  squares.append(i*i)
+  squares.append(i * i)
 print(squares)
 
 # WITH list comprehension... ahhhhh... it's like taking a warm bath.
-squares = [i*i for i in range(5)]
+squares = [i * i for i in range(5)]
 print(squares)
 ```
 
@@ -346,34 +354,34 @@ It is best to think of a dictionary as an unordered set of `key:value` pairs, wi
 The `keys()` method of a dictionary object returns a list of all the keys used in the dictionary, in an arbitrary order. To check whether a single key is in the dictionary, use the `in` keyword.
 
 ```python
-d1 = {} # an empty dict
-d2 = {'key1':1,'key2':"moose",4:5}
-print(d2)
+d_one = {} # an empty dict
+d_two = {'key1':1,'key2':"moose",4:5}
+print(d_two)
 
-# Key-value pairs can also be defined like this - note that '6' does NOT refer to
-# an index position like it would with a list. Here, it creates a key that is given the value false.
-d2[6] = False
-print(d2)
+# Key-value pairs can also be defined like this - note that '6' does NOT refer to an index position like it would with a list. Here, it creates a key (`6`) that is given the value false.
+d_two[6] = False
+print(d_two)
+
 # values can be retrieved using their keys.
-print(d2['key2'])
+print(d_two['key2'])
+
 # Once again: 6 refers to a KEY, NOT an index position.
-print(d2[6])
+print(d_two[6])
 
 # Key-value pairs can be used in conditionals
-if not d2[6]: # evaluates to false
+if not d_two[6]: # evaluates to false
     print("Dicts are fun.")
 else:
     print("Dicts are not that fun.")
 
-# The keys and values of dicts can be accessed as lists. Note that, here,
-# they're being converted to strings so that they can be concatenated with the descriptive text.
-print("keys: "+str(list(d2.keys())))
-print("values: "+str(list(d2.values())))
+# The keys and values of dicts can be accessed as lists. Note that, here, they're being converted to strings so that they can be concatenated with the descriptive text.
+print("keys: "+str(list(d_two.keys())))
+print("values: "+str(list(d_two.values())))
 
 numbers = {'one':1, 'two': 2, 'three': 3}
 print(numbers)
 print(numbers['one'])
-# Hey! This looks familiar... remember list comprehension above?
+# Hey! This looks familiar... remember list comprehension above? We're using list comprehension to print the dictionary's keys.
 print([i for i in numbers])
 
 # We can also use list comprehension to print key:value pairs in a list.
@@ -381,14 +389,13 @@ print([(k,v) for k,v in numbers.items()])
 
 list(numbers.values())
 
-# Here, we use the 'values' method to extract dictionary values, which we
-# then convert to a list, which allows us to reference its elements by their index.
+# Here, we use the 'values' method to extract dictionary values, which we then convert to a list, which allows us to reference its elements by their index.
 playlist = list(numbers.values())
 print(playlist[1])
 print(list(numbers.keys()))
 ```
 
-Much like we can create lists using a 'list comprehension' syntax, we can also construction dictionaries using 'dictionary comprehension' as well:
+Much like we can create lists using list comprehension, we can construction dictionaries using dictionary comprehension:
 
 ```python
 mydict = {k:v for (k,v) in zip(range(5), range(5))}
@@ -398,7 +405,7 @@ mydict
 Finally, Python includes a function called `dict` that allows you to use a very intuitive syntax to construct dictionaries.
 
 ```python
-dict(a=1, b=2)
+dict(a = 1, b = 2)
 ```
 
 ## How Python thinks: With objects!
@@ -512,36 +519,36 @@ Functions are defined using the key word `def`. As with the other flow control t
 # First choose an initial value for x.
 x = 0
 for i in range(100):
-    x+=i
+    x += i
 print(x)
 
 # What if we want to do this for a new initial value for x? What if we use a different number instead of 100? We don't want to rewrite this for loop every time, so let's define a function!
-def for_sum(x,y):
+def for_sum(x, y):
     for i in range(y):
-        x+=i
+        x += i
     # "return" indicates what values to output
     return x
 
 # Same calculation from above
-print(for_sum(0,100))
-print(for_sum(10,50)) # Now with new numbers
+print(for_sum(0,1 00))
+print(for_sum(10, 50)) # Now with new numbers
 
 # Interestingly, variables can store functions. This means that functions
 # can be inputs to other functions.
 f = for_sum
-print(f(0,100))
+print(f(0, 100))
 
-def execute(funct,x):
-    return funct(x,100)
+def execute(funct, x):
+    return funct(x, 100)
 
-print(execute(f,10))
+print(execute(f, 10))
 
 # Now, just for fun:
-print(f(f(f(10,100),50),1000))
+print(f(f(f(10, 100), 50), 1000))
 ```
 
 ```python
-def print_words(x="This",y="Not Eric"):
+def print_words(x = "This", y = "Not Eric"):
     print(x)
     print(y)
 
