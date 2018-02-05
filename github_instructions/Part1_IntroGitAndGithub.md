@@ -6,7 +6,7 @@ Collaboration is key when working with a group on a coding project. Git is a fre
 
 ## What is Github?
 
-Github is a web service built on top of Git that hosts your code and provides easy ways to store, work with, and share your projects. It is designed for collaboration, meaning that once a file is recognized in Github, if you are working on a project with collaborators, it will identify changes between files, and let the users know when they try to upload if the same lines have been changed. If the same lines have been changed, you have to tell it one you want, this is called a **merge conflict**. If a merge conflict is not found, it will automatically update the online version of the repository with your new code.
+Github is a web service built on top of Git that hosts your code and provides easy ways to store, work with, and share your projects. It is designed for collaboration, meaning that once a file is recognized in Github, if you are working on a project with collaborators, it will identify changes between files, and let the users know when they try to upload if the same lines have been changed. If the same lines have been changed, you have to tell it one you want, this is called a **merge conflict**. If a merge conflict is not found, it will automatically update the online version of the repository with your new code. A change! A change!
 
 Working with Github is easy, there are two main ways you can work with Github, via command line, or with a Desktop GUI. The instructions below will show you how to get started on the command line.
 
@@ -45,7 +45,7 @@ Okay, let's get started with Github, set up our computers to talk to the Github 
 
 ## Getting Started on Github
 
-Sign up for a Github account on the (Github site)[http://www.github.com] in which you can host projects and maintain repositories. Once signed up, go to your profile page.
+Sign up for a Github account on the [Github site](http://www.github.com) in which you can host projects and maintain repositories. Once signed up, go to your profile page.
 
 ### Repositories
 
@@ -155,13 +155,6 @@ We know how to do this! The `cd` command!
 ```sh
 cd <Github username>.github.io
 ```
-<!--
-### Sidebar: Create a Repository Remotely using Command Line using Git Init
-
-Above, we created a repository on the Github webpage and then cloned it to our local machine. What if we want to create a repository from the command line in an existing directory and then push that to a Github respoitory so others can collaborate with us?
-
-Check out the [Github documentation](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/) for more information on setting remote resitory URLs. -->
-
 
 ## Build a Simple Webpage
 
