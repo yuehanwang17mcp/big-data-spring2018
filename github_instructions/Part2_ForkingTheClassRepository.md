@@ -16,7 +16,7 @@ You have now forked the repository and cloned it onto your machine. This means t
 
 ## Commit changes to your fork
 
-You will need to commit any changes you've made to the forked repository before you can fetch new files from the class repository. This way, Git will know what has changed and what hasn’t. When you fetch the main class repository, Github will provide the main class files, give you files you don’t have, and flag any items that were changed in both your personal fork and main class repo. As a reminder, you stage, commit, and push changes using the following series of steps.
+You will need to commit any changes you've made to your forked repository before you can fetch new files from the class repository. This way, Git will know what has changed and what hasn’t. When you fetch the main class repository, Github will provide the main class files, give you files you don’t have, and flag any items that were changed in both your personal fork and main class repo. As a reminder, you stage, commit, and push changes using the following series of steps.
 
 Using Terminal or Git Bash, change into the directory that contains the local copy of your forked repository.
 
@@ -72,7 +72,7 @@ git remote add class https://github.com/ericmhuntley/big-data-spring2018.git
 Use `git fetch` to grab the `master` branch of the remote class repository (i.e., `origin`). We then want to merge it into our master branch.
 
 ```sh
-# Check out our fork's master branch.
+# Check out your fork's master branch.
 git checkout master
 # Fetch changes.
 git fetch class
