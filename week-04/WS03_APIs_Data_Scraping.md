@@ -114,6 +114,7 @@ search_term = ''
 latlng = '42.359416,-71.093993' # Eric's office (ish)
 # Setup a search distance
 distance = '1mi'
+# See tweepy API reference for format specifications
 geocode_query = latlng + ',' + distance
 # Set result type (can be 'recent', 'popular', or 'mixed')
 type_of_result = 'recent'
@@ -121,7 +122,7 @@ type_of_result = 'recent'
 tweet_max = 15
 tweet_per_query = 15
 
-file_name = 'tweets.txt'
+file_name = 'data/tweets.json'
 
 # If results from a specific ID onwards are reqd, set since_id to that ID.
 # else default to no lower limit, go as far back as API allows
@@ -133,54 +134,54 @@ max_id = -1
 
 tweet_count = 0
 all_tweets = {}
-with open(file_name, 'w') as f:
-    while tweet_count < tweet_max:
-      try:
-        if (max_id <= 0):
-          if (not sinceId):
-            new_tweets = api.search(q = search_term, rpp = tweet_per_query, geocode = geocode_query)
-          else:
-            new_tweets = api.search(q = search_term, rpp = tweet_per_query, geocode = geocode_query,
-                                    since_id = sinceId)
-        else:
-          if (not sinceId):
-            new_tweets = api.search(q = search_term, rpp = tweet_per_query, geocode = geocode_query,
-                                  max_id = str(max_id - 1))
-          else:
-            new_tweets = api.search(q = search_term, rpp = tweet_per_query, geocode = geocode_query,
-                                  max_id = str(max_id - 1), since_id = sinceId)
-        if not new_tweets:
-          print("No more tweets found")
-          break
-        for tweet in new_tweets:
-          properties = {}
-          if tweet.coordinates != None:
-            properties['lat'] = tweet.coordinates['coordinates'][0]
-            properties['lon'] = tweet.coordinates['coordinates'][1]
-          else:
-            properties['lat'] = None
-            properties['lon'] = None
-          properties['location'] = tweet.user.location
-          properties['id'] = tweet.id_str
-          properties['content'] = tweet.text
-          properties['user'] = tweet.user.screen_name
-          properties['user_id'] = tweet.user.id_str
-          # properties['raw_source'] = tweet
-          properties['time'] = str(tweet.created_at)
-          all_tweets[tweet.id_str] = properties
 
-        tweet_count += len(new_tweets)
-        print("Downloaded {0} tweets".format(tweet_count))
-        max_id = new_tweets[-1].id
+while tweet_count < tweet_max:
+  try:
+    if (max_id <= 0):
+      if (not sinceId):
+        new_tweets = api.search(q = search_term, rpp = tweet_per_query, geocode = geocode_query)
+      else:
+        new_tweets = api.search(q = search_term, rpp = tweet_per_query, geocode = geocode_query,
+                                since_id = sinceId)
+    else:
+      if (not sinceId):
+        new_tweets = api.search(q = search_term, rpp = tweet_per_query, geocode = geocode_query,
+                              max_id = str(max_id - 1))
+      else:
+        new_tweets = api.search(q = search_term, rpp = tweet_per_query, geocode = geocode_query,
+                              max_id = str(max_id - 1), since_id = sinceId)
+    if not new_tweets:
+      print("No more tweets found")
+      break
+    for tweet in new_tweets:
+      properties = {}
+      if tweet.coordinates != None:
+        properties['lat'] = tweet.coordinates['coordinates'][0]
+        properties['lon'] = tweet.coordinates['coordinates'][1]
+      else:
+        properties['lat'] = None
+        properties['lon'] = None
+      properties['location'] = tweet.user.location
+      properties['id'] = tweet.id_str
+      properties['content'] = tweet.text
+      properties['user'] = tweet.user.screen_name
+      properties['user_id'] = tweet.user.id_str
+      # properties['raw_source'] = tweet
+      properties['time'] = str(tweet.created_at)
+      all_tweets[tweet.id_str] = properties
 
-        # Write to GeoJSON
-        with open( 'data/tweets.json', 'w' ) as f:
-                f.write(json.dumps(all_tweets))
+    tweet_count += len(new_tweets)
+    print("Downloaded {0} tweets".format(tweet_count))
+    max_id = new_tweets[-1].id
 
-      except tweepy.TweepError as e:
-        # Just exit if any error
-        print("Error : " + str(e))
-        break
+    # Write to GeoJSON
+    with open( file_name, 'w' ) as f:
+            f.write(json.dumps(all_tweets))
+
+  except tweepy.TweepError as e:
+    # Just exit if any error
+    print("Error : " + str(e))
+    break
 
 # print ("Downloaded {0} tweets, Saved to {1}".format(tweet_count, file_name))
 print (f"Downloaded {tweet_count} tweets. Wrote to {file_name}.")
