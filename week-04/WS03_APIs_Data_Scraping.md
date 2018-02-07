@@ -1,8 +1,11 @@
 # Workshop 3: APIs and Data Scraping: Getting Twitter Data
 
+
+## Express Gratitude to https://www.karambelkar.info/2015/01/how-to-use-twitters-search-rest-api-most-effectively./
+
 ## Set up a Twitter Application
 
-This week we are going to scrape data from the Twitter API and make some plots! We are going to use the Twitter REST API, which lets us query and retreive samples of Tweets. To do this, you need API keys that are associated with your account. Your API keys are secret and unique to you and only you, and they gives you access to Twitter data through the API.
+This week we are going to scrape data from the Twitter API and make some plots! We are going to use the Twitter REST API, which lets us query and retrieve samples of Tweets. To do this, you need API keys that are associated with your account. Your API keys are secret and unique to you and only you, and they gives you access to Twitter data through the API.
 
 There are a couple of ways to get Twitter data, the REST API is just one of them. The others are to set up a Streamer (which streams real time tweets), or to access the Firehose (this means everything!). Read [this article](https://brightplanet.com/2013/06/twitter-firehose-vs-twitter-api-whats-the-difference-and-why-should-you-care/) for a nice comparison between the methods.
 
@@ -11,12 +14,12 @@ The Twitter REST API is best place to start and what we will use in class. Follo
 * Create a twitter account if you do not already have one.
 * Go to [https://apps.twitter.com/](https://apps.twitter.com/) and log in with your twitter credentials.
 * Click **"Create New App"** in the upper right corner
-* Fill out the form, give it a name like **data_getter_yourname** and a description. The form will ask for a website---good thing we made one of these a few week ago! Use the github.io page you created as the URL. Leave the Callback URL field blank. Agree to the terms and click "Create your Twitter application".
+* Fill out the form, give it a name like `data_getter_yourname` and a description. The form will ask for a website---good thing we made one a few week ago! Use the `github.io` page you created as the URL. Leave the Callback URL field blank. Agree to the terms and click "Create your Twitter application".
 * In the next page, click on **Keys and Access Tokens** tab, and copy your "Consumer Key (API Key)" and "Consumer Key (API Secret)".
 
 ## Create a Python script to store your Twitter keys
 
-We need a Python file that will contain the **Twitter** keys. Open your text editor, and in the materials for the week, *PASTE* these keys into a new file and save it as `twitter-keys.py`. You need to define two string variables, one for each key. Your code should look like this:
+We need a Python file that will contain the Twitter keys. Open your text editor, and in the materials for the week, paste they keys you copied into a new file and save it as `twitter-keys.py`. You need to define two string variables, one for each key. Your code should look like this:
 
 ```
 # In the file you should define two variables (these must be strings!)
@@ -43,54 +46,59 @@ This is telling git that it should ignore changes to files called `twitter_keys.
 We will be using `twython`, a Python library that provides wrappers around Twitter's API. Like other Python packages we've used up until this point, we can install `twython` from the command line using `pip`.
 
 ```sh
-pip install twython
+# pip install twython
+pip install tweepy
 ```
 
-Import the libraries:
+Import the libraries, including `twython`:
 
 ```python
 # Import libraries
 import json
 import time
 import threading
+import tweepy
 from datetime import datetime
-from twython import Twython
-
-# Imports the keys from the python file
-from twitter_key import api_key, api_secret
 ```
 
-## Set Up Twython, Get an OAuth2 Token, and Create your Twython Object
-
-In this next step, assign the keys to variables and set up our instance of Twython to work with your account.
-
-Doing this requires our authentication with Twitter using our keys. Twitter uses something called [OAuth](https://dev.twitter.com/oauth) for API authentication. There are two types of OAuth authentication. OAuth1 provides user authentication to the API, and is required to post tweets and issue requests on behalf of users. OAuth 2 is [application-only authentication](https://dev.twitter.com/oauth/application-only), and has higher rate limits but doesn't allow you to post on users behalf. Because we can get more tweets using it, we are going to use OAuth2.
-
-**OAuth 2 requires a Third Access token you must request using the API. This next step will set everything up for us.**
-
-In the last part of this, we create a **Twython** object and call it **my_twython**; this object simplifies the access to the [Twitter API](https://dev.twitter.com/overview/documentation), and provides methods for accessing the API’s endpoints. The first function fetches tweets with a given query at a given lat-long. We will be using the search parameters to hit the APIs endpoint. We need to provide the lat/lon of the centroid of the area we want to query, maximum number of tweets to return, and area within the centroid to search for, among others.
-
+In addition to using `import` to load Python modules, we can use it to import variables from local `.py` scripts. We can therefore import the `api_key` and `api_secret` variables from our `twitter_keys.py` file.
 
 ```python
-# Assigns the keys to the variables
-APP_KEY = api_key
-APP_SECRET = api_secret
+# Imports the keys from the python file
+from twitter_keys import api_key, api_secret
 
-# Create a Twython object called Twitter
-# Set this up using your Twitter Keys
-# Say we are going to use OAuth 2
-twython_setup = Twython(APP_KEY, APP_SECRET, oauth_version=2)
+# Our keys are now stored as global variables.
+print(api_key)
+print(api_secret)
+```
 
-# Get an OAuth2 access token, save as variable so we can launch our
-OAUTH2_ACCESS_TOKEN = twython_setup.obtain_access_token()
+## Get an OAuth2 token, and create your Twython object
 
-# Create a Twython Object we will use for our access to the API
-my_twython = Twython(APP_KEY, access_token=OAUTH2_ACCESS_TOKEN)
+We now need to et up our instance of Twython to work with your account. Doing this requires that we authenticate our Python app using our keys. Twitter uses something called [OAuth](https://dev.twitter.com/oauth) for API authentication. Twitter uses two types of OAuth authentication. OAuth1 provides user authentication to the API and is used to post tweets and issue requests on behalf of users. OAuth 2 provides [application-only authentication](https://dev.twitter.com/oauth/application-only)---it has higher rate limits but it doesn't allow you to post on users' behalf. Because it allows us to gather more Tweets, we are going to use OAuth2.
+
+OAuth 2 requires a Third Access token you must request using the API. This next step will set everything up for us.
+
+We first create a `Twython` object and call it `twitter`; this object simplifies the access to the [Twitter API](https://dev.twitter.com/overview/documentation), and provides methods for accessing the API’s endpoints.
+
+```python
+# Create a Twython object called twitter
+# Set this up using your Twitter Keys, imported from twitter_keys.py
+auth = tweepy.AppAuthHandler(api_key, api_secret)
+
+# Get an OAuth2 access token, save as variable so we can launch our app.
+api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
+
+# Print error and exit if there is an authentication error
+if (not api):
+    print ("Can't Authenticate")
+    sys.exit(-1)
 ```
 
 For reference, the Twython documentation and all available commands can be found here. [https://twython.readthedocs.io/en/latest/usage/starting_out.html](https://twython.readthedocs.io/en/latest/usage/starting_out.html)
 
 ## Query the Twitter API to get Tweets at a Location
+
+<!-- The first function fetches tweets with a given query at a given lat-long. We will be using the search parameters to hit the APIs endpoint. We need to provide the lat/lon of the centroid of the area we want to query, maximum number of tweets to return, and area within the centroid to search for, among others. -->
 
 Next, let's do a search and get some tweets! Specifically, set up a function that will use the **search** API. Read more about the **search** API [here](https://dev.twitter.com/rest/reference/get/search/tweets).
 
@@ -101,58 +109,117 @@ The Twitter API has rate limits that limit how quickly you can download data. Th
 
 ```python
 # Input the search term you want to search on
-search_term='' # SET A SEARCH TERM LIKE 'TRUMP'
+search_term = 'Saginaw' # SET A SEARCH TERM LIKE 'TRUMP'
 # CAN LEAVE search_term BLANK IF YOU WANT ALL TWEETS NEAR A SPECIFIC LOCATION
 # Setup a Lat Lon
-latlong=[40.261455,-76.882553] # Downtown Harrisburg, PA - Capital of Pennsylvania
+latlong = [42.359416,-71.093993] # Eric's office (ish)
 # Setup a search distance
-distance='25mi'
+distance = '25mi'
 # Set result type (can be 'recent', 'popular', or 'mixed')
-type_of_result='recent'
+type_of_result = 'recent'
 # Set number of results (up to 100, remember you can only get 450 in 15 minutes)
-number_of_tweets=15
+tweet_max = 15
+tweet_per_query = 15
 
+file_name = 'tweets.txt'
 
-# Fetches tweets with a given query at a given lat-long.
-def get_tweets_by_location( latlong=None ):
-    # Uses the search function to hit the APIs endpoints and look for recent tweets within the area
-    results = my_twython.search(q=search_term, geocode=str(latlong[0])+','+str(latlong[1])+','+ distance, result_type=type_of_result, count=number_of_tweets)
-    # Returns the only the statuses from the resulting JSON
-    return results['statuses']
+# If results from a specific ID onwards are reqd, set since_id to that ID.
+# else default to no lower limit, go as far back as API allows
+sinceId = None
 
-# test run our function
-get_tweets_by_location(latlong)
+# If results only below a specific ID are, set max_id to that ID.
+# else default to no upper limit, start from the most recent tweet matching the search query.
+max_id = -1
+
+tweet_count = 0
+all_tweets = {}
+print("Downloading max {0} tweets".format(tweet_max))
+with open(file_name, 'w') as f:
+    while tweet_count < tweet_max:
+      try:
+        if (max_id <= 0):
+          if (not sinceId):
+            new_tweets = api.search(q = search_term, count = tweet_per_query)
+          else:
+            new_tweets = api.search(q = search_term, count = tweet_per_query,
+                                    since_id = sinceId)
+        else:
+          if (not sinceId):
+            new_tweets = api.search(q = search_term, count = tweet_per_query,
+                                  max_id = str(max_id - 1))
+          else:
+            new_tweets = api.search(q = search_term, count = tweet_per_query,
+                                  max_id = str(max_id - 1),
+                                  since_id = sinceId)
+        if not new_tweets:
+          print("No more tweets found")
+          break
+        for tweet in new_tweets:
+          # f.write(jsonpickle.encode(tweet._json, unpicklable=False) +
+          #         '\n')
+          properties = {}
+          if tweet.coordinates != None:
+            properties['lat'] = tweet.coordinates[0]
+            properties['lon'] = tweet.coordinates[1]
+          else:
+            properties['lat'] = None
+            properties['lon'] = None
+          properties['location'] = tweet.user.location
+          properties['id'] = tweet.id_str
+          properties['content'] = tweet.text
+          properties['user'] = tweet.user.screen_name
+          properties['user_id'] = tweet.user.id_str
+          properties['raw_source'] = tweet
+          properties['time'] = tweet.created_at
+          all_tweets[tweet.id_str] = properties
+
+        tweet_count += len(new_tweets)
+        print("Downloaded {0} tweets".format(tweet_count))
+        max_id = new_tweets[-1].id
+      except tweepy.TweepError as e:
+        # Just exit if any error
+        print("some error : " + str(e))
+        break
+
+# print ("Downloaded {0} tweets, Saved to {1}".format(tweet_count, file_name))
+print (f"Downloaded {tweet_count} tweets. Wrote to {file_name}.")
 ```
 
-## Automate it - Hit the API and Parse the Result
+## Automate it: Hit the API and Parse the Result
 
 We are going to create a function to help us repeatedly hit the API, and parse the result into a readable JSON that contains the things that we are interested in, and still stores the raw tweet as an additional property. The returned object is a Python `dict` that we can easily parse into another dictionary to later store as a JSON. Raw JSONs returned from the API have a specific structure.
 
-It can be sometimes hard to read a raw JSON. I find it easy to use some online parsers like [this]( http://jsonparseronline.com/) to look at the structure of the JSON, and only access what we care about.
+It can be sometimes hard to read a raw JSON. It can be helpful to use online parsers like [this one]( http://jsonparseronline.com/) to look at the structure of a JSON file, and only access what we care about.
 
 Note: Remember we are limited to 450 every 15 minutes.
 
-
 ```python
 # Does pretty much what its long name suggests.
-def get_lots_of_tweets( latlong ):
+def get_tweets( latlong ):
     # Create a dictionary to parse the JSON
     all_tweets = {}
 
     # We will be hitting the API a number of times within the total time
     total_time = 10
 
-    # Everytime we hit the API we subtract time from the total
+    # Every time we hit the API we subtract time from the total
     remaining_seconds = total_time
     interval = 5
+
     while remaining_seconds > 0: # loop and run the function while remaining seconds is greater than zero
         added = 0
+
         # Hit the Twitter API using our function
         new_tweets = get_tweets_by_location(latlong) # we set latlong above!
+
         # Parse the resulting JSON, and save the rest of the raw content
         for tweet in new_tweets:
+
             tid = tweet['id']
+
+            # Test that we have are not pulling a duplicate tweet
             if tid not in all_tweets:
+                added += 1
                 properties = {}
                 if tweet['coordinates'] != None:
                     properties['lat'] = tweet['coordinates']['coordinates'][0]
@@ -161,57 +228,58 @@ def get_lots_of_tweets( latlong ):
                     properties['lat'] = None
                     properties['lon'] = None
                 properties['location'] = tweet['user']['location'] #This will get us the location associated with the profile
-                properties['tweet_id'] = tid
+                properties['id'] = tid
                 properties['content'] = tweet['text']
                 properties['user'] = tweet['user']['id']
                 properties['raw_source'] = tweet
                 properties['data_point'] = 'none'
                 properties['time'] = tweet['created_at']
                 all_tweets[ tid ] = properties
-                added += 1
-        print("At %d seconds, added %d new tweets, for a total of %d" % ( total_time - remaining_seconds, added, len( all_tweets )))
+
+        print(f"At {total_time - remaining_seconds} seconds, added {added} new tweets, for a total of {len(all_tweets)}")
+
         # We wait a few seconds and hit the API again
         time.sleep(interval)
         remaining_seconds -= interval
+
     print(str(len(all_tweets)) + ' Tweets retrieved.')
+
     # We return the final dictionary to work with in Python
     return all_tweets
 ```
 
 ## Run the Twitter Scraper
 
-We need to call the functions, and save the JSONs into a location. In this case, I made a folder called **data**, where I am saving all the new JSONS. We can run the code continuously utilizing some loop, or we can use libraries like [threading](https://docs.python.org/3.6/library/threading.html).
+We need to call the functions, and save the JSONs into a folder on your local drive. Make sure that you have a folder called `week-04/data`; this is where we'll be saving all the new JSONS.
 
-*Make sure you have a folder named **data** in the directory with your notebook! This function will save our collected datafiles to it when it finishes running.*
-
+<!-- We can run the code continuously utilizing some loop, or we can use libraries like [threading](https://docs.python.org/3.6/library/threading.html). -->
 
 ```python
 # This function executes the the functions over a given period of time
-def run_all():
+def execute_scrapers():
     # This is the number of times the code will be executed. In this case, just once.
     starting = 1
     while starting > 0:
         # Sometimes the API returns some errors, killing the whole script, so we setup try/except to make sure it keeps running
         try:
-            t = get_lots_of_tweets( latlong )
+            t = get_tweets( latlong )
             # We name every file with the current time
-            timestr = time.strftime("%Y%m%d-%H%M%S")
+            timestr = time.strftime('%Y%m%d-%H%M%S')
             # We write a new JSON into the target path
-            with open( 'data/' + '%stweets.json' %(timestr), 'w' ) as f:
+            with open(f'data/{timestr}tweets.json', 'w') as f:
                 f.write(json.dumps(t))
             # we can use a library like threading to execute the run function continuously.
-            #threading.Timer(10, run).start()
+            threading.Timer(10, get_tweets, args = latlng).start()
             starting -= 1
         except:
             pass
 
-run_all()
+execute_scrapers()
 ```
 
-### 6. Let's Explore the Data we Saved to our Machine
+## Let's Explore the Data we Saved to our Machine
 
-Let's look through the JSON we created and checkout some of the data we just downloaded. First, let's import a couple of additional libraries that will let us interact with our file system, use numpy and pandas, and create plots:
-
+Let's look through the JSON we created and check out some of the data we just downloaded. First, let's import a couple of additional libraries that will let us interact with our file system, use numpy and pandas, and create plots:
 
 ```python
 # Import some additional libraries that will allow us to plot and interact with the operating system
@@ -231,6 +299,7 @@ Building on last week, we can do this in Pandas.
 ```python
 # Get the file names from a given directory
 file_dir = "data" # Set this to where your JSON saved
+
 # Get only the JSONs we have saved
 onlyfiles = [ f for f in listdir(file_dir) if isfile(join(file_dir,f)) and not f.startswith('.')]
 
