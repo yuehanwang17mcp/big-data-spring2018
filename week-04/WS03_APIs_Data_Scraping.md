@@ -108,18 +108,18 @@ The Twitter API has rate limits that limit how quickly you can download data. Th
 
 
 ```python
-# Input the search term you want to search on
-search_term = 'Saginaw' # SET A SEARCH TERM LIKE 'TRUMP'
-# CAN LEAVE search_term BLANK IF YOU WANT ALL TWEETS NEAR A SPECIFIC LOCATION
+# Input the search term you want to search on (leave blank if you want to query only by location)
+search_term = ''
 # Setup a Lat Lon
-latlong = [42.359416,-71.093993] # Eric's office (ish)
+latlng = '42.359416,-71.093993' # Eric's office (ish)
 # Setup a search distance
 distance = '25mi'
+geocode_query = latlng + ',' + distance
 # Set result type (can be 'recent', 'popular', or 'mixed')
 type_of_result = 'recent'
 # Set number of results (up to 100, remember you can only get 450 in 15 minutes)
-tweet_max = 15
-tweet_per_query = 15
+tweet_max = 400
+tweet_per_query = 100
 
 file_name = 'tweets.txt'
 
@@ -139,24 +139,21 @@ with open(file_name, 'w') as f:
       try:
         if (max_id <= 0):
           if (not sinceId):
-            new_tweets = api.search(q = search_term, count = tweet_per_query)
+            new_tweets = api.search(q = search_term, rpp = tweet_per_query, geocode = geocode_query)
           else:
-            new_tweets = api.search(q = search_term, count = tweet_per_query,
+            new_tweets = api.search(q = search_term, rpp = tweet_per_query, geocode = geocode_query,
                                     since_id = sinceId)
         else:
           if (not sinceId):
-            new_tweets = api.search(q = search_term, count = tweet_per_query,
+            new_tweets = api.search(q = search_term, rpp = tweet_per_query, geocode = geocode_query,
                                   max_id = str(max_id - 1))
           else:
-            new_tweets = api.search(q = search_term, count = tweet_per_query,
-                                  max_id = str(max_id - 1),
-                                  since_id = sinceId)
+            new_tweets = api.search(q = search_term, rpp = tweet_per_query, geocode = geocode_query,
+                                  max_id = str(max_id - 1), since_id = sinceId)
         if not new_tweets:
           print("No more tweets found")
           break
         for tweet in new_tweets:
-          # f.write(jsonpickle.encode(tweet._json, unpicklable=False) +
-          #         '\n')
           properties = {}
           if tweet.coordinates != None:
             properties['lat'] = tweet.coordinates[0]
@@ -169,16 +166,22 @@ with open(file_name, 'w') as f:
           properties['content'] = tweet.text
           properties['user'] = tweet.user.screen_name
           properties['user_id'] = tweet.user.id_str
-          properties['raw_source'] = tweet
-          properties['time'] = tweet.created_at
+          # properties['raw_source'] = tweet
+          properties['time'] = str(tweet.created_at)
           all_tweets[tweet.id_str] = properties
+          print(tweet)
 
         tweet_count += len(new_tweets)
         print("Downloaded {0} tweets".format(tweet_count))
         max_id = new_tweets[-1].id
+
+        # Write to GeoJSON
+        with open( 'data/tweets.json', 'w' ) as f:
+                f.write(json.dumps(all_tweets))
+
       except tweepy.TweepError as e:
         # Just exit if any error
-        print("some error : " + str(e))
+        print("Error : " + str(e))
         break
 
 # print ("Downloaded {0} tweets, Saved to {1}".format(tweet_count, file_name))
