@@ -113,13 +113,13 @@ search_term = ''
 # Setup a Lat Lon
 latlng = '42.359416,-71.093993' # Eric's office (ish)
 # Setup a search distance
-distance = '25mi'
+distance = '1mi'
 geocode_query = latlng + ',' + distance
 # Set result type (can be 'recent', 'popular', or 'mixed')
 type_of_result = 'recent'
 # Set number of results (up to 100, remember you can only get 450 in 15 minutes)
-tweet_max = 400
-tweet_per_query = 100
+tweet_max = 15
+tweet_per_query = 15
 
 file_name = 'tweets.txt'
 
@@ -133,7 +133,6 @@ max_id = -1
 
 tweet_count = 0
 all_tweets = {}
-print("Downloading max {0} tweets".format(tweet_max))
 with open(file_name, 'w') as f:
     while tweet_count < tweet_max:
       try:
@@ -156,8 +155,8 @@ with open(file_name, 'w') as f:
         for tweet in new_tweets:
           properties = {}
           if tweet.coordinates != None:
-            properties['lat'] = tweet.coordinates[0]
-            properties['lon'] = tweet.coordinates[1]
+            properties['lat'] = tweet.coordinates['coordinates'][0]
+            properties['lon'] = tweet.coordinates['coordinates'][1]
           else:
             properties['lat'] = None
             properties['lon'] = None
@@ -169,7 +168,6 @@ with open(file_name, 'w') as f:
           # properties['raw_source'] = tweet
           properties['time'] = str(tweet.created_at)
           all_tweets[tweet.id_str] = properties
-          print(tweet)
 
         tweet_count += len(new_tweets)
         print("Downloaded {0} tweets".format(tweet_count))
