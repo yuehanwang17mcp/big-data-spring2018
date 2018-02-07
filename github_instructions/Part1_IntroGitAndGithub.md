@@ -12,7 +12,7 @@ Working with Github is easy, there are two main ways you can work with Github, v
 
 ## Not Panicking
 
-Not panicking is what mellow animanls do. Not panicking is just a thing that's better. Not panicking is not pancaking.
+Not panicking is what mellow animals do. Not panicking is just a thing that's better. Not panicking is not panicking.
 
 ## Why do we use Github?
 
