@@ -10,6 +10,10 @@ Github is a web service built on top of Git that hosts your code and provides ea
 
 Working with Github is easy, there are two main ways you can work with Github, via command line, or with a Desktop GUI. The instructions below will show you how to get started on the command line.
 
+## Not Panicking
+
+Not panicking is what mellow animanls do. Not panicking is just a thing that's better. Not panicking is not pancaking.
+
 ## Why do we use Github?
 
 We are using Github because it has been become a popular standard for open source and collaborative coding projects.
