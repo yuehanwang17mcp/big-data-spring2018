@@ -1,7 +1,7 @@
 # Workshop 3: APIs and Data Scraping: Getting Twitter Data
 
 
-## Express Gratitude to https://www.karambelkar.info/2015/01/how-to-use-twitters-search-rest-api-most-effectively./
+Code is adapted from Bhaskar Karambelkar's excellent [blog post](https://www.karambelkar.info/2015/01/how-to-use-twitters-search-rest-api-most-effectively./)
 
 ## Set up a Twitter Application
 
@@ -116,11 +116,8 @@ latlng = '42.359416,-71.093993' # Eric's office (ish)
 distance = '1mi'
 # See tweepy API reference for format specifications
 geocode_query = latlng + ',' + distance
-# Set result type (can be 'recent', 'popular', or 'mixed')
-type_of_result = 'recent'
-# Set number of results (up to 100, remember you can only get 450 in 15 minutes)
-tweet_max = 15
-tweet_per_query = 15
+tweet_max = 1500000000
+tweet_per_query = 100
 
 file_name = 'data/tweets.json'
 
@@ -171,7 +168,7 @@ while tweet_count < tweet_max:
       all_tweets[tweet.id_str] = properties
 
     tweet_count += len(new_tweets)
-    print("Downloaded {0} tweets".format(tweet_count))
+
     max_id = new_tweets[-1].id
 
     # Write to GeoJSON
@@ -182,7 +179,7 @@ while tweet_count < tweet_max:
     # Just exit if any error
     print("Error : " + str(e))
     break
-
+    
 # print ("Downloaded {0} tweets, Saved to {1}".format(tweet_count, file_name))
 print (f"Downloaded {tweet_count} tweets. Wrote to {file_name}.")
 ```
