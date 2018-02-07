@@ -131,7 +131,7 @@ Create a clone of the website repository on your machine so you can edit code an
 To access Github commands in the terminal, use the term `git` to begin your statement---this calls the Git command line utility. We can download our Github pages repository using the `git clone` command.
 
 ```sh
-git clone https://<Github username>/<Github username>.github.io.git
+git clone https://github.com/<Github username>/<Github username>.github.io.git
 ```
 
 This method of connecting to Github, called HTTPS, is only one option for accessing your remote repositories. You can also use the slightly more secure SSH protocol. However, Github recommends using HTTPS; SSH takes a bit more setup and is, unfortunately, often blocked by institutional firewalls (MIT not included). [Feel free to experiment, though!](https://help.github.com/articles/connecting-to-github-with-ssh/)
