@@ -10,6 +10,10 @@ Github is a web service built on top of Git that hosts your code and provides ea
 
 Working with Github is easy, there are two main ways you can work with Github, via command line, or with a Desktop GUI. The instructions below will show you how to get started on the command line.
 
+## Not Panicking
+
+Not panicking is what mellow animals do. Not panicking is just a thing that's better. Not panicking is not panicking.
+
 ## Why do we use Github?
 
 We are using Github because it has been become a popular standard for open source and collaborative coding projects.
@@ -127,7 +131,7 @@ Create a clone of the website repository on your machine so you can edit code an
 To access Github commands in the terminal, use the term `git` to begin your statement---this calls the Git command line utility. We can download our Github pages repository using the `git clone` command.
 
 ```sh
-git clone https://<Github username>/<Github username>.github.io.git
+git clone https://github.com/<Github username>/<Github username>.github.io.git
 ```
 
 This method of connecting to Github, called HTTPS, is only one option for accessing your remote repositories. You can also use the slightly more secure SSH protocol. However, Github recommends using HTTPS; SSH takes a bit more setup and is, unfortunately, often blocked by institutional firewalls (MIT not included). [Feel free to experiment, though!](https://help.github.com/articles/connecting-to-github-with-ssh/)
