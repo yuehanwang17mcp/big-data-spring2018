@@ -15,7 +15,12 @@ You should see something like `Python 3.6.3`. If a Python 2.x.x version shows up
 
 ### Installing Python 3.6.x
 
-Navigate to the [3.6.3 release page](https://www.python.org/downloads/release/python-363/) and select the appropriate installer for your operating system. Install Python using the default settings. Close any open Terminal or Command Prompt windows and reopen the application. Now type `python -V`. This may still cause a Python 2.x.x version to appear; if this is the case, type `python3 -V`. We now have Python 3 and can execute it from the command line!
+Navigate to the [3.6.3 release page](https://www.python.org/downloads/release/python-363/) and select the appropriate installer for your operating system.
+
++ On OS X, this is [Mac OS X 64-bit/32-bit installer](https://www.python.org/downloads/release/python-360/).
++ On Windows, this is [Windows x86-64 executable installer](https://www.python.org/downloads/release/python-360/).
+
+Install Python. **On Windows, you should ensure that "Add Python 3.6 to PATH" is checked.** Close any open Terminal or Command Prompt windows and reopen the application. Now type `python -V`. This may still cause a Python 2.x.x version to appear; if this is the case, type `python3 -V`. We now have Python 3 and can execute it from the command line!
 
 **Note**: If you ran Python 3 using the `python3` command, you'll use this in every instance below where you're instructed to type `python`.
 
