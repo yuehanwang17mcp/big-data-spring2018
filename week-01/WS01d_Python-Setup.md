@@ -92,7 +92,11 @@ Once we've installed `virtualenv`, we can create a new virtual environment using
 ```sh
 mkdir ~/.venvs
 virtualenv --system-site-packages ~/.venvs/bdvs
+
+# On Mac or Linux...
 . ~/.venvs/bdvs/bin/activate
+# On Windows...
+. ~/.venvs/bdvs/Scripts/activate
 ```
 
 First we create a new folder to hold our virtual environments. Next, we create a new virtual environment in the `bdvs` subfolder of our new `.venvs` subdirectory. We're also telling `virtualenv` that we want this environment to inherit its packages from the Python system installation (this is the role of the `--system-site packages` option). Finally, we activate the virtual environment using the `.` operator, which tells the shell to source from a provided path.
