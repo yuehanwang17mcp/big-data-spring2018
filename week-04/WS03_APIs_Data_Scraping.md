@@ -1,27 +1,27 @@
 # Workshop 3: APIs and Data Scraping: Getting Twitter Data
 
 
-Code is adapted from Bhaskar Karambelkar's excellent [blog post](https://www.karambelkar.info/2015/01/how-to-use-twitters-search-rest-api-most-effectively./)
+Code is adapted from Bhaskar Karambelkar's excellent [blog post](https://www.karambelkar.info/2015/01/how-to-use-twitters-search-rest-api-most-effectively./)\
 
 ## Set up a Twitter Application
 
-This week we are going to scrape data from the Twitter API and make some plots! We are going to use the Twitter REST API, which lets us query and retrieve samples of Tweets. To do this, you need API keys that are associated with your account. Your API keys are secret and unique to you and only you, and they gives you access to Twitter data through the API.
+This week we are going to scrape data from the Twitter API and make some plots! We are going to use the Twitter REST API, which lets us query and retrieve samples of Tweets. To do this, you need API keys that are linked to an App that you create through your Twitter account. Your API keys are secret and unique to you and only you, and they gives you access to Twitter data through the API.
 
-There are a couple of ways to get Twitter data, the REST API is just one of them. The others are to set up a Streamer (which streams real time tweets), or to access the Firehose (this means everything!). Read [this article](https://brightplanet.com/2013/06/twitter-firehose-vs-twitter-api-whats-the-difference-and-why-should-you-care/) for a nice comparison between the methods.
+There are a couple of ways to get Twitter data; the REST API is just one of them. The others are to set up a Streamer (which streams real time tweets), or to access the Firehose (this means everything!). Read [this article](https://brightplanet.com/2013/06/twitter-firehose-vs-twitter-api-whats-the-difference-and-why-should-you-care/) to compare these methods.
 
 The Twitter REST API is best place to start and what we will use in class. Follow the following steps to get your keys.
 
-* Create a twitter account if you do not already have one.
-* Go to [https://apps.twitter.com/](https://apps.twitter.com/) and log in with your twitter credentials.
-* Click **"Create New App"** in the upper right corner
-* Fill out the form, give it a name like `data_getter_yourname` and a description. The form will ask for a website---good thing we made one a few week ago! Use the `github.io` page you created as the URL. Leave the Callback URL field blank. Agree to the terms and click "Create your Twitter application".
-* In the next page, click on **Keys and Access Tokens** tab, and copy your "Consumer Key (API Key)" and "Consumer Key (API Secret)".
++ Create a Twitter account if you do not already have one.
++ Go to [https://apps.twitter.com/](https://apps.twitter.com/) and log in with your Twitter credentials.
++ Click **"Create New App"** in the upper right corner
++ Fill out the form, give it a name like 'data_getter_yourname' and a description. The form will ask for a website---good thing we made one of these a few week ago! Use your GitHub Pages site as the URL. Leave the Callback URL field blank. Agree to the terms and click "Create your Twitter application".
++ In the next page, click on **Keys and Access Tokens** tab, and copy your "Consumer Key (API Key)" and "Consumer Key (API Secret)".
 
 ## Create a Python script to store your Twitter keys
 
-We need a Python file that will contain the Twitter keys. Open your text editor, and in the materials for the week, paste they keys you copied into a new file and save it as `twitter-keys.py`. You need to define two string variables, one for each key. Your code should look like this:
+We need to create a Python file (`.py`) that will contain the Twitter keys. Open your text editor, and in the materials for the week, paste these keys into a new file called `twitter-keys.py`. You need to define two string variables, one for each key. Your code should look like this:
 
-```
+```python
 # In the file you should define two variables (these must be strings!)
 api_key = "your twitter key"
 api_secret = "your twitter secret"
@@ -33,7 +33,7 @@ Using this method, we can then import the keys and use them on a repeated basis,
 
 Here's the thing---it's **never** a good idea to include these keys in a publicly accessible script or webpage. This means that these keys should not find their way to GitHub. One way to keep them private is importing the keys as a variable from a separate, untracked file. We can make sure to avoid accidentally pushing the file by adding its name to a `.gitignore` file.
 
-Create a new file in the root directory of your forked repo. Save this file as .gitignore. Add the following lines to this file:
+Create a new file in the root directory of your forked repo. Save this file as `.gitignore`. Add the following lines to this file:
 
 ```sh
 week-04/**/twitter_keys.py
@@ -41,16 +41,16 @@ week-04/**/twitter_keys.py
 
 This is telling git that it should ignore changes to files called `twitter_keys.py` in any subdirectory of the week-04 directory. We're safe! This file will go untracked by GitHub and we can be sure that we won't accidentally push it to our public GitHub repo.
 
-## Importing the Libraries and Twitter Keys
+## Importing Libraries and Twitter Keys
 
-We will be using `twython`, a Python library that provides wrappers around Twitter's API. Like other Python packages we've used up until this point, we can install `twython` from the command line using `pip`.
+We will be using `tweepy`, a Python library that provides wrappers around Twitter's API. Like other Python packages we've used up until this point, we can install `tweepy` from the command line using `pip`.
 
 ```sh
 # pip install twython
 pip install tweepy
 ```
 
-Import the libraries, including `twython`:
+Import the libraries, including `tweepy`:
 
 ```python
 # Import libraries
@@ -61,7 +61,7 @@ import tweepy
 from datetime import datetime
 ```
 
-In addition to using `import` to load Python modules, we can use it to import variables from local `.py` scripts. We can therefore import the `api_key` and `api_secret` variables from our `twitter_keys.py` file.
+In addition to using `import` to load Python modules, we can use it to import variables from local `.py` scripts. This is very useful here---we can import the `api_key` and `api_secret` variables from our untracked `twitter_keys.py` file.
 
 ```python
 # Imports the keys from the python file
@@ -72,9 +72,15 @@ print(api_key)
 print(api_secret)
 ```
 
-## Get an OAuth2 token, and create your Twython object
+## Get an Auth2 token, and create your `tweepy` object
 
-We now need to et up our instance of Twython to work with your account. Doing this requires that we authenticate our Python app using our keys. Twitter uses something called [OAuth](https://dev.twitter.com/oauth) for API authentication. Twitter uses two types of OAuth authentication. OAuth1 provides user authentication to the API and is used to post tweets and issue requests on behalf of users. OAuth 2 provides [application-only authentication](https://dev.twitter.com/oauth/application-only)---it has higher rate limits but it doesn't allow you to post on users' behalf. Because it allows us to gather more Tweets, we are going to use OAuth2.
+We now need to construct `tweepy` objects that will store authentication credentials and call the API. We'll do this using the Application Only Auth method (`tweepy.AppAuthHandler()`)
+
+
+Many scripts and tutorials you'll find on Github and elsewhere use the Access Token Authentication method, which limits you to 180 requests per 15 minutes (or a request every five seconds) at a rate of 100 tweets per request. This means that, theoretically, you are capped to 18,000 Tweets per fifteen minutes.
+
+
+Twitter supports two  something called [OAuth](https://dev.twitter.com/oauth) for API authentication. Twitter uses two types of OAuth authentication. OAuth1 provides user authentication to the API and is used to post tweets and issue requests on behalf of users. OAuth 2 provides [application-only authentication](https://dev.twitter.com/oauth/application-only)---it has higher rate limits but it doesn't allow you to post on users' behalf. Because it allows us to gather more Tweets, we are going to use OAuth2.
 
 OAuth 2 requires a Third Access token you must request using the API. This next step will set everything up for us.
 
@@ -179,7 +185,7 @@ while tweet_count < tweet_max:
     # Just exit if any error
     print("Error : " + str(e))
     break
-    
+
 # print ("Downloaded {0} tweets, Saved to {1}".format(tweet_count, file_name))
 print (f"Downloaded {tweet_count} tweets. Wrote to {file_name}.")
 ```
