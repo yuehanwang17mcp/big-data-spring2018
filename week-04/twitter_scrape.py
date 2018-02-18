@@ -2,27 +2,25 @@
 # import time
 # import threading
 import tweepy
-# import jsonpickle
+import jsonpickle
 # from datetime import datetime
 from twitter_keys import api_key, api_secret
 
 def auth(key, secret):
-  # Create a Twython object called twitter
-  # Set this up using your Twitter Keys, imported from twitter_keys.py
-  auth = tweepy.AppAuthHandler(key, secret)
-
-  # Get an OAuth2 access token, save as variable so we can launch our app.
-  api = tweepy.API(auth, wait_on_rate_limit = True, wait_on_rate_limit_notify = True)
-  return api
-
+    # Create a Twython object called twitter
+    # Set this up using your Twitter Keys, imported from twitter_keys.py
+    auth = tweepy.AppAuthHandler(key, secret)
+    # Get an OAuth2 access token, save as variable so we can launch our app.
+    api = tweepy.API(auth, wait_on_rate_limit = True, wait_on_rate_limit_notify = True)
   # Print error and exit if there is an authentication error
-  if (not api):
-    print ("Can't Authenticate")
-    sys.exit(-1)
+    if (not api):
+        print ("Can't Authenticate")
+        sys.exit(-1)
+    else:
+        return api
 
 api = auth(api_key, api_secret)
 
-search_term = ''
 # Setup a Lat Lon
 latlng = '42.359416,-71.093993' # Eric's office (ish)
 # Setup a search distance
@@ -34,10 +32,9 @@ geocode_query = latlng + ',' + distance
 file_name = 'data/tweets.json'
 
 
-tweets = get_tweets(tweet_max = 10, geo = geocode_query)
-print(tweets)
+tweets = get_tweets(tweet_max = 15, geo = geocode_query, write = True)
 
-def get_tweets(geo, search_term = '', tweet_per_query = 100, tweet_max = 150, since_id = None, max_id = -1):
+def get_tweets(geo, search_term = '', tweet_per_query = 100, tweet_max = 150, since_id = None, max_id = -1, write = False):
     tweet_count = 0
     all_tweets = {}
     while tweet_count < tweet_max:
@@ -56,6 +53,9 @@ def get_tweets(geo, search_term = '', tweet_per_query = 100, tweet_max = 150, si
                 print("No more tweets found")
                 break
             for tweet in new_tweets:
+                if write == True:
+                    with open('data/tweets.json', 'w') as f:
+                        f.write(jsonpickle.encode(tweet._json, unpicklable=False) + '\n')
                 all_tweets[tweet.id_str] = parse_tweet(tweet)
             max_id = new_tweets[-1].id
             tweet_count += len(new_tweets)

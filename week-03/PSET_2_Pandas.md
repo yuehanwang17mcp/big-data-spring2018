@@ -1,13 +1,10 @@
 # Problem Set 2: Intro to Pandas
 
-## Part 1
-
 In this problem set, we want to determine if we can use voter registrations as a proxy for votes cast. Because who you vote for on an individual basis is not recorded, we would like to see if the numbers for those registered in a precinct as Republican or Democrate actually reflect the results of the election based on the outcome. We'll continue our analysis of Centre County, Pennsylvania, and we are going to use Pandas, Numpy, and Matplotlib as our tools to explore the data.
 
 Building off the in class example, first a short example will introduce us to the dataset, some data wrangling functions of Pandas, and a few plots with Matplotlib.
 
 Throughout the exercises we will be continuously using Pandas and some of its merging functionality to join the numerous OD files available. We will be building exploratory data visualizations, finding urban patterns and locating divergent areas within the dataset. Some useful documentation for merging data with Pandas can be found at:
-
 
 http://pandas.pydata.org/pandas-docs/stable/merging.html
 
@@ -24,9 +21,9 @@ from itertools import cycle, islice
 %matplotlib inline
 ```
 
-Next, let's open up one of the files. Let's look at the voter registrations, this is the same as we did in the inclass.
+Next, let's open up one of the files. Let's look at the voter registrations; this is the same as we did in the inclass.
 
-**Problem 1: Load CENTRE_FVE_20170123.csv into Pandas as a data frame called 'df_voters'.**
+## Problem 1: Load CENTRE_FVE_20170123.csv into Pandas as a data frame called 'df_voters'
 
 To start us off, we need to determine party affiliations for each of those registered. Reading in the metadata, this is held in column 12. Let's take a look at unique party registrations in column 12.
 

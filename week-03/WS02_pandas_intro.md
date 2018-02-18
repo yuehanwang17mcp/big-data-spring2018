@@ -1,12 +1,8 @@
 # Big Data And Society: Lab 2
 
-## To-Do
-
-+ Add section on exporting data to more familiar formats (csv,etc)
-
 ## Introduction to Pandas
 
-`Pandas` is a library for Python for data manipulation and analysis. Pandas expands the data processing capacities of Python and adds a number of classes for easily importing data; in particular, it adds numerical tables, from various formats into their DataFrame object. A `DataFrame` is Panda’s basic object that allows multidimensional data processing and indexing. `DataFrames` can be easily and efficiently queried without the need of cumbersome syntax and convoluted loops. `DataFrames` can be merged with other data, they can be sliced, and they can be reshaped; in a way, we can think of Pandas as a big data combination of Excel and SQL.
+`Pandas` is a library for Python for data manipulation and analysis. Pandas expands the data processing capacities of Python and adds a number of classes for easily importing data; in particular, it adds numerical tables, from various formats into their DataFrame object. A `DataFrame` is Panda’s basic object that allows multidimensional data processing and indexing. `DataFrames` can be easily and efficiently queried without the need of cumbersome syntax and convoluted loops. `DataFrames` can be merged with other data, they can be sliced, and they can be reshaped. In a way, we can think of Pandas as a combination of Excel and SQL.
 
 ## Resources
 
@@ -55,11 +51,15 @@ Pandas provides a number of reader functions that process files and return a pan
 Additional documentation can be found on the API:
 http://pandas.pydata.org/pandas-docs/stable/index.html
 
-To start us off, lets look at a results file by precinct from the 2016 general election. This is an extract of results by precinct for Centre County, Pennsylvania.
+To start us off, let's look at some aggregated cell phone GPS data from a location services company called Skyhook. This is a Boston extract of Skyhook's OpenTide product, which aggregates individual GPS pings to 100x100 meter points. If you're interested, I scraped this from a CARTO product showcasing Skyhook's OpenTide data using a simple script that I've included in this week's materials (`scripts/skyhook_scrape.py`).
 
 ```python
-# We are reading a CSV with election data
-df = pd.read_table('data/centrecounty_precinct_results_nov2016.txt', sep=',')
+# If you started Atom from a directory other than the /week-03 directory, you'll need to change Python's working directory. Uncomment these lines and specify your week-03 path.
+# import os
+# os.chdir('week-03')
+
+# Reading a CSV with Skyhook data
+df = pd.read_csv('data/skyhook_2017-07.csv', sep=',')
 
 # We can print the first 5 rows of the df
 df.head()
@@ -81,297 +81,238 @@ In general, the API is the best resource: http://pandas.pydata.org/pandas-docs/s
 df.dtypes
 ```
 
-The shape of the object is:
+We can determine the shape (i.e., the dimensions) of our DataFrame by accessing its `shape` property.
 
 ```python
 df.shape
 ```
 
-3526 rows times 16 columns. A spredsheet is a matrix. `df.shape` returns a tuple, so we can access members of this **tuple** like we do with a list:
+1,048,575 rows times 9 columns! Not *huge* data by contemporary standards, but definitely big. `df.shape` returns a `tuple`, so we can access members of this `tuple` like we do with a `list`:
 
 ```python
-df.shape[0], df.shape[1]
-```
-
-```python
+# Number of rows
 df.shape[0]
+# Number of columns
+df.shape[1]
 ```
 
-These are the column names:
-
+Let's retrieve the DataFrame's column names. We do this by accessing its columns property. While we're at it, let's look into the data type of the object returned by `df.columns`.
 
 ```python
 df.columns
+type(df.columns)
 ```
 
-Notice that `df.columns` returns a `Pandas.Series` object. This object is built on top of the Python **lists**, and has similar methods and attributes.
+The `df.columns` returns an `Index` object, which is a series. This object is built on top of Python `lists`, and has similar methods and attributes.
 
-Access an individual column.
-
+We can access an individual column using a simple syntax:
 
 ```python
-df.Contest
+df.cat_name
 ```
 
-We can use the unique() function to find the unique values in each column. Let's find the unique values in the Contest column
+Let's try accessing the `count` column using the same syntax:
 
 ```python
-df.Contest.unique()
+df.count
+```
+
+Hold the phone... that gave us something quite different. This is because `count` refers to a specific Pandas function that counts the number of non-null observations over a given axis (which in this case didn't work because we didn't specify an axis). To retrieve this column, we can use a more explicit syntax that can't be so easily misinterpreted:
+
+```python
+df['count']
+```
+
+We can use the `unique()` method to find the unique values in each column. Let's find the unique values in the `cat_name` column.
+
+```python
+df.lat.unique()
 ```
 
 Now lets get multiple columns:
 
 ```python
-df_multipleColumns = df[['Contest','PrecNo', 'Count']]
+df_multipleColumns = df[['hour', 'cat', 'count']]
 df_multipleColumns.head()
 ```
 
 ## Querying
 
-Pandas `DataFrames` have built-in methods for performing queries in a SQL style. They can be diced, sorted, etc it. We can apply any of this queries to parts of the `df`, and based on this query select subsets of the whole `df`. Let's do some filtering and querying.
+Pandas `DataFrames` have built-in methods for performing queries using a style similar to SQL. This allows us to slice and dice our dataframes with ease. We can apply queries to parts of the `df`, and based on this query select subsets of the whole `df`. Let's do some filtering and querying.
 
-The output of this is a series.
-
-```python
-df['PrecNo'] == 1
-```
-
-To print out the table with only the rows we want, we can apply what is called a filter. The above is a series. Let's take a look again at **Precinct 1**. We can use the `df` mask to get a filtered dataframe: we use the mask to "index" into the dataframe to get the rows we want.
-
+The output of this is a series containing the truth of falsehood of our query - we call this a **mask**.
 
 ```python
-df_precinct1 = df[df['PrecNo'] == 1]
+df['hour'] == 158
 ```
+
+To print out the table with only the rows we want, we can apply what is called a filter. Our query above returned a **mask**---again, a series containing the Boolean result of evaluating each value in our column against a specified criteria. Let's take a look at a specific time. We can use the `df` mask to get a filtered DataFrame: we use the mask to "index" into the DataFrame to get the rows we want.
 
 ```python
-df_precinct1.head()
+
+time = df[df['hour'] == 158]
+time.head
+time.shape
 ```
 
-We can query based on multiple conditions, by using a `&` condition. All we need to do is add `()` brackets around each condition. The query uses a boolean AND. Each condition ceates a mask of trues and falses.
+We see that we now have a DataFrame containing observations in a single hour, subsetted from our DataFrame containing data for all of July 2017. Using `.shape`, we can see that it contains 10,601 rows.
+
+We can query based on multiple criteria using boolean operators (`&` for `and`, `|` for `or`). All we need to do is add `()` brackets around each condition. The query uses a boolean AND. Each condition creates a mask containing `True` and `False` values.
 
 ```python
-df[(df['PrecNo'] < 8) & (df['PrecNo'] > 5)]
+df[(df['hour'] == 158) & (df['count'] > 50)]
 ```
 
-Because this dataset contains all of the different contests in the November generals, we can use a query to pull out just the presidential election. Here we use [df.loc](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.loc.html) to select by label and find only those listings for the presidential election.
+We've now filtered our dataset substantially: we've limited our results to a single hour and limited our returned cells to those with more than 50 aggregated GPS pings.
 
+Because this dataset contains every day between July 1 and July 31, we can specify a single day that is of interest to us. The fourth of July might seem the obvious choice, but let's imagine we're Francophiles: Bastille day it is.
 
 ```python
-df_pres = df.loc[df['Contest'] == 'PRESIDENTIAL ELECTORS']
-df_pres
+bastille = df[df['date'] == '7/14/17']
 ```
 
-Now that we are looking just at the votes for the presidential election, we can find, for example, which rows show votes for Hillary Clinton.
+Now that we're celebrating the abolition of French feudalism, we can see which aggregated cells saw greater than average levels of activity:
 
 ```python
-df_clinton = df_pres.loc[df_pres['Candidate'] == 'HILLARY CLINTON,  PRESIDENT']
-df_clinton.head()
+bastille_enthusiasts = bastille[bastille['count'] > bastille['count'].mean()]
+bastille_enthusiasts.head
 ```
-
-```python
-df_pres['Candidate'].unique()
-```
-
 
 Since these rows are the ones that have voted for Clinton, we can perform operations to locate which rows (ie which precincts) had more than 50% of the vote go to Clinton.
 
-This gives us a `Pandas.Series` of `True`s and `False`s. We call this a mask.
+This gives us a `Pandas.Series` of `True`s and `False`s. Again, we call this a mask.
 
-
-```python
+<!-- ```python
 df_clinton.PctCnt > 50
 ```
 
-We can summarize the Count field for the rows that represent Clinton.
+We can summarize the Count field for the rows that represent Clinton. -->
+
+Pandas gives us a simple way to generate summary statistics. The `.describe()` method can be used to return a table that includes the count of non-null rows, their mean, standard deviation, etc.
 
 ```python
-df_clinton.Count.sum()
+bastille_enthusiasts['count'].describe()
 ```
 
-Say we want to summary for all of the candidates, lets go back to the **df_pres** table we made and group by the candidate, then sum the count.
+Say that we want to generate summary statistics for each day in the month of July. We can use the `.groupby()` method to collapse a DataFrame on the values stored in a given column. For those of you who know SQL, this should be somewhat familiar; for each unique value stored in the date column, we're executing a given method, in this case, `.describe()`. The output of this operation is a table in which each row represents a date, and each column is a summary statistic of the `count` column.
 
 ```python
-df_pres.groupby('Candidate').Count.sum()
+df.groupby('date')['count'].describe()
 ```
 
-We can group by with multiple columns. This will allow us to look at the results from each precinct.
+We can group by multiple columns as well. Let's calculate summary statistics for the `count` column for each hour of each day!
 
 ```python
-df_pres.groupby(['PrecNo','Candidate']).Count.sum()
+df.groupby(['date', 'hour'])['count'].describe()
 ```
 
-Or directly, in Pandas, which works since `df_pres` is a pandas Series. Pandas series have a number of built-in methods like `.max()`, `.min()`, and `.mean()`!
+We can also use built-in pandas methods to calculate individual summary statistics---for example, `.max()`, `.min()`, and `.mean()`!
 
 ```python
-df_clinton['Count'].max()
+df['count'].max()
+df['count'].min()
+df['count'].mean()
+df['count'].std()
+df['count'].count()
 ```
 
-You can save these as variables. And cast them to strings.
+You can save these as variables and cast them to strings.
 
 ```python
 # create min, max, and mean
-max_clinton = df_clinton['Count'].max()
-min_clinton = df_clinton['Count'].min()
-mean_clinton = df_clinton['Count'].mean()
+max_count = df['count'].max()
+min_count = df['count'].min()
+mean_count = df['count'].mean()
 
 # print out some results
-print("Highest precinct vote total for Clinton: " + str(max_clinton))
-print("Lowest precinct vote total for Clinton: " + str(min_clinton))
-print("Mean precinct vote total for Clinton: " + str(mean_clinton))
+print(f"Maximum number of GPS pings: {max_count}")
+print(f"Minimum number of GPS pings: {min_count}")
+print(f"Average number of GPS pings: {mean_count}")
 ```
 
-This isn't super useful though, so we can get the whole row of the max and min values of the percentage vote, use the following query.
-
+This isn't necessarily all that useful, though. We're also interested in returning all of the other columns associated with those minimum and maximum values. We can do that like so:
 
 ```python
-df_clinton.loc[df['PctCnt'] == df_clinton['PctCnt'].max()]
+df[df['count'] == df['count'].max()]
 ```
 
-Here, Clinton took 77% of the vote!
+There is a single row that contains the maximum value of GPS pings. This is not the case for the minimum---the following query returns a table with a large number of rows with only a single GPS ping.
 
 ```python
-df_clinton.loc[df['PctCnt'] == df_clinton['PctCnt'].min()]
+df[df['count'] == df['count'].min()]
 ```
-
-In this precinct, Clinton took only 17% of the votes.
 
 #### Exercise
 
-Calculate the minimum value, and maximum value of the `Count` column to find the precincts with the highest and lowest turnouts by percentage. Hint, you'll want to filter by `Contest`. [This](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.min.html#pandas.Series.min) documentation might be useful.
-
+Calculate the minimum value and maximum value of the `count` column to find the `hour` with the highest and lowest numbers of GPS pings. You'll want to group by hour. [This](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.min.html#pandas.Series.min) documentation might be useful.
 
 ```python
 # Your code here
-
+hour_sum = df.groupby('hour')['count'].sum()
+hour_sum[hour_sum == hour_sum.max()]
+hour_sum[hour_sum == hour_sum.min()]
 ```
 
 #### Exercise:
-Get the average actual number of people that turned out to vote by precinct across the whole dataset. [Documentation](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.subtract.html#pandas.Series.subtract)
-
+Get the average number of GPS pings per hour across the whole dataset. [Documentation](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.subtract.html#pandas.Series.subtract)
 
 ```python
-# Your code here
 
+import matplotlib.pyplot as plt
+%matplotlib inline
+# Your code here
+df.groupby('hour')['count'].mean()
 ```
 
 ## Cleaning
 
 One of the most common tasks while working with big data is data cleaning. Datasets will be inherently heterogeneous and unstructured. The lack of structure can cause functions to throw errors. We can clean data sets through various methods; if the discrepancies follow a structured pattern, it is possible to use built-in functions, or write our own functions. However, if the errors cannot be structured, we might have to do it manually!
 
-For this example, we first check the datatypes:
+You may have noticed something strange about the `hours` column in this dataset---we are reasonably sure that there are only 24 hours in a day, but the `hours` column ranges from 0-167. This is because the data for each day is not terribly tidy; each day includes a small number of observations from the surrounding week. Further complicating the matter, the 168 hours take place over a week that runs from Sunday to Monday, where Sunday is 0-23, Monday is 24-47 etc.
+
+Let's clean the data so that each day contains only those observations that occur during the appropriate day. To do so, we need to first identify which day of the week each calendar day corresponds with. We'll need to convert our `date` column to a `datetime` type that Python can interpret using the `datetime` library. We do this as follows:
 
 ```python
-df.dtypes
+import datetime
+df['date_new'] = pd.to_datetime(df['date'], format='%m/%d/%y')
 ```
+
+What we're doing here is creating a new `date_new` column based on our `date` column using the `.to_datetime()` method. We specify a format that our date is stored in. `%m/%d/%y` means: month as a decimal number, day as a decimal number, year without a century. We can confirm that this is correct by looking at several rows of the DataFrame.
+
+```python
+df['date'].head
+```
+
+Once we've created a new column, we can create another column which uses an internal calendar to determine which day a given calendar date lands on. The one quirk here is that, by convention, the `weekday` function returns a numeric value according to a week that runs from 0 to 6 where 0 is Monday. Our 0 hour is midnight on Sunday, so we'll need to make our weekday number match our `hours` column. We do this using the `.apply() method`.
+
+```python
+df['weekday'] = df['date_new'].apply(lambda x: x.weekday() + 1)
+df['weekday'].replace(7, 0, inplace = True)
+```
+
+`lambda` sounds complicated, but really isn't. It allows us to define a function on the fly---here we're saying "do the following for every row: identify a weekday and add one to the returned value." This results in a range from 1-7 and we still want it to range from 0 to 6, so we replace 7 with 0 using the built-in Pandas `.replace` method.
+
+With this new column, we have everything we need to drop rows that are outside a desired 24-hour time window using a relatively simple for loop:
+
+```python
+for i in range(0, 168, 24):
+  df.drop(df[(df['weekday'] == (i/24)) & ((df['hour'] < i) | (df['hour'] >= i + 24 )) ].index, inplace = True)
+```
+
+This looks complicated, but let's break it down. We're running a loop which iterates over a range from 0 to 168, exclusive, using steps of 24. In other words, we're iterating over a week's worth of hours, day-by-day.
+
+We then use the `.drop` method to drop rows according to a criteria. We're dropping a row if it's `weekday` is a given value, and its `hour` value is either less than or greater than the window of hours over which that day spans.
+
+Let's see what our dataset looks like after we've performed this cleaning operation:
 
 ```python
 df.shape
 ```
 
-A common cause of errors is having Null or 'None' values. This usually means data was missing.
+## Exporting Data
 
-
-```python
-df[df['PrecNo'].isnull()]
-```
-
-We had some incomplete data! We can get rid of it with the `.notnull()` function.
-
+We lost a little under 200,000 rows, but we're still left with 827,172. Let's export this to a CSV! Easy.
 
 ```python
-df = df[df['PrecNo'].notnull()]
-df.shape
+df.to_csv('data/skyhook_cleaned.csv')
 ```
-
-We removed those 6 rows. Important note, this is working in memory! We are not actually changing the table, do to so, you can export your output to a CSV.
-
-## Split-apply-combine (Joins!)
-
-With Pandas we can split the data into groups based on some criteria. We can then apply a function to each group independently, and finally combine the results into a new data structure.
-
-![Joins](http://i.imgur.com/yjNkiwL.png)
-
-#### Group Registered Voter Data and Compare Numbers
-
-In this next section, let's look at registered voter data, and do some grouping, joins, and comparisons.
-
-
-
-```python
-# Import the file
-# Note: It's a big one! You can work with large files in Pandas with ease.
-# However, you might need to set the low memory option to False.
-df_voters = pd.read_table('data/CENTRE_FVE_20170123.csv', sep=',', low_memory=False)
-df_voters
-```
-
-```python
-# Get the row count
-df_voters.shape
-```
-
-```python
-# change column datatype to int for Field 27
-df_voters['27'].unique()
-```
-
-Our table is 123443 rows long, by 153 columns. For a data dictionary, see the data folder. Looking at our metadata, our precinct code is held in Field 27.
-
-
-```python
-# Group the edges by their source
-grouped = df_voters.groupby('27')
-summed = grouped['27'].count()
-
-# get a series
-summed.head()
-```
-
-```python
-# Convert our series to a dataframe so we can work with it further
-df_summed_extract = summed.to_frame()
-# df_summed_extract.index = df_summed_extract.index.map(int)
-df_summed_extract.head()
-```
-
-http://pandas.pydata.org/pandas-docs/stable/generated/pandas.Index.rename.html
-
-
-```python
-# lets rename things so they make more sense
-df_summed_extract.columns = ['Count']
-df_summed_extract.index.names = ['Precinct']
-df_summed_extract
-```
-
-Next, lets perform a join. We are going to compare the number of registered voters in the voter registration dataset to the same number in the results dataset. Let's join this table we just made from the voter registration dataset to the results dataset, based on precinct number.
-
-How might we do this?
-
-
-```python
-# Query out the necessary rows
-df_resultsRegVoters = df.loc[df['Contest'] == 'REGISTERED VOTERS - TOTAL']
-
-# Create our table with headers and new index for joining
-df_summed_resultsRV = df_resultsRegVoters[['PrecNo', 'Count']].astype(int).set_index('PrecNo')
-df_summed_resultsRV.columns = ['Count']
-
-# View our table
-df_summed_resultsRV.head()
-```
-
-
-```python
-# run a join!
-df_compare = df_summed_extract.join(df_summed_resultsRV, lsuffix='_Extract', rsuffix='_Results')
-df_compare
-```
-
-
-```python
-df_compare['difference'] = np.subtract(df_compare['Count_Extract'], df_compare['Count_Results'])
-df_compare
-```
-
-The numbers are really close, but not quite the same. Why might this be?
