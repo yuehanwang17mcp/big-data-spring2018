@@ -53,13 +53,15 @@ http://pandas.pydata.org/pandas-docs/stable/index.html
 
 To start us off, let's look at some aggregated cell phone GPS data from a location services company called Skyhook. This is a Boston extract of Skyhook's OpenTide product, which aggregates individual GPS pings to 100x100 meter points. If you're interested, I scraped this from a CARTO product showcasing Skyhook's OpenTide data using a simple script that I've included in this week's materials (`scripts/skyhook_scrape.py`).
 
+This data is too big to upload uncompressed to GitHub, so I've included it as a ZIP file. Extract this zip file and make sure the resulting file is named `skyhook_2017-07.csv`.
+
 ```python
 # If you started Atom from a directory other than the /week-03 directory, you'll need to change Python's working directory. Uncomment these lines and specify your week-03 path.
 # import os
 # os.chdir('week-03')
 
 # Reading a CSV with Skyhook data
-df = pd.read_csv('data/skyhook_2017-07.csv', sep=',')
+df = pd.read_csv('week-03/data/skyhook_2017-07.csv', sep=',')
 
 # We can print the first 5 rows of the df
 df.head()
@@ -182,12 +184,6 @@ Since these rows are the ones that have voted for Clinton, we can perform operat
 
 This gives us a `Pandas.Series` of `True`s and `False`s. Again, we call this a mask.
 
-<!-- ```python
-df_clinton.PctCnt > 50
-```
-
-We can summarize the Count field for the rows that represent Clinton. -->
-
 Pandas gives us a simple way to generate summary statistics. The `.describe()` method can be used to return a table that includes the count of non-null rows, their mean, standard deviation, etc.
 
 ```python
@@ -244,24 +240,17 @@ df[df['count'] == df['count'].min()]
 
 #### Exercise
 
-Calculate the minimum value and maximum value of the `count` column to find the `hour` with the highest and lowest numbers of GPS pings. You'll want to group by hour. [This](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.min.html#pandas.Series.min) documentation might be useful.
+Calculate the minimum value and maximum value of the `count` column to find the `hour` with the highest and lowest numbers of GPS pings. You'll want to group by hour.
 
 ```python
-# Your code here
-hour_sum = df.groupby('hour')['count'].sum()
-hour_sum[hour_sum == hour_sum.max()]
-hour_sum[hour_sum == hour_sum.min()]
+
 ```
 
 #### Exercise:
-Get the average number of GPS pings per hour across the whole dataset. [Documentation](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.subtract.html#pandas.Series.subtract)
+Get the average number of GPS pings per hour across the whole dataset.
 
 ```python
 
-# import matplotlib.pyplot as plt
-# %matplotlib inline
-# Your code here
-# df.groupby('hour')['count'].mean()
 ```
 
 ## Cleaning
@@ -273,7 +262,9 @@ You may have noticed something strange about the `hours` column in this dataset-
 We can visualize this problem by making some simple line graphs of our `count` column.
 
 ```python
-
+# This line lets us plot on our ipython notebook
+second = df[df['date'] == '2017-07-02'].groupby('hour')['count'].sum()
+second.plot()
 ```
 
 Let's clean the data so that each day contains only those observations that occur during the appropriate day. To do so, we need to first identify which day of the week each calendar day corresponds with. We'll need to convert our `date` column to a `datetime` type that Python can interpret using the `datetime` library. We do this as follows:
@@ -302,12 +293,12 @@ With this new column, we have everything we need to drop rows that are outside a
 
 ```python
 for i in range(0, 168, 24):
-  df.drop(df[(df['weekday'] == (i/24)) & ((df['hour'] < i) | (df['hour'] >= i + 24 )) ].index, inplace = True)
+  df.drop(df[(df['weekday'] == (i/24)) & ( (df['hour'] < date_range[i - 6]) | (df['hour'] >= date_range[i - 6] + 24 )) ].index, inplace = True)
 ```
 
 This looks complicated, but let's break it down. We're running a loop which iterates over a range from 0 to 168, exclusive, using steps of 24. In other words, we're iterating over a week's worth of hours, day-by-day.
 
-We then use the `.drop` method to drop rows according to a criteria. We're dropping a row if it's `weekday` is a given value, and its `hour` value is either less than or greater than the window of hours over which that day spans.
+We then use the `.drop()` method to drop rows according to a criteria. We're dropping a row if it's `weekday` is a given value, and its `hour` value is either less than or greater than the window of hours over which that day spans.
 
 Let's see what our dataset looks like after we've performed this cleaning operation:
 
