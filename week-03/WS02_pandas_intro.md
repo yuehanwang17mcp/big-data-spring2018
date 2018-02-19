@@ -53,7 +53,7 @@ http://pandas.pydata.org/pandas-docs/stable/index.html
 
 To start us off, let's look at some aggregated cell phone GPS data from a location services company called Skyhook. This is a Boston extract of Skyhook's OpenTide product, which aggregates individual GPS pings to 100x100 meter points. If you're interested, I scraped this from a CARTO product showcasing Skyhook's OpenTide data using a simple script that I've included in this week's materials (`scripts/skyhook_scrape.py`).
 
-This data is too big to upload uncompressed to GitHub, so I've included it as a ZIP file. Extract this zip file and make sure the resulting file is named `skyhook_2017-07.csv`. We then read in the CSV using the pandas `read_csv` function.
+This data is too big to upload uncompressed to GitHub, so I've included it as a ZIP file. Extract this zip file and make sure the resulting file is named `skyhook_2017-07.csv`, located in your `week-03` data folder. We then read in the CSV using the pandas `read_csv` function.
 
 ```python
 # If you started Atom from a directory other than the /week-03 directory, you'll need to change Python's working directory. Uncomment these lines and specify your week-03 path.
