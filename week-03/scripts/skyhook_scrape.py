@@ -15,4 +15,4 @@ for date in datelist:
     df = pd.concat([df, df_new])
     # print(df.head())
 
-df.to_csv('skyhook_2017-07.csv')
+df.to_csv('week-03/data/skyhook_2017-07.csv')

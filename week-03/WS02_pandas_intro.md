@@ -6,7 +6,7 @@
 
 ## Resources
 
-Pandas employs a number of functional and declarative programming idioms making it a bit different from regular Python syntax. However, it is very close to functionality to `NumPy` in that objects are treated as vectors. In this exercise, `NumPy` is generally used for math functions.
+Pandas's syntax is a bit different from regular Python syntax. However, it is very close to functionality to `NumPy` in that objects are treated as vectors. In this exercise, `NumPy` is generally used for math functions.
 
 You may want to reference a [cheatsheet](https://drive.google.com/folderview?id=0ByIrJAE4KMTtaGhRcXkxNHhmY2M&usp=sharing) to ease the learning curve and learn about some of its functionality:
 
@@ -87,7 +87,7 @@ We can determine the shape (i.e., the dimensions) of our DataFrame by accessing 
 df.shape
 ```
 
-1,048,575 rows times 9 columns! Not *huge* data by contemporary standards, but definitely big. `df.shape` returns a `tuple`, so we can access members of this `tuple` like we do with a `list`:
+1,352,529 rows times 9 columns! Not *huge* data by contemporary standards, but definitely big. `df.shape` returns a `tuple`, so we can access members of this `tuple` like we do with a `list`:
 
 ```python
 # Number of rows
@@ -258,10 +258,10 @@ Get the average number of GPS pings per hour across the whole dataset. [Document
 
 ```python
 
-import matplotlib.pyplot as plt
-%matplotlib inline
+# import matplotlib.pyplot as plt
+# %matplotlib inline
 # Your code here
-df.groupby('hour')['count'].mean()
+# df.groupby('hour')['count'].mean()
 ```
 
 ## Cleaning
@@ -270,14 +270,20 @@ One of the most common tasks while working with big data is data cleaning. Datas
 
 You may have noticed something strange about the `hours` column in this dataset---we are reasonably sure that there are only 24 hours in a day, but the `hours` column ranges from 0-167. This is because the data for each day is not terribly tidy; each day includes a small number of observations from the surrounding week. Further complicating the matter, the 168 hours take place over a week that runs from Sunday to Monday, where Sunday is 0-23, Monday is 24-47 etc.
 
+We can visualize this problem by making some simple line graphs of our `count` column.
+
+```python
+
+```
+
 Let's clean the data so that each day contains only those observations that occur during the appropriate day. To do so, we need to first identify which day of the week each calendar day corresponds with. We'll need to convert our `date` column to a `datetime` type that Python can interpret using the `datetime` library. We do this as follows:
 
 ```python
 import datetime
-df['date_new'] = pd.to_datetime(df['date'], format='%m/%d/%y')
+df['date_new'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
 ```
 
-What we're doing here is creating a new `date_new` column based on our `date` column using the `.to_datetime()` method. We specify a format that our date is stored in. `%m/%d/%y` means: month as a decimal number, day as a decimal number, year without a century. We can confirm that this is correct by looking at several rows of the DataFrame.
+What we're doing here is creating a new `date_new` column based on our `date` column using the `.to_datetime()` method. We specify a format that our date is stored in. `%Y-%m-%d` means: year with a century month as a decimal number, and day as a decimal number all separated by hyphens. We can confirm that this is correct by looking at several rows of the DataFrame.
 
 ```python
 df['date'].head
@@ -309,9 +315,11 @@ Let's see what our dataset looks like after we've performed this cleaning operat
 df.shape
 ```
 
+We lost a some rows, but we're still left with 1,069,177: not too shabby!
+
 ## Exporting Data
 
-We lost a little under 200,000 rows, but we're still left with 827,172. Let's export this to a CSV! Easy.
+Let's export our cleaned data file to a CSV! Easy.
 
 ```python
 df.to_csv('data/skyhook_cleaned.csv')
