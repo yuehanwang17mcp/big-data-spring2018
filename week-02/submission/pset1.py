@@ -50,33 +50,31 @@ def validate(password):
     numcount = 0
     lettercount = 0
     charcount = 0
-
+    # test password length
     if len(password) < 8 or len(password) > 14:
         return ("your password should be 8-14 characters long")
-
+        # test if password has at least two digits
     for i in password:
         for num in '0123456789':
              if i == num:
                 numcount += 1
     if numcount < 2:
         return ("your password should include at least 2 digits")
-
-
+    # test if password has uppercase letter
     for i in password:
         for upletter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
             if i == upletter:
                 lettercount += 1
     if lettercount == 0:
         return ("your password should include at least 1 uppercase letter")
-
-
+    # test if password has special character
     for i in password:
         for spchar in ['!', '?', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=']:
              if i == spchar:
                 charcount += 1
     if charcount == 0:
         return ("your password should include at least 1 special character from (!?@#$%^&*()-_=+)")
-
+    # if password passes all of the tests, then it works well
     return ("your password works well")
 
 print(validate("088566382@P"))
