@@ -47,40 +47,37 @@ print(str_format(2,'big data spring 2018'))
 
 # E Password Validation Function
 def validate(password):
-
     numcount = 0
     lettercount = 0
     charcount = 0
 
-    if len(password)<8 or len(password)>14:
-        return("your password should be 8-14 characters long")
+    if len(password) < 8 or len(password) > 14:
+        return ("your password should be 8-14 characters long")
 
-    if 8<len(password)<14:
-        for i in password:
-            for num in '0123456789':
-                if i==num:
-                    numcount += 1
-        if numcount < 2:
-            return ("your password should include at least 2 digits")
+    for i in password:
+        for num in '0123456789':
+             if i == num:
+                numcount += 1
+    if numcount < 2:
+        return ("your password should include at least 2 digits")
 
-    if 8<=len(password)<=14 and numcount >= 2:
-        for i in password:
-            for upletter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
-                if i == upletter:
-                    lettercount += 1
-        if lettercount == 0:
-            return("your password should include at least 1 uppercase letter")
 
-    if 8<=len(password)<=14  and numcount >= 2 and lettercount >0:
-        for i in password:
-            for spchar in ['!', '?', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=']:
-                if i == spchar:
-                    charcount += 1
-        if charcount == 0:
-            return("your password should include at least 1 special character from (!?@#$%^&*()-_=+)")
+    for i in password:
+        for upletter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+            if i == upletter:
+                lettercount += 1
+    if lettercount == 0:
+        return ("your password should include at least 1 uppercase letter")
 
-    if len(password)<=14 and len(password)>=8 and numcount >= 2 and lettercount >0 and charcount >0:
-        return("your password works well")
+
+    for i in password:
+        for spchar in ['!', '?', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=']:
+             if i == spchar:
+                charcount += 1
+    if charcount == 0:
+        return ("your password should include at least 1 special character from (!?@#$%^&*()-_=+)")
+
+    return ("your password works well")
 
 print(validate("088566382@P"))
 
