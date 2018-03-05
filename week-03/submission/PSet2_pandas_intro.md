@@ -65,11 +65,11 @@ Your first task is to create a bar chart (not a line chart!) of the total count 
 
 ### Solution
 
-```
+
 gps_pings = df.groupby('date')['count'].sum()
 gps_pings.plot.bar(title='Total pings by date', color='cyan')
 plt.show()
-```
+
 
 ## Problem 2: Modify the Hours Column
 
@@ -79,12 +79,12 @@ After running your code, you should have either a new column in your DataFrame o
 
 ### Solution
 
-```
+
 for i in range(0, 168, 24):
   j = range(0,168,1)[i - 5]
   df['hour'].replace(range(j, j + 5, 1), range(-5, 0, 1), inplace=True)
   df['hour'].replace(range(i, i + 19, 1), range(0, 19, 1), inplace=True)
-```
+
 
 ## Problem 3: Create a Timestamp Column
 
@@ -93,9 +93,9 @@ Now that you have both a date and a time (stored in a more familiar 24-hour rang
 
 ### Solution
 
-```
+
 df['timestamp'] = df['date_new'] + pd.to_timedelta(df['hour'], unit='h')
-```
+
 
 ## Problem 4: Create Two Line Charts of Activity by Hour
 
@@ -103,7 +103,7 @@ Create two more graphs. The first should be a **line plot** of **total activity*
 
 ### Solution
 
-```
+
 gps_acts = df.groupby('timestamp')['count'].sum()
 gps_acts.plot(title='Total activity in each hour over the week', color='b')
 plt.show()
@@ -111,13 +111,13 @@ plt.show()
 gps_acts_by_hours = df.groupby('24-hour')['count'].sum()
 gps_acts_by_hours.plot.bar(title='GPS pings by hours of the day', color='r')
 plt.show()
-```
+
 
 ## Problem 5: Create a Scatter Plot of Shaded by Activity
 
 Pick three times (or time ranges) and use the latitude and longitude to produce scatterplots of each. In each of these scatterplots, the size of the dot should correspond to the number of GPS pings. Find the [Scatterplot documentation here](http://pandas.pydata.org/pandas-docs/version/0.19.1/visualization.html#scatter-plot). You may also want to look into how to specify a pandas Timestamp (e.g., pd.Timestamp) so that you can write a mask that will filter your DataFrame appropriately. Start with the [Timestamp documentation](https://pandas.pydata.org/pandas-docs/stable/timeseries.html#timestamps-vs-time-spans)!
 
-```
+
 gps_acts_2=df[df['timestamp']==pd.Timestamp('2017-07-04 08:00:00')]
 gps_acts_2.plot.scatter( x='lat', y='lon', s=gps_acts_2['count']*0.2);
 plt.title('Activity at 8:00am on Independence Day')
@@ -132,7 +132,7 @@ gps_acts_3=df[df['timestamp']==pd.Timestamp('2017-07-05 18:00:00')]
 gps_acts_3.plot.scatter( x='lat', y='lon', s=gps_acts_3['count']*0.2);
 plt.title('Activity at 6:00pm on the day after Independence Day')
 plt.show()
-```
+
 
 ## Problem 6: Analyze Your (Very) Preliminary Findings
 
