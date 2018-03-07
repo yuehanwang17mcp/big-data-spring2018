@@ -32,13 +32,13 @@ Landsat is a VERY long-running Earth observation and satellite imaging program, 
 
 You can see here that each band corresponds to a different range of of radiant energy (with the exception of band 8, which contains several bands). Bands 2 - 4 correspond to portions of the visible spectrum.  
 
-Landsat observations made available as “scenes”; each of these scenes is approximately 183 km x 170 km and is captured every 16 days. The files we'll be working with today are relatively small extracts of a single scene - I clipped out Middlesex, Suffolk and Norfolk counties in a GIS before providing the data. Remote sensing is, in many ways, the original big data! Each of the unclipped bands runs hundreds of megabytes, totaling almost 2 GB. And this is only one scene!
+Landsat observations are made available as “scenes”; each of these scenes is approximately 183 km x 170 km and is captured every 16 days. The files we'll be working with today are relatively small extracts of a single scene - I clipped out Middlesex, Suffolk and Norfolk counties in GIS before providing the data. Remote sensing is, in many ways, the original big data! Each of the unclipped bands runs hundreds of megabytes, totaling almost 2 GB. And this is only one scene!
 
 A remarkable amount of analysis can be done by doing basic calculations across these multiple bands.
 
 ## Install GDAL
 
-While we'll be doing our coding in Python by reading in a library called `osgeo`. However, on the back end, this Python library is powered by a spatial analysis and data management package called GDAL. We'll first have to make sure GDAL is installed on our systems.
+We'll be doing our coding in Python by reading in a library called `osgeo`. However, on the back end, this Python library is powered by a spatial analysis and data management package called GDAL. We'll first have to make sure GDAL is installed on our systems.
 
 ### Mac
 
@@ -58,6 +58,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 %matplotlib inline
+## make sure you set the DATA path to be to the folder where you downloaded the data at the beginning of class
 DATA = "/Users/ehuntley/Desktop/week-05/landsat"
 ```
 
