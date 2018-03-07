@@ -74,7 +74,7 @@ Finally, run the Python shell again by typing `python` in the command line. Type
 
 ### Load Packages
 
-The top line here is new - we're importing `gdal` from the `osgeo` library, which is how Python interfaces with GDAL.
+Now we will start working in Atom. The top line here is new - we're importing `gdal` from the `osgeo` library, which is how Python interfaces with GDAL.
 
 ```python
 from osgeo import gdal
@@ -120,6 +120,7 @@ type(nir)
 These `red` and `nir` arrays are what we will be working with to calculate our NDVI! First, let's examine one of them by plotting it using `matplotlib`'s `imshow` (image show) function:
 
 ```python
+# make sure you run these two lines at the same time or the color bar won't show up in your plot
 plt.imshow(nir)
 plt.colorbar()
 ```
@@ -135,7 +136,8 @@ def ndvi_calc(red, nir):
 Now let's run it!
 
 ```python
-plt.imshow(ndvi(red, nir), cmap="YlGn")
+# here we are calling our function within the plot!
+plt.imshow(ndvi_calc(red, nir), cmap="YlGn")
 plt.colorbar()
 ```
 
@@ -151,7 +153,7 @@ nir.dtype
 red = red.astype(np.float32)
 nir = nir.astype(np.float32)
 
-plt.imshow(ndvi(red, nir), cmap='YlGn')
+plt.imshow(ndvi_calc(red, nir), cmap='YlGn')
 plt.colorbar()
 ```
 
