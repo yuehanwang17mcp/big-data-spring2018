@@ -74,7 +74,7 @@ Finally, run the Python shell again by typing `python` in the command line. Type
 
 ### Load Packages
 
-The top line here is new - we're importing `gdal` from the `osgeo` library.
+The top line here is new - we're importing `gdal` from the `osgeo` library, which is how Python interfaces with GDAL.
 
 ```python
 from osgeo import gdal
@@ -111,7 +111,7 @@ nir_band = nir_data.GetRasterBand(1)
 nir = nir_band.ReadAsArray()
 ```
 
-What we see above is `gdal` proceeding in three steps. It opens a connection to the file, obtains the raster band (all the data we'll be working with only contains band 1) and reading it as a `numpy` array so that we can process it. We can see that these are `numpy` arrays by checking their type.
+What we see above is `gdal` proceeding in three steps. It opens a connection to the file, obtains the raster band (all the data we'll be working with only contains band 1), and reads in a `numpy` array so that we can process it. We can see that these are `numpy` arrays by checking their type.
 
 ```python
 type(nir)
@@ -135,17 +135,17 @@ def ndvi(red, nir):
 Now let's run it!
 
 ```python
-plt.imshow(ndvi(red, nir))
+plt.imshow(ndvi(red, nir), cmap="YlGn")
 plt.colorbar()
 ```
 
-Uh-oh. That doesn't look too promising... the problem is that we're dealing with
+Uh-oh. That doesn't look too promising... the problem is that we're trying to do math that results in non-integer values with data inputs stored as integers. We can verify this as follows:
 
 ```python
-gdal.GetDataTypeName(nir_band.DataType)
+red.dtype
 nir.dtype
 ```
-
+`uint16` refers to an unsigned 16-bit integer. So in addition to the fact that we're doing non-integer math with integer datatypes, we're also potentially creating negative values, which doesn't work so well with an unsigned data type. Good thing we can easily convert these `numpy` arrays using the `numpy` `.astype()` method.
 
 ```python
 red = red.astype(np.float32)
@@ -153,15 +153,12 @@ nir = nir.astype(np.float32)
 
 plt.imshow(ndvi(red, nir), cmap='YlGn')
 plt.colorbar()
-
 ```
 
+Better! We've just made a map of vegetated land cover using a new raster data layer derived from red and near-infrared Landsat data! Let's store the results of this function as a new variable.
 
 ```python
 ndvi = ndvi(red, nir)
-
-plt.imshow(ndvi, cmap='RdYlGn')
-plt.colorbar()
 ```
 
 ## Calculate Land Surface Temperature
