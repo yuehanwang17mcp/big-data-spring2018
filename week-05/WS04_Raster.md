@@ -12,7 +12,7 @@ Today's agenda
 
 ## Download Data
 
-We've included all of the data for today's workshop in a zip file located at [duspviz.mit.edu/resources/ws04_materials.zip](duspviz.mit.edu/resources/ws04_materials.zip). We've provided this data separately because we're trying to avoid placing our data on GitHub; we'll write code that we version using Git on files that are stored outside of our GitHub repo. This will keep us from encountering nasty issues where were prevented from pushing to GitHub because we have a file in our commit history that exceeds 25 MB.
+We've included all of the data for today's workshop in a zip file located at [duspviz.mit.edu/resources/ws04_materials.zip](http://duspviz.mit.edu/resources/ws04_materials.zip). We've provided this data separately because we're trying to avoid placing our data on GitHub; we'll write code that we version using Git on files that are stored outside of our GitHub repo. This will keep us from encountering nasty issues where were prevented from pushing to GitHub because we have a file in our commit history that exceeds 25 MB.
 
 ## Landsat
 
