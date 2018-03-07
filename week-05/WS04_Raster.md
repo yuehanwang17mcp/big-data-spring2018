@@ -44,6 +44,15 @@ We'll be doing our coding in Python by reading in a library called `osgeo`. Howe
 
 Mac users will install GDAL from [http://www.kyngchaos.com/software:frameworks](http://www.kyngchaos.com/software:frameworks). Select the most recent version (2.2 at the time of this writing). Install it using the default options. It will probably behoove you to restart your system after you've installed.
 
+Once you've installed GDAL from KyngChaos, you'll have to add its location to your Python path. You'll only have to do this once. If you're using your virtual environment (again, we still recommend this), activate it first (`. ~/.venvs/bdvs/bin/activate`). Then open the Python terminal by typing `python`. Then, type the following lines:
+
+```python
+import sys
+sys.path.insert(0,'/Library/Frameworks/GDAL.framework/Versions/2.2/Python/3.6/site-packages')
+```
+
+You (should) only need to do this once.
+
 ### Windows
 
 From the command line (note: NOT Git Bash), execute either `python` or `python3`, depending on how your system is configured. Take note of the message that appears at the top: it's probably something like:
@@ -52,7 +61,7 @@ From the command line (note: NOT Git Bash), execute either `python` or `python3`
 Python 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:04:45) [MSC v.1900 32 bit (Intel)] on win32
 ```
 
-Take note of your Python version (e.g., 3.6.4) and whether you're running 32 bit or 64 bit Python. Quit the Python shell by typing `quit()`. Navigate to [Christoph Gohlke's page](https://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal) and select the version of GDAL 2.2.3 that corresponds to your Python version and either 32 or 64 bit. For example, based on the message above, I would download `GDAL‑2.2.3‑cp36‑cp36m‑win32.whl` (cp36 refers to my Python version, win32 to the 32-bit Python).
+Take note of your Python version (e.g., 3.6.4) and whether you're running 32 bit or 64 bit Python. Quit the Python shell by typing `quit()`. Navigate to [Christoph Gohlke's page](https://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal) and select the version of GDAL 2.2.3 that corresponds to your Python version and either 32 or 64 bit. For example, based on the message above, I would download `GDAL‑2.2.3‑cp36‑cp36m‑win32.whl` (`cp36` refers to my Python version, `win32` to the 32-bit Python).
 
 Next, change directory to the the location to which you downloaded the `.whl` file and run:
 
