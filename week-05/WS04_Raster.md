@@ -1,12 +1,16 @@
 # Working With Rasters in Python: Calculating Vegetation and Land Surface Temperature
 
+Today's agenda:
+
++ Download Data
++ A Bit About Landsat
++ Install GDAL
++ Calculating a Normalized Vegetation Index
++ Calculating an Estimate of Land Surface Temperature
+
 ## Download Data
 
-I've included all of the data for today's workshop in a zip file located at [](). Note: DO NOT INCLUDE THIS DATA IN YOUR GITHUB REPO.
-
-## Raster Data
-
-A raster dataset is just an image that is spatially located. They depict phenomena continuously
+We've included all of the data for today's workshop in a zip file located at [duspviz.mit.edu/resources/ws04_materials.zip](duspviz.mit.edu/resources/ws04_materials.zip). We've provided this data separately because we're trying to avoid placing our data on GitHub; we'll write code that we version using Git on files that are stored outside of our GitHub repo. This will keep us from encountering nasty issues where were prevented from pushing to GitHub because we have a file in our commit history that exceeds 25 MB.
 
 ## Landsat
 
