@@ -1,5 +1,7 @@
 # Working With Rasters in Python: Calculating Vegetation and Land Surface Temperature
 
+![Land Surface Temperature Map](./images/lst_map.png)
+
 Today's agenda
 
 + Download Data
