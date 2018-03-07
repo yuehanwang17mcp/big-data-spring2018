@@ -1,6 +1,6 @@
 # Working With Rasters in Python: Calculating Vegetation and Land Surface Temperature
 
-Today's agenda:
+Today's agenda
 
 + Download Data
 + A Bit About Landsat
@@ -46,7 +46,22 @@ Mac users will install GDAL from [http://www.kyngchaos.com/software:frameworks](
 
 ### Windows
 
-Navigate to [https://trac.osgeo.org/osgeo4w/](https://trac.osgeo.org/osgeo4w/) and download the 64-bit installer. Run it and install the software using 'Express Desktop Install'; for the moment, skip installing QGIS and GRASS, although QGIS is a great (great!) open-source GIS that's handy to have around. You may want to come back later and install Q if you don't already have it. This will take a few minutes. It will probably behoove you to restart your system after you've installed.
+From the command line (note: NOT Git Bash), execute either `python` or `python3`, depending on how your system is configured. Take note of the message that appears at the top: it's probably something like:
+
+```sh
+Python 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:04:45) [MSC v.1900 32 bit (Intel)] on win32
+```
+
+Take note of your Python version (e.g., 3.6.4) and whether you're running 32 bit or 64 bit Python. Quit the Python shell by typing `quit()`. Navigate to [Christoph Gohlke's page](https://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal) and select the version of GDAL 2.2.3 that corresponds to your Python version and either 32 or 64 bit. For example, based on the message above, I would download `GDAL‑2.2.3‑cp36‑cp36m‑win32.whl` (cp36 refers to my Python version, win32 to the 32-bit Python).
+
+Next, change directory to the the location to which you downloaded the `.whl` file and run:
+
+```sh
+# Replace the below file name with the appropriate one for your system
+pip install GDAL‑2.2.3‑cp36‑cp36m‑win32.whl
+```
+
+Finally, run the Python shell again by typing `python` in the command line. Type `from osgeo import gdal`. If you receive no error message, you're golden! Quit the shell by typing `quit()`.
 
 ### Load Packages
 
@@ -114,12 +129,15 @@ plt.imshow(ndvi(red, nir))
 plt.colorbar()
 ```
 
-Uh-oh. That doesn't look too promising...
+Uh-oh. That doesn't look too promising... the problem is that we're dealing with
 
 ```python
 gdal.GetDataTypeName(nir_band.DataType)
 nir.dtype
+```
 
+
+```python
 red = red.astype(np.float32)
 nir = nir.astype(np.float32)
 
@@ -130,20 +148,7 @@ plt.colorbar()
 
 
 ```python
-bqa_raster = os.path.join(DATA, 'LC08_L1TP_012031_20170716_20170727_01_T1_BQA.TIF')
-bqa_data = gdal.Open(bqa_raster)
-bqa_band = bqa_data.GetRasterBand(1)
-bqa = bqa_band.ReadAsArray()
-bqa = bqa.astype(np.float32)
-
-def ndvi_nodata(red, nir, bqa):
-    ndvi = (nir - red) / (nir + red)
-    ndvi[bqa == 1] = -1
-    return ndvi
-
 ndvi = ndvi(red, nir)
-
-ndvi.dtype
 
 plt.imshow(ndvi, cmap='RdYlGn')
 plt.colorbar()
@@ -159,7 +164,7 @@ We'll be reading in the TIRS
 
 ```python
 # Path of TIRS Band
-b10_raster = os.path.join(DATA, 'LC08_L1TP_012031_20170716_20170727_01_T1_B10.TIF')
+b10_raster = os.path.join(DATA, 'b10.TIF')
 
 # Load in TIRS Band
 tirs_data = gdal.Open(b10_raster)
