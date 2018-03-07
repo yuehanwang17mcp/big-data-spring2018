@@ -7,7 +7,7 @@ Today's agenda
 + Download Data
 + A Bit About Landsat
 + Install GDAL
-+ Calculating a Normalized Vegetation Index
++ Calculating a Normalized Difference Vegetation Index
 + Calculating an Estimate of Land Surface Temperature
 
 ## Download Data
@@ -88,9 +88,9 @@ import os
 DATA = "/Users/ehuntley/Desktop/week-05/landsat"
 ```
 
-## Calculating a Normalized Vegetation Index
+## Calculating a Normalized Difference Vegetation Index
 
-The first thing we're going to do is use the near-infrared and red bands of the Landsat imagery to calculate a simple index for estimating *how much vegetation* is present in a given raster cell; this simple index is called the Normalized Vegetation Index (NDVI). We calculate it as follows:
+The first thing we're going to do is use the near-infrared and red bands of the Landsat imagery to calculate a simple index for estimating *how much vegetation* is present in a given raster cell; this simple index is called the Normalized Difference Vegetation Index (NDVI). We calculate it as follows:
 
 ![image](./images/ndvi.svg)
 
