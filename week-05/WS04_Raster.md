@@ -127,7 +127,7 @@ plt.colorbar()
 This is aerial imagery conveniently cropped to the area surrounding Greater Boston. Next, let's define a function that will calculate our NDVI! Our `nir` and `red` variables are `numpy` arrays, which are vectorized; therefore we can add them, subtract them, etc. as we would the column of a `dataframe`.
 
 ```python
-def ndvi(red, nir):
+def ndvi_calc(red, nir):
     """ Calculate NDVI"""
     return (nir - red) / (nir + red)
 ```
@@ -158,7 +158,7 @@ plt.colorbar()
 Better! We've just made a map of vegetated land cover using a new raster data layer derived from red and near-infrared Landsat data! Let's store the results of this function as a new variable.
 
 ```python
-ndvi = ndvi(red, nir)
+ndvi = ndvi_calc(red, nir)
 ```
 
 ## Calculate Land Surface Temperature
@@ -167,7 +167,7 @@ Not only can we estimate tree cover, but we can also estimate land surface tempe
 
 ### Read in TIRS Band
 
-We'll be reading in the TIRS
+So far, we've been working with the red and near-infrared bands. To calculate the surface temperature, we'll want to read in one of the thermal bands - these are very similar! For now, let's read in Band 10 and ensure that its stored as a floating point data type.
 
 ```python
 # Path of TIRS Band
@@ -177,9 +177,10 @@ b10_raster = os.path.join(DATA, 'b10.TIF')
 tirs_data = gdal.Open(b10_raster)
 tirs_band = tirs_data.GetRasterBand(1)
 tirs = tirs_band.ReadAsArray()
+tirs = tirs.astype(np.float32)
 ```
 
-We now need to read in some correction values stored in the Landsat metadata. You can do this two ways: by opening the file and manually searching. Feel free to do this, jotting down values as you find them. We're looking for:
+We now need to read in some correction values stored in the Landsat metadata in order to convert the values stored in the band to radiances. You can do this the easy (and tedious) way or the slightly harder (and automatic) way. The easy way is by opening the file and manually searching. Feel free to do this, jotting down values as you find them. We're looking for:
 
 + `RADIANCE_MULT_BAND_10`
 + `RADIANCE_ADD_BAND_10`
@@ -188,34 +189,59 @@ We now need to read in some correction values stored in the Landsat metadata. Yo
 
  But this sounds manual and sort of tedious... plus, we'd like to be able to replicate it over many Landsat datasets that we may download in the future. So let's look at a cooler way! We can read in the metatdata `txt` file and locate our variables of interest programmatically.
 
+ Let's read the text file in as a Python list.
+
 ```python
-meta_file = '/Users/ehuntley/Desktop/week-05/landsat/LC08_L1TP_012031_20170716_20170727_01_T1_MTL.txt'
+meta_file = '/Users/ehuntley/Desktop/week-05/landsat/MTL.txt'
 
 with open(meta_file) as f:
     meta = f.readlines()
+```
 
+Check out the format of the `meta` list; each line of the text file is stored as an element in a list. We can then search this list for the variables of interest using list comprehension.
+
+```python
 # Define terms to match
 matchers = ['RADIANCE_MULT_BAND_10', 'RADIANCE_ADD_BAND_10', 'K1_CONSTANT_BAND_10', 'K2_CONSTANT_BAND_10']
 
-# Let's look at what this returns...
-matching = [s for s in meta if any(xs in s for xs in matchers)]
-print(matching)
-
+[s for s in meta if any(xs in s for xs in matchers)]
 ```
-We see that we've returned a list of the format `    RADIANCE_MULT_BAND_10 = 3.3420E-04\n` where `\n` is a line break character. We can use two string methods to first, split the resulting string at the equals sign and return what comes after the equals sign (`.split(' = ')[1]`) and second, to strip the `\n` from the end (`.strip('\n')`). We finally coerce the resulting number to a floating point data type.
+
+We see that we've returned a list containing our variables and their values in the format `    RADIANCE_MULT_BAND_10 = 3.3420E-04\n` where `\n` is a line break character. We can use two string methods to first, split the resulting string at the `=` and return what comes after the equals sign (`.split(' = ')[1]`) and second, to strip the `\n` from the end (`.strip('\n')`). We finally coerce the resulting number to a floating point data type. Let's define a function to do this:
 
 ```python
 def process_string (st):
     return float(st.split(' = ')[1].strip('\n'))
+```
 
+Let's run that list comprehension again, applying our function to the results in a variable, `matching`.
+
+```python
 matching = [process_string(s) for s in meta if any(xs in s for xs in matchers)]
+```
+
+Finally, we can assign each element of the list to a different variable name.
+
+```python
 rad_mult_b10, rad_add_b10, k1_b10, k2_b10 = matching
 ```
-The last line stores elements of the resulting list using more readable variable names.  Cool!
 
+We now calculate a series of different derived values; we're not physicists, but we're about to play-act the role of `geophysicist`.
 
+### Step 1: Calculate Top of Atmosphere Spectral Radiance
 
-### Step 1: Calculate At-Sensor Spectral Radiance
+First, we scale the `tirs` band using the multiplicative and additive factors stored in the Landsat metadata - this produces a measured radiance at the top of the atmosphere.
+
+![At-Sensor Spectral Radiance](./images/spec_rad.png)
+
+Where:
+
++ Lλ = TOA spectral radiance (Watts/( m2 * srad * μm))
++ ML = Band-specific multiplicative rescaling factor from the metadata (e.g., `rad_mult_b10)`)
++ AL = Band-specific additive rescaling factor from the metadata (e.g., `rad_add_b10`)
++ Qcal = Quantized and calibrated standard product pixel values (e.g., `tirs`)
+
+We have all of these values;  
 
 ```python
 rad = rad_mult_b10 * tirs + rad_add_b10
@@ -223,18 +249,37 @@ plt.imshow(rad, cmap='RdYlGn')
 plt.colorbar()
 ```
 
-
 ### Step 2: Calculate Brightness Temperature
+
+We then calculate the brightness temperature at the top of the atmosphere. This is not quite temperature as we usually understand it; it is a measure of radiation. We calculate this according to the following equation:
+
+![At-Sensor Spectral Radiance](./images/bt.png)
+
+Where:
+
++ T = Top of atmosphere brightness temperature (K)
++ Lλ = TOA spectral radiance (`rad`)
++ K1 = Band-specific thermal conversion constant from the metadata (`k1_b10`)
++ K2 = Band-specific thermal conversion constant from the metadata (`k2_b10`)
+
 ```python
 bt = k2_b10 / np.log((k1_b10/rad) + 1) - 273.15
 plt.imshow(bt, cmap='RdYlGn')
 plt.colorbar()
 ```
+
 ### Step 3: Calculate Normalized Difference Vegetation Index
 
-We've already done this!
+We've already done this! It should be stored in the variable `ndvi`.
+
+```python
+plt.imshow(ndvi, cmap='YlGn')
+plt.colorbar()
+```
 
 ### Step 4: Calculate Proportional Vegetation
+
+We now need to produce an estimate of the proportional vegetation.
 
 ```python
 pv = (ndvi - 0.2) / (0.5 - 0.2) ** 2
