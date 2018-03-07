@@ -1,7 +1,5 @@
 # Working With Rasters in Python: Calculating Vegetation and Land Surface Temperature
 
-Today, we'll be learning to work with raster data in Python using Landsat data as
-
 ## Download Data
 
 I've included all of the data for today's workshop in a zip file located at [](). Note: DO NOT INCLUDE THIS DATA IN YOUR GITHUB REPO.
