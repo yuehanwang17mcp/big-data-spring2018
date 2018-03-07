@@ -165,6 +165,8 @@ Better! We've just made a map of vegetated land cover using a new raster data la
 ndvi = ndvi_calc(red, nir)
 ```
 
+**Note About Errors:** We're getting some type errors, but that's because it's dividing by null values - the function still works and will serve our purposes just fine. You may continue to get similar errors throughout the exercise. Nothing to worry about!
+
 ## Calculate Land Surface Temperature
 
 Not only can we estimate tree cover, but we can also estimate land surface temperature using the NDVI we just estimated as one of our inputs! We'll be following the method outlined by Jeevalakshmi, Reddy, and Manikiam [here](https://www.ripublication.com/ijaer17/ijaerv12n20_57.pdf). Much of this comes directly from LANDSAT's own documentation as well. I will note when we're taking some interpretive liberties.
@@ -384,7 +386,7 @@ driver = gdal.GetDriverByName('GTiff')
 # so we can use the tirs_data size properties
 # Note that tirs_data = gdal.Open(b10_raster)
 # This is not the numpy array!
-new_dataset = driver.Create('/Users/ehuntley/Desktop/week-05/landsat/ndvi.tif',
+new_dataset = driver.Create('/Users/ehuntley/Desktop/week-05/landsat/lst.tif',
                     tirs_data.RasterXSize,
                     tirs_data.RasterYSize,
                     1,
