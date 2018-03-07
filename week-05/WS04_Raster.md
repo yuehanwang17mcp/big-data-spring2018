@@ -296,7 +296,6 @@ We're going to make a bunch of assumptions here - that NDVI < 0.2 implies unvege
 
 ```python
 pv = (ndvi - 0.2) / (0.5 - 0.2) ** 2
-pv.dtype
 plt.imshow(pv, cmap='RdYlGn')
 plt.colorbar()
 ```
@@ -362,7 +361,7 @@ p = h * c / s
 Let's then calculate the LST.
 
 ```python
-lst = bt / (1 + (wave * bt / p) * np.log(emissivity))
+lst = bt / (1 + (wave * bt / p) * np.log(emis))
 
 plt.imshow(lst, cmap='RdYlGn')
 plt.colorbar()
@@ -370,20 +369,30 @@ plt.colorbar()
 
 # Write a .tif File
 
-Creating a new TIF file using GDAL is a bit cumbersome, but it looks a little bit like this. We're going to write our land surface temperature
+Creating a new TIF file using GDAL is a bit cumbersome, but it looks a little bit like this. We're going to write our land surface temperature to a Geotiff, just like the ones we imported.
 
 ```python
+# Invoke the GDAL Geotiff driver
 driver = gdal.GetDriverByName('GTiff')
 
-new_dataset = driver.Create('ndvi.tif',
-                    red_data.RasterXSize,
-                    red_data.RasterYSize,
+# Use the driver to create a new file.
+# It has the same dimensions as our original rasters
+# so we can use the tirs_data size properties
+# Note that tirs_data = gdal.Open(b10_raster)
+# This is not the numpy array!
+new_dataset = driver.Create('/Users/ehuntley/Desktop/week-05/landsat/ndvi.tif',
+                    tirs_data.RasterXSize,
+                    tirs_data.RasterYSize,
                     1,
                     gdal.GDT_Float32)
-new_dataset.SetProjection(red_data.GetProjection())
-new_dataset.SetGeoTransform(red_data.GetGeoTransform())
+# Set projection - same logic as above.
+new_dataset.SetProjection(tirs_data.GetProjection())
+# Set transformation - same logic as above.
+new_dataset.SetGeoTransform(tirs_data.GetGeoTransform())
+# Set up a new band.
 new_band = new_dataset.GetRasterBand(1)
+# Set NoData Value
 new_band.SetNoDataValue(-1)
-
+# Write our Numpy array to the new band!
 new_band.WriteArray(lst)
 ```
