@@ -228,7 +228,9 @@ Finally, we can assign each element of the list to a different variable name.
 rad_mult_b10, rad_add_b10, k1_b10, k2_b10 = matching
 ```
 
-We now calculate a series of different derived values; we're not physicists, but we're about to play-act the role of `geophysicist`.
+We now calculate a series of different derived values; we're about to play-act the role of geophysicist. Of course, much of this is simply applying other people's methods - we can look to the scientific literature to find methods and apply them to our datasets. We don't necessarily need to understand every single step... in fact, it's common that working with datasets involves applying methods without getting too bogged down in the specifics. We're just looking for an estimate of land surface temperature, not a rigorous, geoscientist-approved model (and, anyway, we can use geoscientist approved models).
+
+Let's get started!
 
 ### Step 1: Calculate Top of Atmosphere Spectral Radiance
 
@@ -264,6 +266,8 @@ Where:
 + K1 = Band-specific thermal conversion constant from the metadata (`k1_b10`)
 + K2 = Band-specific thermal conversion constant from the metadata (`k2_b10`)
 
+This also calculates the brightness temperature in degrees Kelvin, so convert by subtracting 273.15.
+
 ```python
 bt = k2_b10 / np.log((k1_b10/rad) + 1) - 273.15
 plt.imshow(bt, cmap='RdYlGn')
@@ -281,7 +285,16 @@ plt.colorbar()
 
 ### Step 4: Calculate Proportional Vegetation
 
-We now need to produce an estimate of the proportional vegetation.
+We now need to produce an estimate of the proportional vegetation. We can calculate this like so:
+
+![Proportional Vegetation](./images/pv.png)
+
+Where:
++ NDVI = Normalized Difference Vegetation Index (`ndvi`)
++ NDVI_s = approximation of the NDVI value for unvegetated terrain (0.2)
++ NDVI_v = approximation of the NDVI value for vegetated terrain
+
+We're going to make a bunch of assumptions here - that NDVI < 0.2 implies unvegetated terrain, that 0.2 < NDVI < 0.5 implies a mixture of vegetation and unvegetated terrain, and that NDVI > 0.5 implies nearly fully vegetated land. This is a simplifying assumption that probably wouldn't hold up to rigorous testing, but it's fine for our purposes.
 
 ```python
 pv = (ndvi - 0.2) / (0.5 - 0.2) ** 2
@@ -292,6 +305,20 @@ plt.colorbar()
 
 ### Step 5: Calculate Land Surface Emissivity
 
+We're then going to reclassify our `pv` to make it correspond to differently levels of surface emissivity - in other words, how effectively does it emit thermal radiation (heat)? We define a number of ranges: if NDVI is negative, we assume it's water, with a emissivity of 0.991. If it's between 0 and 0.2, we assume we're dealing with something with the emissivity of soil (0.991). If it's between 0.2 and 0.5, we calculate a value based on the proportion of vegetation in the cell. If it's greater than 5, we assume we're dealing with heavy vegetation and set the emissivity to an estimate of vegetation emissivity (0.973).
+
+![Emissivity](./images/emis.png)
+
+Where:
+
++ ԑλ = Land Surface Emissivity
++ P_v = Proportional Vegetation (`pv`)
++ ԑs = Estimate of soil emissivity (0.966)
++ ԑv = Estimate of vegetation emissivity (0.973)
++ C = surface roughness (we're using a value of 0.005)
++ NDVI_s = approximation of the NDVI value for unvegetated terrain (0.2)
++ NDVI_v = approximation of the NDVI value for vegetated terrain (0.5)
+
 ```python
 def emissivity_reclass (pv, ndvi):
     ndvi_dest = ndvi.copy()
@@ -301,13 +328,28 @@ def emissivity_reclass (pv, ndvi):
     ndvi_dest[np.where(ndvi >= 0.5)] = 0.973
     return ndvi_dest
 
-emissivity = emissivity_reclass(pv, ndvi)
+emis = emissivity_reclass(pv, ndvi)
 
 plt.imshow(emissivity, cmap='RdYlGn')
 plt.colorbar()
 ```
 
 ### Step 6: Calculate Land Surface Temperature
+
+Finally, we calculate the Land Surface Temperature using several physical constants, our estimate of the brightness temperature at the sensor, and our estimate of land emissivity. This looks like this:
+
+![Land Surface Temperature](./images/lst.png)
+
+Ts = Land Surface Temperature
+BT = Brightness Temperature (`bt`)
+e = Emissivity (`emis`)
+ρ = h * (c / σ)
+σ = Boltzmann constant (1.38e-23)
+c = Speed of light (2.998e8)
+h = Planck's Constant (6.626e-34)
+
+Let's first define our physical constants:
+
 ```python
 wave = 10.8E-06
 # PLANCK'S CONSTANT
@@ -317,6 +359,11 @@ c = 2.998e8
 # BOLTZMANN's CONSTANT
 s = 1.38e-23
 p = h * c / s
+```
+
+Let's then calculate the LST.
+
+```python
 lst = bt / (1 + (wave * bt / p) * np.log(emissivity))
 
 plt.imshow(lst, cmap='RdYlGn')
