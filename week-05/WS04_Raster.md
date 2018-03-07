@@ -198,6 +198,7 @@ We now need to read in some correction values stored in the Landsat metadata in 
  Let's read the text file in as a Python list.
 
 ```python
+# make this path the local path to your MTL.txt file that you downloaded at the start of the workshop
 meta_file = '/Users/ehuntley/Desktop/week-05/landsat/MTL.txt'
 
 with open(meta_file) as f:
@@ -333,7 +334,7 @@ def emissivity_reclass (pv, ndvi):
 
 emis = emissivity_reclass(pv, ndvi)
 
-plt.imshow(emissivity, cmap='RdYlGn')
+plt.imshow(emis, cmap='RdYlGn')
 plt.colorbar()
 ```
 
