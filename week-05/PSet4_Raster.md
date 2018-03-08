@@ -19,13 +19,13 @@ Your challenge this week is to package the functionality we were working with in
 
 Download one scene of summertime Landsat 8 data for Boston, MA through [Earth Explorer](https://earthexplorer.usgs.gov/) - you'll have to create an account first! Your search criteria should look something like this:
 
-![Earth Explorer Search](./images/ee-criteria.png)
+<img alt="Earth Explorer Search" src="./images/ee-criteria.png" width = "400"/>
 
 This data can come from any dates after March 2013---the first period for which Landsat 8 data is available. Prior Landsat data is slightly different, which means that the code we cooked up in the class workshop will not be appropriate.
 
 Once you've decided on a date and a scene, you'll be prompted to select the data set. We want Landsat > Landsat Collection 1 Level-1 > Landsat 8 OLI/TIRS C1 Level-1. Check the box next to this data set.
 
-![Select Landsat 8 Dataset](./images/ee-dataset.png)
+<img alt="Select Landsat 8 Dataset" src="./images/ee-dataset.png" width = "400"/>
 
 Click 'Results >>'. You should see a selection of Landsat scenes that meet your search criteria. Choose one that is relatively cloud-free (you should be able to do this with simple visual inspection). Once you've chosen a scene, select the 'download options' button (![Download options](./images/dl-options.png)) and choose to download the 'Level-1 GeoTIFF Data Product'. This is going to be a big file (~900 MB); do NOT attempt to store it in your Github repository. Extract the downloaded ZIP file into a directory. Take a look and note that the data is stored in files with names much, much longer than the ones we used in class. You'll have to account for this in your script!
 
