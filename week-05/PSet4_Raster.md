@@ -132,7 +132,7 @@ According to the [USGS Landsat documentation](https://landsat.usgs.gov/collectio
 | Cloud Shadow - High     | 2976, 2980, 2984, 2988, 3008, 3012, 3016, 3020, 7072, 7076, 7080, 7084, 7104, 7108, 7112, 7116 |
 
 
-Write a function similar to the one we developed to reclassify emissivity to reclassify, for example, your `ndvi` Numpy array based on values stored in the BQA. The function should reclassify input data in such a way that pixels, except for those that are clear (for example, 2720), are assigned a value of `nan`.
+Write a function that reclassifies an input Numpy array based on values stored in the BQA. The function should reclassify input data in such a way that pixels, except for those that are clear (for example, 2720), are assigned a value of `nan`. Use the `emissivity_calc` function as a model!
 
 First you'll have to read in the BQA - use your new `read_tif` function!
 
