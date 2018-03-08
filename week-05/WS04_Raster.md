@@ -225,6 +225,7 @@ Let's run that list comprehension again, applying our function to the results in
 
 ```python
 matching = [process_string(s) for s in meta if any(xs in s for xs in matchers)]
+matching
 ```
 
 Finally, we can assign each element of the list to a different variable name.
@@ -324,7 +325,7 @@ Where:
 + NDVI_v = approximation of the NDVI value for vegetated terrain (0.5)
 
 ```python
-def emissivity_reclass (pv, ndvi):
+def emissivity_calc (pv, ndvi):
     ndvi_dest = ndvi.copy()
     ndvi_dest[np.where(ndvi < 0)] = 0.991
     ndvi_dest[np.where((0 <= ndvi) & (ndvi < 0.2)) ] = 0.966
@@ -332,7 +333,7 @@ def emissivity_reclass (pv, ndvi):
     ndvi_dest[np.where(ndvi >= 0.5)] = 0.973
     return ndvi_dest
 
-emis = emissivity_reclass(pv, ndvi)
+emis = emissivity_calc(pv, ndvi)
 
 plt.imshow(emis, cmap='RdYlGn')
 plt.colorbar()
@@ -399,7 +400,7 @@ new_dataset.SetGeoTransform(tirs_data.GetGeoTransform())
 # Set up a new band.
 new_band = new_dataset.GetRasterBand(1)
 # Set NoData Value
-new_band.SetNoDataValue(-1)
+new_band.SetNoDataValue('nan')
 # Write our Numpy array to the new band!
 new_band.WriteArray(lst)
 ```
