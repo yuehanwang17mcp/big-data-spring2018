@@ -2,6 +2,19 @@
 
 Your challenge this week is to package the functionality we were working with in the workshop into a series of functions capable of processing Landsat data. You'll then use these functions to process Landsat data you've downloaded, producing estimates of Vegetation Land Surface Temperature. Finally, you'll use the BQA band to write a filter that removes clouds and cloud shadows from our Landsat dataset.
 
+## Deliverables
+
+### To GitHub
+
+1. Your Python functions, pushed to your Github. Use this markdown page as a template!
+
+### To Stellar
+
+**NOTE: Your uploaded .tif files should be < 150 MB. If they exceed this, you may run into submission issues. It's also a pretty good clue that something may be awry.**
+
+1. Your NDVI output, with clouds filtered.
+2. Your Land Surface Temperature output, with clouds filtered.
+
 ## Download Landsat Data
 
 Download one scene of summertime Landsat 8 data for Boston, MA through [Earth Explorer](https://earthexplorer.usgs.gov/) - you'll have to create an account first! Your search criteria should look something like this:
@@ -10,7 +23,11 @@ Download one scene of summertime Landsat 8 data for Boston, MA through [Earth Ex
 
 This data can come from any dates after March 2013---the first period for which Landsat 8 data is available. Prior Landsat data is slightly different, which means that the code we cooked up in the class workshop will not be appropriate.
 
-Once you've decided on a date and a scene, click the 'download options' button (![Download options](./images/dl-options.png)) and choose to download the 'Level-1 GeoTIFF Data Product'. This is going to be a big file (~900 MB); do NOT attempt to store it in your Github repository. Extract the downloaded ZIP file into a directory. Take a look and note that the data is stored in files with names much, much longer than the ones we used in class.
+Once you've decided on a date and a scene, you'll be prompted to select the data set. We want Landsat > Landsat Collection 1 Level-1 > Landsat 8 OLI/TIRS C1 Level-1. Check the box next to this data set.
+
+![Select Landsat 8 Dataset](./images/ee-dataset.png)
+
+Click 'Results >>'. You should see a selection of Landsat scenes that meet your search criteria. Choose one that is relatively cloud-free (you should be able to do this with simple visual inspection). Once you've chosen a scene, select the 'download options' button (![Download options](./images/dl-options.png)) and choose to download the 'Level-1 GeoTIFF Data Product'. This is going to be a big file (~900 MB); do NOT attempt to store it in your Github repository. Extract the downloaded ZIP file into a directory. Take a look and note that the data is stored in files with names much, much longer than the ones we used in class. You'll have to account for this in your script!
 
 ## Write a Python Script Using Functions to Process the Data
 
@@ -132,9 +149,31 @@ According to the [USGS Landsat documentation](https://landsat.usgs.gov/collectio
 | Cloud Shadow - High     | 2976, 2980, 2984, 2988, 3008, 3012, 3016, 3020, 7072, 7076, 7080, 7084, 7104, 7108, 7112, 7116 |
 
 
-Write a function that reclassifies an input Numpy array based on values stored in the BQA. The function should reclassify input data in such a way that pixels, except for those that are clear (for example, 2720), are assigned a value of `nan`. Use the `emissivity_calc` function as a model!
+Write a function that reclassifies an input Numpy array based on values stored in the BQA. The function should reclassify input data in such a way that pixels, except for those that are clear (for example, 2720), are assigned a value of `nan`. Use the `emissivity_calc` function as a model! If our `emissivity_calc` function looks like this:
 
-First you'll have to read in the BQA - use your new `read_tif` function!
+```python
+def emissivity_calc (pv, ndvi):
+    """
+    Calculates an estimate of emissivity
+    """
+    ndvi_dest = ndvi.copy()
+    ndvi_dest[np.where(ndvi < 0)] = 0.991
+    ndvi_dest[np.where((0 <= ndvi) & (ndvi < 0.2)) ] = 0.966
+    ndvi_dest[np.where((0.2 <= ndvi) & (ndvi < 0.5)) ] = (0.973 * pv[np.where((0.2 <= ndvi) & (ndvi < 0.5)) ]) + (0.966 * (1 - pv[np.where((0.2 <= ndvi) & (ndvi < 0.5)) ]) + 0.005)
+    ndvi_dest[np.where(ndvi >= 0.5)] = 0.973
+    return ndvi_dest
+```
+
+We're doing something similar here!
+
+```python
+def cloud_filter(array, bqa):
+    array_dest = array.copy()
+    array_dest[np.where((bqa != <a certain value>) & (bqa != <another certain value>)) ] = 'nan'
+    return array_dest
+```
+
+You should simply be able to revise the above function, making your criteria test for `bqa` values not equal to 2720, 2724, 2728, 2732.
 
 ```python
 def cloud_filter(array, bqa):
@@ -142,3 +181,5 @@ def cloud_filter(array, bqa):
     Filters out clouds and cloud shadows using values of BQA.
     """
 ```
+
+##
