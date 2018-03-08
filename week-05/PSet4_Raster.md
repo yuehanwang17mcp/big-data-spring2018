@@ -10,10 +10,10 @@ Your challenge this week is to package the functionality we were working with in
 
 ### To Stellar
 
-**NOTE: Your uploaded .tif files should be < 150 MB. If they exceed this, you may run into submission issues. It's also a pretty good clue that something may be awry.**
+**NOTE: Your compressed `tifs` should each be between 90 and 150 MB.**
 
-1. Your NDVI output, with clouds filtered.
-2. Your Land Surface Temperature output, with clouds filtered.
+1. Your NDVI `tif`, compressed into a `zip` file, with clouds filtered. Call this file `yourlastname_ndvi_imagerydate.zip` (where `imagerydate` is the date the image was captured).
+2. Your Land Surface Temperature `tif`, compressed into a `zip` file with clouds filtered. Call this file `yourlastname_lst_imagerydate.zip` (where `imagerydate` is the date the image was captured).
 
 ## Download Landsat Data
 
@@ -33,7 +33,7 @@ Click 'Results >>'. You should see a selection of Landsat scenes that meet your 
 
 In class, we wrote one function to calculate the Normalized Difference Vegetation Index and one function to estimate surface emissivity.
 
-Build on these functions, writing six other functions, using the code I showed in in the workshop. Note that when you're working with the Landsat data, you'll need to either...
+Build on these functions, writing six other functions, using the code I showed in in the workshop. Note that when you're working with the downloaded Landsat data, you'll need to either...
 
 1. Use the much longer Landsat-provided file names. I recommend doing this, as it will allow you to much more easily use these scripts across multiple Landsat scenes.
 2. Rename your files, making them shorter and more... well, appealing I guess.
@@ -72,11 +72,36 @@ def emissivity_calc (pv, ndvi):
     ndvi_dest[np.where(ndvi >= 0.5)] = 0.973
     return ndvi_dest
 
+def array2tif(raster_file, new_raster_file, array):
+    """
+    Writes 'array' to a new tif, 'new_raster_file',
+    whose properties are given by a reference tif,
+    here called 'raster_file.'
+    """
+    # Invoke the GDAL Geotiff driver
+    raster = gdal.Open(raster_file)
+
+    driver = gdal.GetDriverByName('GTiff')
+    out_raster = driver.Create(new_raster_file,
+                        raster.RasterXSize,
+                        raster.RasterYSize,
+                        1,
+                        gdal.GDT_Float32)
+    out_raster.SetProjection(raster.GetProjection())
+    # Set transformation - same logic as above.
+    out_raster.SetGeoTransform(raster.GetGeoTransform())
+    # Set up a new band.
+    out_band = out_raster.GetRasterBand(1)
+    # Set NoData Value
+    out_band.SetNoDataValue(-1)
+    # Write our Numpy array to the new band!
+    out_band.WriteArray(array)
+
 ```
 # Your Functions!
 
 ```python
-def read_tif(location):
+def tif2array(location):
     """
     Should:
     1. Use gdal.open to open a connection to a file.
@@ -121,16 +146,10 @@ def lst_calc(location):
     of a directory in your file system. That means it will have
     to call your other functions. It should:
     1. Define necessary constants
-    2. Read in appropriate tifs (using read_tif)
+    2. Read in appropriate tifs (using tif2array)
     3. Retrieve needed variables from metadata (retrieve_meta)
     4. Calculate ndvi, rad, bt, pv, emis using appropriate functions
     5. Calculate LST and return it.
-    """
-
-def write(write_nparray, ref_raster, location):
-    """
-    Write write_nparray as a Geotiff using ref_raster to
-    determine size, projection, etc.
     """
 ```
 
@@ -138,7 +157,7 @@ Use these functions to generate an Normalized Difference Vegetation Index and a 
 
 ## Remove Clouds
 
-Your Landsat data contains another band, whose filename ends with `_BQA.tif`. this is the so-called 'quality assessment band', which contains estimates of where there are clouds in our image.
+Your Landsat data contains another band, whose filename ends with `_BQA.tif`. this is the so-called 'quality assessment band', which contains estimates of where there are clouds in our image. You'll need to read this `tif` in: try using your new `tif2array` function!
 
 According to the [USGS Landsat documentation](https://landsat.usgs.gov/collectionqualityband), these values are where we can be highly confident that the image is clear and where there are clouds and cloud shadows:
 
@@ -148,23 +167,7 @@ According to the [USGS Landsat documentation](https://landsat.usgs.gov/collectio
 | Cloud Confidence - High | 2800, 2804, 2808, 2812, 6896, 6900, 6904, 6908                                                 |
 | Cloud Shadow - High     | 2976, 2980, 2984, 2988, 3008, 3012, 3016, 3020, 7072, 7076, 7080, 7084, 7104, 7108, 7112, 7116 |
 
-
-Write a function that reclassifies an input Numpy array based on values stored in the BQA. The function should reclassify input data in such a way that pixels, except for those that are clear (for example, 2720), are assigned a value of `nan`. Use the `emissivity_calc` function as a model! If our `emissivity_calc` function looks like this:
-
-```python
-def emissivity_calc (pv, ndvi):
-    """
-    Calculates an estimate of emissivity
-    """
-    ndvi_dest = ndvi.copy()
-    ndvi_dest[np.where(ndvi < 0)] = 0.991
-    ndvi_dest[np.where((0 <= ndvi) & (ndvi < 0.2)) ] = 0.966
-    ndvi_dest[np.where((0.2 <= ndvi) & (ndvi < 0.5)) ] = (0.973 * pv[np.where((0.2 <= ndvi) & (ndvi < 0.5)) ]) + (0.966 * (1 - pv[np.where((0.2 <= ndvi) & (ndvi < 0.5)) ]) + 0.005)
-    ndvi_dest[np.where(ndvi >= 0.5)] = 0.973
-    return ndvi_dest
-```
-
-We're doing something similar here!
+Write a function that reclassifies an input Numpy array based on values stored in the BQA. The function should reclassify input data in such a way that pixels, except for those that are clear (for example, 2720), are assigned a value of `nan`. Use the `emissivity_calc` function as a model! We're doing something similar here! Your code will look like this:
 
 ```python
 def cloud_filter(array, bqa):
@@ -182,4 +185,13 @@ def cloud_filter(array, bqa):
     """
 ```
 
-##
+## Write Your Filtered Arrays as `.tifs`
+
+You should now be able to write your NDVI and LST arrays as GeoTIFFs. For example, to write your LST, assuming you're storing it in a variable called `lst`.
+
+```python
+out_path = os.path.join(DATA, 'lst.tif')
+array2tif(tirs_path, out_path, lst)
+```
+
+Once you've written these, you should compress each of them into a zip file - two separate ZIP files! This is to ensure that the files come in under Stellar's file submission size limit.

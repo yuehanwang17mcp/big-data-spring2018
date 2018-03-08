@@ -99,8 +99,8 @@ Where NIR stands for near-infrared and red is light reflected in the red region.
 Okay, enough biophysics! Let's calculate the NDVI. We begin by reading in our files.
 
 ```python
-b4_raster = os.path.join(DATA, 'b4.tif')
-b5_raster = os.path.join(DATA, 'b5.tif')
+red_path = os.path.join(DATA, 'b4.tif')
+nir_path = os.path.join(DATA, 'b5.tif')
 
 # Load in Red band
 red_data = gdal.Open(b4_raster)
@@ -177,10 +177,10 @@ So far, we've been working with the red and near-infrared bands. To calculate th
 
 ```python
 # Path of TIRS Band
-b10_raster = os.path.join(DATA, 'b10.TIF')
+tirs_path = os.path.join(DATA, 'b10.TIF')
 
 # Load in TIRS Band
-tirs_data = gdal.Open(b10_raster)
+tirs_data = gdal.Open(tirs_path)
 tirs_band = tirs_data.GetRasterBand(1)
 tirs = tirs_band.ReadAsArray()
 tirs = tirs.astype(np.float32)
@@ -377,30 +377,39 @@ plt.colorbar()
 
 # Write a .tif File
 
-Creating a new TIF file using GDAL is a bit cumbersome, but it looks a little bit like this. We're going to write our land surface temperature to a Geotiff, just like the ones we imported.
+Creating a new TIF file using GDAL is a bit cumbersome, but it looks a little bit like this. I've written this as a function, so all you need to provide is a path to write to (`new_raster_file`), an array to write (`array`), and the path to a file that GDAL can reference to determine raster dimensions, etc.
 
 ```python
-# Invoke the GDAL Geotiff driver
-driver = gdal.GetDriverByName('GTiff')
 
-# Use the driver to create a new file.
-# It has the same dimensions as our original rasters
-# so we can use the tirs_data size properties
-# Note that tirs_data = gdal.Open(b10_raster)
-# This is not the numpy array!
-new_dataset = driver.Create('/Users/ehuntley/Desktop/week-05/landsat/lst.tif',
-                    tirs_data.RasterXSize,
-                    tirs_data.RasterYSize,
-                    1,
-                    gdal.GDT_Float32)
-# Set projection - same logic as above.
-new_dataset.SetProjection(tirs_data.GetProjection())
-# Set transformation - same logic as above.
-new_dataset.SetGeoTransform(tirs_data.GetGeoTransform())
-# Set up a new band.
-new_band = new_dataset.GetRasterBand(1)
-# Set NoData Value
-new_band.SetNoDataValue('nan')
-# Write our Numpy array to the new band!
-new_band.WriteArray(lst)
+def array2tif(raster_file, new_raster_file, array):
+    """
+    Writes 'array' to a new tif, 'new_raster_file',
+    whose properties are given by a reference tif,
+    here called 'raster_file.'
+    """
+    # Invoke the GDAL Geotiff driver
+    raster = gdal.Open(raster_file)
+
+    driver = gdal.GetDriverByName('GTiff')
+    out_raster = driver.Create(new_raster_file,
+                        raster.RasterXSize,
+                        raster.RasterYSize,
+                        1,
+                        gdal.GDT_Float32)
+    out_raster.SetProjection(raster.GetProjection())
+    # Set transformation - same logic as above.
+    out_raster.SetGeoTransform(raster.GetGeoTransform())
+    # Set up a new band.
+    out_band = out_raster.GetRasterBand(1)
+    # Set NoData Value
+    out_band.SetNoDataValue(-1)
+    # Write our Numpy array to the new band!
+    out_band.WriteArray(array)
+```
+
+Now, to export our new Land Surface Temperature estimates, all we have to do is call this function like this:
+
+```python
+out_path = os.path.join(DATA, 'lst.tif')
+array2tif(tirs_path, out_path, lst)
 ```
