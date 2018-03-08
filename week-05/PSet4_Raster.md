@@ -16,7 +16,10 @@ Once you've decided on a date and a scene, click the 'download options' button (
 
 In class, we wrote one function to calculate the Normalized Difference Vegetation Index and one function to estimate surface emissivity.
 
-Build on these functions, writing six other functions, using the code I showed in in the workshop.
+Build on these functions, writing six other functions, using the code I showed in in the workshop. Note that when you're working with the Landsat data, you'll need to either...
+
+1. Use the much longer Landsat-provided file names. I recommend doing this, as it will allow you to much more easily use these scripts across multiple Landsat scenes.
+2. Rename your files, making them shorter and more... well, appealing I guess.
 
 ## Code from Class
 
