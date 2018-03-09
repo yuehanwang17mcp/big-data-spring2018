@@ -156,7 +156,7 @@ def lst_calc(location):
     2. Read in appropriate tifs (using tif2array)
     3. Retrieve needed variables from metadata (retrieve_meta)
     4. Calculate ndvi, rad, bt, pv, emis using appropriate functions
-    5. Calculate l(land surface temperature) LST and return it.
+    5. Calculate land surface temperature and return it.
     """
 ```
 
