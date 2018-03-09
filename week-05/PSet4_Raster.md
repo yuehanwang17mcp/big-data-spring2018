@@ -4,7 +4,7 @@
 
 ## Deadline
 
-+ PSet 4 is due *Friday, March 16 by 9PM.*
++ PSet 4 is due *Friday, March 16 by 6PM.*
 
 ## Description
 
