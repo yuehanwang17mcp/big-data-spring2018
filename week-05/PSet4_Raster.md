@@ -163,6 +163,9 @@ def lst_calc(location):
     3. Retrieve needed variables from metadata (retrieve_meta)
     4. Calculate ndvi, rad, bt, pv, emis using appropriate functions
     5. Calculate land surface temperature and return it.
+    Your LST function may return strips of low-values around the raster...
+    This is a processing artifact that you're not expected to account for.
+    Nothing to worry about!
     """
 ```
 
