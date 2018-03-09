@@ -2,6 +2,12 @@
 
 *NOTE: We recommend viewing these instructions on GitHub in your web browser so that you can see the screenshots that we include below.*
 
+## Deadline
+
++ PSet 4 is due *Friday, March 16 by 9PM.*
+
+## Description
+
 Your challenge this week is to package the functionality we were working with in the workshop into a series of functions capable of processing Landsat data. You'll then use these functions to process Landsat data you've downloaded, producing estimates of Vegetation Land Surface Temperature. Finally, you'll use the BQA band to write a filter that removes clouds and cloud shadows from our Landsat dataset.
 
 ## Deliverables
