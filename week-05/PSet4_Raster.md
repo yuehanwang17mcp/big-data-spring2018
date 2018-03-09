@@ -1,12 +1,14 @@
 # Problem Set 4: Working With Landsat Data
 
+*NOTE: We recommend viewing these instructions on GitHub in your web browser so that you can see the screenshots that we include below.*
+
 Your challenge this week is to package the functionality we were working with in the workshop into a series of functions capable of processing Landsat data. You'll then use these functions to process Landsat data you've downloaded, producing estimates of Vegetation Land Surface Temperature. Finally, you'll use the BQA band to write a filter that removes clouds and cloud shadows from our Landsat dataset.
 
 ## Deliverables
 
 ### To GitHub
 
-1. Your Python functions, pushed to your Github. Use this markdown page as a template!
+1. Your Python functions, pushed to your Github week-05 submission folder. Use this markdown page as a template!
 
 ### To Stellar
 
@@ -17,11 +19,9 @@ Your challenge this week is to package the functionality we were working with in
 
 ## Download Landsat Data
 
-Download one scene of summertime Landsat 8 data for Boston, MA through [Earth Explorer](https://earthexplorer.usgs.gov/) - you'll have to create an account first! Your search criteria should look something like this:
+Download one scene of summertime Landsat 8 data for Boston, MA through [Earth Explorer](https://earthexplorer.usgs.gov/) - you'll have to create an account first! This data can come from any dates after March 2013---the first period for which Landsat 8 data is available. Prior Landsat data is slightly different, which means that the code we cooked up in the class workshop will not work for Landsat data before March 2013. Your search criteria should look something like this:
 
 <img alt="Earth Explorer Search" src="./images/ee-criteria.png" width = "400"/>
-
-This data can come from any dates after March 2013---the first period for which Landsat 8 data is available. Prior Landsat data is slightly different, which means that the code we cooked up in the class workshop will not be appropriate.
 
 Once you've decided on a date and a scene, you'll be prompted to select the data set. We want Landsat > Landsat Collection 1 Level-1 > Landsat 8 OLI/TIRS C1 Level-1. Check the box next to this data set.
 
@@ -33,7 +33,7 @@ Click 'Results >>'. You should see a selection of Landsat scenes that meet your 
 
 In class, we wrote one function to calculate the Normalized Difference Vegetation Index and one function to estimate surface emissivity.
 
-Build on these functions, writing six other functions, using the code I showed in in the workshop. Note that when you're working with the downloaded Landsat data, you'll need to either...
+Build on these functions, writing six other functions, using the code we used in the workshop. Note that when you're working with the downloaded Landsat data, you'll need to either...
 
 1. Use the much longer Landsat-provided file names. I recommend doing this, as it will allow you to much more easily use these scripts across multiple Landsat scenes.
 2. Rename your files, making them shorter and more... well, appealing I guess.
@@ -100,6 +100,8 @@ def array2tif(raster_file, new_raster_file, array):
 ```
 # Your Functions!
 
+We recommend reading carefully through the goals for all functions before starting the first function.
+
 ```python
 def tif2array(location):
     """
@@ -123,7 +125,7 @@ def rad_calc(tirs, var_list):
     """
     Calculate Top of Atmosphere Spectral Radiance
     Note that you'll have to access the metadata variables by
-    their index number in the list.
+    their index number in the list, instead of naming them like we did in class.
     """
 
 def bt_calc(rad, var_list):
@@ -149,7 +151,7 @@ def lst_calc(location):
     2. Read in appropriate tifs (using tif2array)
     3. Retrieve needed variables from metadata (retrieve_meta)
     4. Calculate ndvi, rad, bt, pv, emis using appropriate functions
-    5. Calculate LST and return it.
+    5. Calculate l(land surface temperature) LST and return it.
     """
 ```
 
