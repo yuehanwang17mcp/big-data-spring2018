@@ -159,7 +159,7 @@ Use these functions to generate an Normalized Difference Vegetation Index and a 
 
 Your Landsat data contains another band, whose filename ends with `_BQA.tif`. this is the so-called 'quality assessment band', which contains estimates of where there are clouds in our image. You'll need to read this `tif` in: try using your new `tif2array` function!
 
-According to the [USGS Landsat documentation](https://landsat.usgs.gov/collectionqualityband), these values are where we can be highly confident that the image is clear and where there are clouds and cloud shadows:
+According to the [USGS Landsat documentation](https://landsat.usgs.gov/collectionqualityband), these values are where we can be highly confident that the image is clear and, additionally, where there are clouds and cloud shadows:
 
 | Attribute               | Pixel Value                                                                                    |
 |-------------------------|------------------------------------------------------------------------------------------------|
