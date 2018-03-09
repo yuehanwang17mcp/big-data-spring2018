@@ -14,8 +14,8 @@ Your challenge this week is to package the functionality we were working with in
 
 **NOTE: Your compressed `tifs` should each be between 90 and 150 MB.**
 
-1. Your NDVI `tif`, compressed into a `zip` file, with clouds filtered. Call this file `yourlastname_ndvi_imagerydate.zip` (where `imagerydate` is the date the image was captured).
-2. Your Land Surface Temperature `tif`, compressed into a `zip` file with clouds filtered. Call this file `yourlastname_lst_imagerydate.zip` (where `imagerydate` is the date the image was captured).
+1. Your NDVI `tif`, compressed into a `zip` file, with clouds filtered. Call this file `yourlastname_ndvi_imagerydate.zip` (where `imagerydate` is the date the image was captured in the format `YYYYMMDD`).
+2. Your Land Surface Temperature `tif`, compressed into a `zip` file with clouds filtered. Call this file `yourlastname_lst_imagerydate.zip` (where `imagerydate` is the date the image was captured in the format `YYYYMMDD`).
 
 ## Download Landsat Data
 
@@ -46,6 +46,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 %matplotlib inline
+
+# Mac Users: If you're having issues importing GDAL,
+# you may have to add GDAL to your Python path again
+# sys.path.insert(0,'/Library/Frameworks/GDAL.framework/Versions/2.2/Python/3.6/site-packages')
 
 DATA = "/Users/ehuntley/Desktop/week-05/landsat"
 
@@ -143,6 +147,7 @@ def pv_calc(ndvi, ndvi_s, ndvi_v):
 def lst_calc(location):
     """
     Calculate Estimate of Land Surface Temperature.
+    Your output should
     ---
     Note that this should take as its input ONLY the location
     of a directory in your file system. That means it will have
@@ -169,7 +174,7 @@ According to the [USGS Landsat documentation](https://landsat.usgs.gov/collectio
 | Cloud Confidence - High | 2800, 2804, 2808, 2812, 6896, 6900, 6904, 6908                                                 |
 | Cloud Shadow - High     | 2976, 2980, 2984, 2988, 3008, 3012, 3016, 3020, 7072, 7076, 7080, 7084, 7104, 7108, 7112, 7116 |
 
-Write a function that reclassifies an input Numpy array based on values stored in the BQA. The function should reclassify input data in such a way that pixels, except for those that are clear (for example, 2720), are assigned a value of `nan`. Use the `emissivity_calc` function as a model! We're doing something similar here! Your code will look like this:
+Write a function that reclassifies an input Numpy array based on values stored in the BQA. The function should reclassify input data in such a way that pixels, *except for those that are clear* (for example, 2720), are assigned a value of `nan`. Use the `emissivity_calc` function as a model! We're doing something similar here! Your code will look like this:
 
 ```python
 def cloud_filter(array, bqa):
@@ -189,11 +194,14 @@ def cloud_filter(array, bqa):
 
 ## Write Your Filtered Arrays as `.tifs`
 
-You should now be able to write your NDVI and LST arrays as GeoTIFFs. For example, to write your LST, assuming you're storing it in a variable called `lst`.
+You should now be able to write your NDVI and LST arrays as GeoTIFFs. For example, to write your filtered LST to a `tif` consistent with the naming convention we've requested, you would write this code (assuming you're storing your LST in a variable called `lst_filter`).
 
 ```python
-out_path = os.path.join(DATA, 'lst.tif')
-array2tif(tirs_path, out_path, lst)
+tirs_path = os.path.join(DATA, 'LC08_L1TP_012031_20170716_20170727_01_T1_B10.TIF')
+out_path = os.path.join(DATA, 'huntley_ndvi_20170716.tif')
+array2tif(tirs_path, out_path, lst_filter)
 ```
 
-Once you've written these, you should compress each of them into a zip file - two separate ZIP files! This is to ensure that the files come in under Stellar's file submission size limit.
+The reason you have to specify the `tirs_path` is that GDAL looks to another raster file to obtain dimensions, etc. We could use any of our input rasters - the TIRS band was chosen somewhat arbitrarily.
+
+Once you've written these, you should compress each of them into a zip file - two separate ZIP files! This is to ensure that the files come in under Stellar's file submission size limit. Name sure they are named correctly e.g., `yourlastname_ndvi_imagerydate.tif`, where `yourlastname` is your last name and `imagerydate` is the date the imagery was captured reported in the format `YYYYMMDD`.
