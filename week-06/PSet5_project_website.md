@@ -6,7 +6,7 @@ We are giving you more time for this Problem Set, because next week is your midt
 
 ## Deadlines
 
-+ Website Due on
++ Website Due on Wednesday, April 4 by 6PM.
 
 ## Part 1: Create a Project Website
 
