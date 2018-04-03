@@ -919,7 +919,7 @@ var neigh311 = [];
 d3.csv("neigh_311.csv", function(d) {
     return {
         neigh : d.neigh, // city name
-        num_311 : +d.num_311 // force value of rats to be number (+)
+        num_311 : +d.num_311 // force value of 311 calls to be number (+)
     };
 }, function(error, rows) { // catch error if error, read rows
     neigh311 = rows; // set neigh311 equal to rows
@@ -938,83 +938,7 @@ and then putting the D3 code that creates the chart within the function.
 In short, put the entirety of the code that creates your chart into one
 function that we can call when we load the page.
 
-```js
-// Write the createVisualization function
-// This will contain the script that creates the chart
-function createVisualization(){
-    // Width and height of SVG
-    var w = 150;
-    var h = 175;
-
-    // Get length of dataset
-    var arrayLength = neigh311.length; // length of dataset
-    var maxValue = d3.max(ratData, function(d) { return +d;} ); // get maximum
-    var x_axisLength = 100; // length of x-axis in our layout
-    var y_axisLength = 100; // length of y-axis in our layout
-
-    // Use a scale for the height of the visualization
-    var yScale = d3.scaleLinear()
-        .domain([0, maxValue])
-        .range([0, y_axisLength]);
-
-    //Create SVG element
-    var svg = d3.select("body")
-        .append("svg")
-        .attr("width", w)
-        .attr("height", h);
-
-    // Select and generate rectangle elements
-    svg.selectAll( "rect" )
-        .data( ratData )
-        .enter()
-        .append("rect")
-        .attr( "x", function(d,i){
-            return i * (x_axisLength/arrayLength) + 30; // Set x coord
-        })
-        .attr( "y", function(d){
-            return h - d * (y_axisLength/maxValue); // Set y coord
-        })
-        .attr( "width", (x_axisLength/arrayLength) - 1)
-        .attr( "height", function(d){
-            return d * (y_axisLength/maxValue); // Set height to data value
-        })
-        .attr( "fill", "steelblue");
-
-    // Create y-axis
-    svg.append("line")
-        .attr("x1", 30)
-        .attr("y1", 75)
-        .attr("x2", 30)
-        .attr("y2", 175)
-        .attr("stroke-width", 2)
-        .attr("stroke", "black");
-
-    // Create x-axis
-    svg.append("line")
-        .attr("x1", 30)
-        .attr("y1", 175)
-        .attr("x2", 130)
-        .attr("y2", 175)
-        .attr("stroke-width", 2)
-        .attr("stroke", "black");
-
-    // y-axis label
-    svg.append("text")
-        .attr("class", "y label")
-        .attr("text-anchor", "end")
-        .text("No. of Rats")
-        .attr("transform", "translate(20, 20) rotate(-90)")
-        .attr("font-size", "14")
-        .attr("font-family", "'Open Sans', sans-serif");
-}; // end of function
-```
-
-This puts the creation of our chart into one function that we can call
-at any point.
-
-### Change data references from `d` to `d.num_311`
-
-Last, because our dataset is now from a CSV, not just a simple array, we
+Finally, change data references from `d` to `d.num_311`; because our dataset is now from a CSV, not just a simple array, we
 have to tell D3 which columns represent
 our data. When we load the CSV, D3 creates a JSON in which we can access
 the objects and properties of each data item. JavaScript
@@ -1048,7 +972,7 @@ function createVisualization() {
 
     // Select and generate rectangle elements
     svg.selectAll( "rect" )
-        .data( ratData )
+        .data( neigh311 )
         .enter()
         .append("rect")
         .attr( "x", function(d,i){
