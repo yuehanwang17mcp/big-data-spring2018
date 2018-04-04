@@ -401,6 +401,26 @@ properties, number of rats (*number*) and city *city*), we can reference
 it as we would in any other JavaScript object. i.e. `d.number`. We
 will look at this more in a bit!
 
+## Arrow Functions
+
+While we'll be using the above syntax to work with anonymous functions in D3,
+it's worth noting that there is another way which is slightly more concise - this
+is the arrow function. Using arrow functions, we can write:
+
+```js
+.attr( "height", d => d);
+```
+Which is syntactically equivalent to:
+
+```js
+.attr( "height", function(d){
+    return d;
+});
+```
+
+Cool! But for now, let's stick with the more verbose syntax as it is slightly more
+standard.
+
 ## Use D3 to Read Data and Create Elements from Data
 
 It’s more often the case that you don’t have your data-driven elements
