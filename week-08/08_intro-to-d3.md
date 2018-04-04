@@ -6,7 +6,7 @@ Session Objectives
 - Understand how D3 binds a data value to a page element.
 
 To download the materials for exercises, [click here.](https://github.com/mjfoster83/d3-workshop) This is
-d3\_part1\_makeAChart.
+d3\_part1\_barcharts.
 
 ## What is D3?
 
@@ -23,11 +23,11 @@ come across standard plotting libraries; `ggplot2` or `shiny` for R, Excel's
 built-in plotting functions, `matplotlib` in Python... these are libraries that
 make it easy to do *particular kinds of plotting*. They will have built-in functions
 to make producing certain kind of graphics very simple. Generating a complete bar
-chart might require only one line of code.
+chart might require only one line of code, or the click of one button.
 
 This is not the case in D3. D3 is output-neutral; this means that every graphic requires
 quite a bit of explicit coding to give direction to our web browser. On the one hand,
-this means that producing even simply graphics will at first seem very laborious. On
+this means that producing even simple graphics will at first seem very laborious. On
 the other hand, because D3 is not prescriptive, you can quite literally do anything with it.
 Where dedicated plotting and mapping libraries break down quite quickly when you want to
 do something other than what they're intended to do, D3 will have no complaint when you try to push
@@ -49,7 +49,7 @@ text documents that contain code written to structure the webpage
 (HTML), style that page (CSS), and add dynamic elements (JS). Webpages
 will often have many assets, including images, data, and other
 supplemental material that makes the page display and function
-propertly.
+properly.
 
 ![](/_assets/img/d3-documents.png)
 
@@ -68,8 +68,7 @@ Events you connect to these elements allow for interaction with the
 data[^1^](#citation1).
 
 Just what does this mean? Take a look at a sample dataset. D3 allows
-this data to be attached to elements in our document. this data to
-elements in our document.
+these data to be attached to elements in our document.
 
 City         \# of Rats
 ------------ ------------
@@ -103,13 +102,13 @@ connect data to some SVG elements on your page.
 
 In order to work with D3, we have to serve the page your visualization
 is on to the web. To do so, open terminal, change directory to where you
-have saved the files, and start up a simple Python server using:
+have saved the files (down to the folder called 'd3_part1_barcharts'), and start up a simple Python server using:
 
 ```python
 python -m http.server
 ```
 
-Navigate in a browser to **simple-bar-chart-completed.html**, and you
+Remember that you can now access this file through the browser by typing **http://localhost:8000** into the browser bar. Then, navigate in the browser to **barchart-completed.html**, and you
 can view the completed code for the first example. We are going to start
 from scratch to show you how to draw SVG!
 
@@ -152,7 +151,7 @@ following values.
 
 We want a bar chart, with the height of each bar as the respective value
 in the dataset. (i.e. The first bar has a height of 40 pixels, etc.) In
-the following the block of code, copy and paste the SVG elements
+the following block of code, copy and paste the SVG elements
 highlighted in the block below into your code.
 
 ```html
@@ -213,7 +212,7 @@ all child elements are located in relation to this parent element.
 For more on SVG, its capabilities and available elements, [check out the
 documentation.](https://developer.mozilla.org/en-US/docs/Web/SVG)
 
-#### Working with the Document Object Model
+### Working with the Document Object Model
 
 Working with D3, you will become very familiar with the Document Object
 Model, often shorted to just “The DOM”. The DOM is highly functional,
@@ -228,8 +227,8 @@ interact with them.
 
 ![](/_assets/img/d3-dom.PNG)
 
-Tthe body of your page is an element, under it are paragraph elements
-and headers. Typically, an SVG element used in D3 is sits nested within
+The body of your page is an element, and under it are paragraph elements
+and headers. Typically, an SVG element used in D3 sits nested within
 the `body` element in the DOM.
 
 For more on working with the DOM, and what exactly this means, [check
@@ -243,7 +242,7 @@ hard to create, tedious to update or modify, and is not expandable. This
 is where D3 steps in. D3 will allow us easy access to these elements, we
 can use D3 to give the height to the element.
 
-Modify our code block to include the D3 library, and then embed the data
+Let's modify our code block to include the D3 library, and then embed the data
 into the JavaScript tag in the body. Observe the block of code below.
 Note that we remove the height attribute for the SVG rectangles, we will
 use D3 to create and define the height attribute.
