@@ -67,12 +67,12 @@ data[^1^](#citation1).
 Just what does this mean? Take a look at a sample dataset. D3 allows
 these data to be attached to elements in our document.
 
-City         \# of Rats
------------- ------------
-Brookline    40
-Boston       90
-Cambridge    30
-Somerville   60
+| City       | # of Rats |
+|------------|-----------|
+| Brookline  | 40        |
+| Boston     | 90        |
+| Cambridge  | 30        |
+| Somerville | 60        |
 
 The primary element you will find yourself working with is the SVG, or
 the [Scalable Vector
