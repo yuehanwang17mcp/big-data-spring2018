@@ -20,11 +20,11 @@ come across standard plotting libraries; `ggplot2` or `shiny` for R, Excel's
 built-in plotting functions, `matplotlib` in Python... these are libraries that
 make it easy to do *particular kinds of plotting*. They will have built-in functions
 to make producing certain kind of graphics very simple. Generating a complete bar
-chart might require only one line of code.
+chart might require only one line of code, or the click of one button.
 
 This is not the case in D3. D3 is output-neutral; this means that every graphic requires
 quite a bit of explicit coding to give direction to our web browser. On the one hand,
-this means that producing even simply graphics will at first seem very laborious. On
+this means that producing even simple graphics will at first seem very laborious. On
 the other hand, because D3 is not prescriptive, you can quite literally do anything with it.
 Where dedicated plotting and mapping libraries break down quite quickly when you want to
 do something other than what they're intended to do, D3 will have no complaint when you try to push
@@ -46,7 +46,7 @@ text documents that contain code written to structure the webpage
 (HTML), style that page (CSS), and add dynamic elements (JS). Webpages
 will often have many assets, including images, data, and other
 supplemental material that makes the page display and function
-propertly.
+properly.
 
 ![](./images/d3-documents.png)
 
@@ -65,8 +65,7 @@ Events you connect to these elements allow for interaction with the
 data[^1^](#citation1).
 
 Just what does this mean? Take a look at a sample dataset. D3 allows
-this data to be attached to elements in our document. this data to
-elements in our document.
+these data to be attached to elements in our document.
 
 City         \# of Rats
 ------------ ------------
@@ -100,13 +99,13 @@ connect data to some SVG elements on your page.
 
 In order to work with D3, we have to serve the page your visualization
 is on to the web. To do so, open terminal, change directory to where you
-have saved the files, and start up a simple Python server using:
+have saved the files (down to the folder called 'd3_part1_barcharts'), and start up a simple Python server using:
 
 ```python
 python -m http.server
 ```
 
-Navigate in a browser to **simple-bar-chart-completed.html**, and you
+Remember that you can now access this file through the browser by typing **http://localhost:8000** into the browser bar. Then, navigate in the browser to **barchart-completed.html**, and you
 can view the completed code for the first example. We are going to start
 from scratch to show you how to draw SVG!
 
@@ -149,7 +148,7 @@ following values.
 
 We want a bar chart, with the height of each bar as the respective value
 in the dataset. (i.e. The first bar has a height of 40 pixels, etc.) In
-the following the block of code, copy and paste the SVG elements
+the following block of code, copy and paste the SVG elements
 highlighted in the block below into your code.
 
 ```html
@@ -218,8 +217,8 @@ interact with them.
 
 ![D3 and the DOM](./images/d3-dom.PNG)
 
-Tthe body of your page is an element, under it are paragraph elements
-and headers. Typically, an SVG element used in D3 is sits nested within
+The body of your page is an element, and under it are paragraph elements
+and headers. Typically, an SVG element used in D3 sits nested within
 the `body` element in the DOM.
 
 For more on working with the DOM, and what exactly this means, [check
@@ -233,7 +232,7 @@ hard to create, tedious to update or modify, and is not expandable. This
 is where D3 steps in. D3 will allow us easy access to these elements, we
 can use D3 to give the height to the element.
 
-Modify our code block to include the D3 library, and then embed the data
+Let's modify our code block to include the D3 library, and then embed the data
 into the JavaScript tag in the body. Observe the block of code below.
 Note that we remove the height attribute for the SVG rectangles, we will
 use D3 to create and define the height attribute.
@@ -355,8 +354,7 @@ set the height attribute.
 
 #### Anonymous Functions
 
-Something that might have happened here that could be a bit confusing,
-we set height to an anonymous function.
+In our code we set height to an anonymous function. These can be a bit confusing, so let's dig into what this means.
 
 ```js
 .attr( "height", function(d){
@@ -371,7 +369,7 @@ built into D3. The name of this variable (**d**) is arbitrary, but d is
 usually used as it represents a data value.
 
 You can use **console.log(d);** to see the values held by **d** printed
-to the console.
+to the console in your browser.
 
 ```js
 .attr( "height", function(d){
@@ -408,7 +406,7 @@ will look at this more in a bit!
 It’s more often the case that you don’t have your data-driven elements
 pre-baked into the page, but rather create them on the fly. Let’s give
 that a try. Save your current document, and let’s **start with a new
-empty HTML page.** Again, here is the boilerplate, with the D3 library loaded.
+empty HTML page.** Save this new HTML page in the same folder as the HTML file we were just working on. Again, here is the boilerplate, with the D3 library loaded.
 Note we don’t create any SVG elements by hand, we are going to use the
 capabilities of the D3 library to create these.
 
@@ -455,7 +453,7 @@ creates a new element as a child of each element in the current
 selection, then the
 [attr()](https://github.com/mbostock/d3/wiki/Selections#attr) method
 will be used to set the height and width of the SVG element. The
-highlighed code below will create our SVG as a child of the body
+highlighted code below will create our SVG as a child of the body
 element, and give it height and weight attributes.
 
 ```js
@@ -516,7 +514,7 @@ get an empty selection. The next few lines of code in our block above
 create these elements by binding data, defining an `enter()` behavior, and
 appending a new element.
 
-1. `data()` - We bind the data to our empty selection using the [`data()]`(https://github.com/mbostock/d3/wiki/Selections#data) method, it will return the four data values in our dataset.
+1. `data()` - We bind the data to our empty selection using the [`data()`](https://github.com/mbostock/d3/wiki/Selections#data) method, it will return the four data values in our dataset.
 2. `enter()` - When we load data, it will iterate through the dataset and apply all methods that follow to each of the values of our dataset. The [`enter()`](https://github.com/mbostock/d3/wiki/Selections#enter) method creates placeholders for each data element for which no corresponding DOM element was found. Because it iterates, it will create four placeholders.
 3. `append()` - Finally, the [`append(“rect”)`](https://github.com/mbostock/d3/wiki/Selections#append) method will insert a rectangle into each of the placeholders that do not have a “rect” element, which is all of them.
 4. `attr()` - Iteratively sets attributes, such as (x,y) location, width, and height for each of the rectangle elements. Right now, these are all in the same location **(0,0)** and have the same width **(20)** and height **(100)**. We need to use functions to make this work properly, and will detail that next.
@@ -532,17 +530,17 @@ all in the same location.
 The `enter()` and `exit()` methods deal with new elements and unused
 elements, respectively, based on incoming data. It's worth taking a minute to fully grasp these!
 
-The `enter()` method tells D3 what to do when there are more elements in a data array than there are elements in the selection. So if you have 12 rows in an input dataset but only 8 `rect` elements when the `enter()` method is invoked, D3 will go to what follows the `enter()` method to determine what to do. Usually, the enter function will be used to create (`append()`) new elements to a given visualization. The `exit()` method tells D3 what to do when there are more elements in a data array than there are elements in a selection. Usually, this will be used to clear elements that are no longer needed.
+The `enter()` method tells D3 what to do when there are more elements in a data array than there are elements in the selection. So if you have 12 rows in an input dataset but only 8 `rect` elements when the `enter()` method is invoked, D3 will go to what follows the `enter()` method to determine what to do. Usually, the enter function will be used to create (`append()`) new elements to a given visualization. The `exit()` method tells D3 what to do when there are more elements in a data array than there are elements in a selection. Usually, this will be used to clear elements that are no longer needed. You can think of these like the 'go' and 'stop' methods, where `enter()` is the former and `exit()` is the latter.
 
 ### Styling the `rect` Elements
 
 Finally, we properly size and arrange the `rect` elements. To do
-this, we can modify the h`eight` attribute and `x` and `y` attributes for each
+this, we can modify the `height` attribute and `x` and `y` attributes for each
 of our rectangle elements. The attributes can read functions that allow
 us to dynamically change attributes based on the data value of the
 current iteration.
 
-Update the attributes to properly display the “rect” elements by
+So, let's update the attributes to properly display the “rect” elements by
 changing the `x` attribute and `height` attribute. This will look
 familiar! It is exactly how we assigned a height in the previous
 example.
@@ -580,15 +578,15 @@ svg.selectAll( "rect" )
 
 #### Setting the x attribute
 
-Space the bars our horizontally using the
+You notice here a second argument is provided to our anonymous function
+(**i**). This represents the index location of the data value referred to
+in the **d** argument.
+
+Here we space the bars horizontally using the
 second i argument. The i argument is the index of each bar in the
 selection as the code iterates through. For our four rectangles, **i**
 here will be 0, 1, 2, and 3, giving us **x** positions of **0, 25, 50,
 and 75**.
-
-You notice here a second argument is provided to our anonymous function
-(**i**). This represets the index location of the data value referred to
-in the **d** argument.
 
 #### Setting the height attribute
 
@@ -613,7 +611,7 @@ Save and refresh your document... look familiar? We did it!
 ## Design the Chart
 
 As is, this chart is not very useful. In fact, it is just four
-rectangles. We need to add some context, rejustify the bars, and perhaps
+rectangles. We need to add some context, re-justify the bars, and perhaps
 add some axes. We can do this right in our script by adjusting the
 attributes and properties of the SVG elements. In the following steps,
 we’ll add those axes and label.
@@ -623,7 +621,7 @@ we’ll add those axes and label.
 The chart is confusing. The higher the
 number the farther down the page the bar extends. We can change this
 quite easily by adjusting the value of the y attribute. See the
-adjustment to our code below in lines 24-26.
+adjustment to our code below.
 
 ```js
 // Our D3 code will go here.
@@ -664,15 +662,15 @@ refresh.
 ![It worked!](./images/bottom_bars.png)
 
 ### Add Labels
-Let's provide a bit more context, and add axes to the map along the left side
-and bottom.
+This will provide a bit more context, and add axes to the map along the left side
+and bottom. When finished, our chart will look like this. Let’s take a
+look.
 
 #### Add the X and Y axes
 
 A simple method of doing this is to add
 SVG line elements to our script. We can set the X and Y coordinates for
-the start and end of the line, along with the stroke and width. The
-following text will add our axes.
+the start and end of the line, along with the stroke and width. Add the following text in our script and they will add our axes.
 
 ```js
 // Create y-axis
@@ -797,7 +795,7 @@ This takes in our data and scales it to our visualization.
 Next, modify the generate rectangle elements method in our code to
 properly locate `x`, `y`, `width`, and `height`. We’ll use the
 `yScale` for the `y` and `height` values, and some simple math for
-our `x` and `width` values.
+our `x` and `width` values. You will also need to update the axes so they follow the chart as it changes.
 
 ```js
 // Select and generate rectangle elements
@@ -816,6 +814,24 @@ svg.selectAll( "rect" )
         return yScale(d); // Set height of using the scale
     })
     .attr( "fill", "steelblue");
+
+// Create y-axis
+svg.append("line")
+		.attr("x1", 30)
+		.attr("y1", 0)
+		.attr("x2", 30)
+		.attr("y2", 100)
+		.attr("stroke-width", 2)
+		.attr("stroke", "black");
+
+// Create x-axis
+svg.append("line")
+		.attr("x1", 30)
+		.attr("y1", 100)
+		.attr("x2", 130)
+		.attr("y2", 100)
+		.attr("stroke-width", 2)
+		.attr("stroke", "black");
 ```
 
 This will change the location and dimensions of our bars to match the
@@ -844,7 +860,7 @@ The JSON can be conceptualized as the following.
 
 ### Our Dataset
 
-In your materials, locate `neigh_311.csv`. It contains a small dataset that depicts the total number of 311 calls in 2017 and through this April 3 in 2018. It is saved in CSV format, with the first row as a column
+In your materials from week's class repo, locate `neigh_311.csv`. It contains a small dataset that depicts the total number of 311 calls in 2017 and through April 3, 2018. It is saved in CSV format, with the first row as a column
 header.
 
 ```csv
@@ -886,8 +902,8 @@ saves it as a JSON element.
     {"neigh": "Harbor Islands", "num_311": 0 }]
 ```
 
-Using d3.csv will read the CSV and store the data as a JSON in which you
-can parse the dataset.
+Using d3.csv, we will read the CSV and store the data as a JSON in which you
+can parse the dataset. Make sure you copy the 311 csv from the class repo into the folder with your working HTML files.
 
 ### Replace ratData array with call to CSV
 
@@ -909,7 +925,7 @@ d3.csv("neigh_311.csv", function(d) {
 });
 ```
 
-This is an empty array that is then populated with a call to a CSV.
+This is an empty array that is then populated with a call to a CSV. You can check that the CSV was read in properly by saving, refreshing your browser, and taking a quick look at your console log.
 Within the function, we then call a function that we will define below named `createVisualization()`.
 
 ### Put the entire D3 chart code into one function called `createVisualization()`
@@ -1066,7 +1082,7 @@ svg.selectAll( "rect" )
     })
     .attr( "fill", "steelblue")
     .on("mouseover", function(d){
-        return tooltip.style("visibility", "visible").text(d.neigh + ": " + d.num-311);
+        return tooltip.style("visibility", "visible").text(d.neigh + ": " + d.num_311);
     })
     .on("mousemove", function(d){
         return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px").text(d.neigh + ": " + d.num_311);
