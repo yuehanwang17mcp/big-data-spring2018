@@ -53,7 +53,7 @@ def validate(password):
     # test password length
     if len(password) < 8 or len(password) > 14:
         return ("your password should be 8-14 characters long")
-        # test if password has at least two digits
+    # test if password has at least two digits
     for i in password:
         for num in '0123456789':
              if i == num:

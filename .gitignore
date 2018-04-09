@@ -11,3 +11,5 @@ week-03/data/skyhook_cleaned.csv
 week-03/data/skyhook_2017-07.csv
 **/*key*
 week-04/data/*.json
+week-03/*
+week-04/*
