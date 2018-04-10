@@ -10,7 +10,7 @@ The following three graphics should be included as HTML pages hosted on your Git
 
 ## Part 1: Stacked Bar Charts of 311 Sources
 
-First, you will develop a [Stacked Bar Chart](https://bl.ocks.org/ericmhuntley/57d32aaee59f1c00c77d83d66964509e) that displays the total number of 311 calls in each Boston neighborhood, broken down by the source of the call. In other words, recreate the following bar chart:
+First, you will develop a [Stacked Bar Chart](https://bl.ocks.org/ericmhuntley/56244534d1dc3500692820a1d23cdbd0) that displays the total number of 311 calls in each Boston neighborhood, broken down by the source of the call. In other words, recreate the following bar chart:
 
 ![US State-Level Election Results](images/stacked_bar.png)
 
@@ -24,7 +24,7 @@ You can use some liberty with your design, but should at least include the follo
 
 ## Part 2: Normalized Stacked Bar Charts of 311 Sources
 
-Next, you will develop a [Normalized Stacked Bar Chart](https://bl.ocks.org/ericmhuntley/56244534d1dc3500692820a1d23cdbd0). This will be very similar to the previous chart, but will display each source as a percentage of total calls rather than as a raw count. In other words, you should include at least the following:
+Next, you will develop a [Normalized Stacked Bar Chart](https://bl.ocks.org/ericmhuntley/57d32aaee59f1c00c77d83d66964509e). This will be very similar to the previous chart, but will display each source as a percentage of total calls rather than as a raw count. In other words, you should include at least the following:
 
 1. All included Boston neighborhoods.
 2. The data represented as a **Normalized Stacked Bar Chart** with each stacked bar representing the percentage of calls received from a given source.
