@@ -1,6 +1,6 @@
-# PSet 6: Working with `d3.js`: Charts and Maps
+# PSet 6: Working with `d3.js`: Charts
 
-For the PSET this week, we are going to create three `d3.js` graphics using data on 311 requests made in the year 2017. The two graphics will be a stacked bar chart and a normalized stacked bar chart, respectively; these will display the proportion of 311 service requests by neighborhood broken down by request source (e.g., Twitter, the Citizens Connect App). Finally, you'll make a choropleth map representing the percentage of requests in each neighborhood coming from Twitter.
+For the PSET this week, we are going to create two `d3.js` graphics using data on 311 requests made in the year 2017. The two graphics will be a stacked bar chart and a normalized stacked bar chart, respectively; these will display the proportion of 311 service requests by neighborhood broken down by request source (e.g., Twitter, the Citizens Connect App).
 
 For purposes of citation, the data you'll be working with is provided by BOS:311 and downloaded from [Analyze Boston](https://data.boston.gov/dataset/311-service-requests).
 
@@ -20,7 +20,7 @@ You can use some liberty with your design, but should at least include the follo
 
 1. All included Boston neighborhoods.
 2. Show the data in a **Stacked Bar Chart** with the height of each neighborhood bar representing the number of 311 calls and each stacked bar representing the number of calls received from a given source.
-3. Add source information and a legend.
+3. Add source information, a legend, and a title.
 
 ## Part 2: Normalized Stacked Bar Charts of 311 Sources
 
@@ -28,7 +28,7 @@ Next, you will develop a [Normalized Stacked Bar Chart](https://bl.ocks.org/eric
 
 1. All included Boston neighborhoods.
 2. The data represented as a **Normalized Stacked Bar Chart** with each stacked bar representing the percentage of calls received from a given source.
-3. Add source information and a legend.
+3. Add source information, a legend, and a title.
 
 Your final chart should look much like the following:
 
