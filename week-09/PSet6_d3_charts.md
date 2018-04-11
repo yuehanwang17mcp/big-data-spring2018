@@ -6,7 +6,11 @@ For purposes of citation, the data you'll be working with is provided by BOS:311
 
 ## Deliverables
 
-The following three graphics should be included as HTML pages hosted on your Github pages site. Please remember to submit to Stellar so that we know you've completed the assignment.
+The following three graphics should be included in two places:
+
+1. Place HTML files containing these visualizations on your Github pages site.
+2. Place your HTML files in week 9's `submission` folder in your forked class repo.
+3. Include Please remember to submit to Stellar so that we know you've completed the assignment.
 
 ## Part 1: Stacked Bar Charts of 311 Sources
 
