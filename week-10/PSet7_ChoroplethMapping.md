@@ -2,7 +2,7 @@
 
 ![Final Map](./images/final_map.png)
 
-In this problem set, we'll be building a choropleth map of the percentage of 311 requests made through Twitter by Boston neighborhood. The map will also include a legend and an interactive tooltip. You should be able to use much of the code from our in-class workshops on choropleth mapping and charts.
+In this problem set, we'll be building a choropleth map of the percentage of 311 requests made through Twitter by Boston neighborhood. The map will also include a legend and an interactive tooltip. You should be able to use much of the code from our in-class workshops on [choropleth mapping](http://duspviz.mit.edu/d3-workshop/mapping-data-with-d3/) and [barcharts](http://duspviz.mit.edu/d3-workshop/intro-to-d3/) - the latter will be useful when you're producing a tooltip!
 
 ### Deliverables
 
