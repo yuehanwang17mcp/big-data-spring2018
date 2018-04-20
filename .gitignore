@@ -3,7 +3,6 @@
 week-04/**/twitter_keys.py
 **/__pycache__/*
 **/__pycache__/*
-week-09/*
 week-10/*
 week-11/*
 **/superceded/*
@@ -11,3 +10,5 @@ week-03/data/skyhook_cleaned.csv
 week-03/data/skyhook_2017-07.csv
 **/*key*
 week-04/data/*.json
+week-03/*
+week-04/*
