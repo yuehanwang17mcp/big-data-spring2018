@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Mapping with D3</title>
+	<script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
+	<script src="https://d3js.org/d3-queue.v2.min.js"></script>
+</head>
+<body>
+	<!-- Page elements and content go here. -->
+	<script>
+		// Our D3 code will go here.
+    var width = 700,
+    height = 580;
+
+    var projection = d3.geoAlbers()
+        .scale(190000)
+        .translate([width / 2, height / 2]);
+
+    var path = d3.geoPath()
+        .projection(projection);
+
+    var svg = d3.select("body")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    // Queue up datasets using d3 Queue
+    queue()
+        .defer(d3.json, "boston_neigh.json")
+        .await(ready); // Run 'ready' when JSONs are loaded
+
+    // Ready Function, runs when data is loaded
+    function ready(error, us) {
+      if (error) throw error;
+
+      svg.append("g")
+          .attr("class", "counties")
+        .selectAll("path")
+          .data(topojson.feature) // Bind TopoJSON data elements
+        .enter().append("path")
+          .attr("d", path)
+          .style("fill", "white")
+          .style("stroke", "black");
+    }
+
+	</script>
+</body>
+</html>
