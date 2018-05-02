@@ -29,7 +29,7 @@ import matplotlib.pylab as plt
 %matplotlib inline
 
 # Read in the data
-
+df = pd.read_csv('/Users/ehuntley/Dropbox/teaching/big-data/data/skyhook_2017-07.csv', sep=',')
 df = pd.read_csv('week-03/data/skyhook_2017-07.csv', sep=',')
 
 # Create a new date column formatted as datetimes.
@@ -108,6 +108,8 @@ gps_acts = df.groupby('timestamp')['count'].sum()
 gps_acts.plot(title='Total activity in each hour over the week', color='b')
 plt.show()
 
+# EH: There is no column 24-hour... I imagine you were trying to group by 'hour'?
+
 gps_acts_by_hours = df.groupby('24-hour')['count'].sum()
 gps_acts_by_hours.plot.bar(title='GPS pings by hours of the day', color='r')
 plt.show()
@@ -144,8 +146,12 @@ The first two graphs demonstrate cell phone activity on Independence day(2017-07
 
 2. A shortcoming in the completeness of the data that becomes obvious when it is visualized.
 
+# This isn't really a shortcoming in the data... that's a visualization shortcoming. A shortcoming in the data is something like 'aggregated data obscures individual activity' or 'the metadata for this data is not terribly complete' or something along these lines.
+
 Although we know the latitude and longitude of the pings, without a map underneath, it is hard to identify the locations where cell phone activity concentrates and cross compare it with landuse or other important urban features.
 
 3. How this data could help us identify vulnerabilities related to climate change in the greater Boston area.
+
+# This isn't exactly fleshed out...
 
 We can use the data to identify places where people tend to gather, and compare it to a flood map to see which places are under threat.

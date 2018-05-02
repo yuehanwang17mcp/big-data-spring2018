@@ -14,6 +14,9 @@ print (len(lst_a))
 lst_a[4] = 'new'
 print (lst_a)
 
+# EH: this is correct, but it's slightly better to use reverse indexing... what if the list length changes?
+string_list[-1] = 'new'
+
 
 #B.1 Convert the list into a normal sentence with join(), then print
 sentence_words = ['I', 'am', 'learning', 'Python', 'to', 'munge', 'large', 'datasets', 'and', 'visualize', 'them']
@@ -46,6 +49,7 @@ print(str_format(2,'big data spring 2018'))
 
 
 # E Password Validation Function
+
 def validate(password):
     numcount = 0
     lettercount = 0
@@ -55,6 +59,7 @@ def validate(password):
         return ("your password should be 8-14 characters long")
     # test if password has at least two digits
     for i in password:
+        # EH: probably easier to use range(0, 10)
         for num in '0123456789':
              if i == num:
                 numcount += 1
@@ -98,6 +103,7 @@ print(exp(5,4))
 
 
 #G Min and Max Function
+# Correct, though in both cases, you don't want to name a function or a variable with the same name as a stock function or object (min, max) and you also don't really want to give a variable the same name as your function.
 def min(list):
     min = list[0]
     for i in list:
